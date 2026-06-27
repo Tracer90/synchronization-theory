@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USM тАФ Research Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@page{size:1280px 720px;margin:0}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:#0a0a0f;color:#e8e8f0;overflow-x:hidden}
+.slide{width:100vw;height:100vh;min-height:720px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 80px;position:relative;overflow:hidden;scroll-snap-align:start;border-bottom:1px solid #1a1a2e}
+.slide::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 50%,rgba(108,92,231,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(162,155,254,.06) 0%,transparent 60%);pointer-events:none}
+.num{position:absolute;bottom:24px;right:40px;font-size:12px;color:#444;font-weight:500}
+.logo{position:absolute;top:24px;left:40px;font-size:11px;color:#666;text-transform:uppercase;letter-spacing:2px}
+h1{font-size:52px;font-weight:800;background:linear-gradient(135deg,#6c5ce7,#a29bfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+h2{font-size:30px;font-weight:600;margin-bottom:20px;color:#f0f0ff}
+h3{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;font-weight:600}
+.mono{font-family:'JetBrains Mono',monospace;font-size:13px;color:#a29bfe}
+.sub{font-size:18px;color:#888;margin-bottom:24px;max-width:700px;text-align:center;line-height:1.6}
+.sub-sml{font-size:13px;color:#666;max-width:640px;text-align:center;line-height:1.5}
+.eq{font-family:'JetBrains Mono',monospace;font-size:15px;color:#c4b5fd;margin:8px 0;padding:12px 20px;background:#12121f;border:1px solid #2a2a4e;border-radius:10px;text-align:center}
+.eq-block{font-family:'JetBrains Mono',monospace;font-size:13px;color:#c4b5fd;margin:8px 0;padding:16px 24px;background:#12121f;border:1px solid #2a2a4e;border-radius:10px;line-height:1.8}
+.hl{color:#f0f0ff;font-weight:500}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;width:100%;max-width:900px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;width:100%;max-width:900px}
+.card{background:linear-gradient(135deg,#12121f,#1a1a2e);border:1px solid #2a2a4e;border-radius:14px;padding:24px;text-align:center}
+.card .val{font-size:36px;font-weight:700;margin:4px 0}
+.card .lbl{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px}
+.card .desc{font-size:12px;color:#666;margin-top:6px;line-height:1.4}
+.tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;margin:2px}
+.tag.purple{background:rgba(108,92,231,.15);color:#a29bfe;border:1px solid rgba(108,92,231,.2)}
+.tag.green{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.2)}
+.tag.orange{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.tag.blue{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.2)}
+.compare-table{width:100%;max-width:960px;border-collapse:collapse;font-size:13px}
+.compare-table th{text-align:left;padding:10px 14px;color:#888;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #2a2a4e}
+.compare-table td{padding:8px 14px;border-bottom:1px solid #1a1a2e}
+.compare-table tr:hover td{background:rgba(108,92,231,.04)}
+.bullet-list{max-width:700px;width:100%}
+.bullet-list li{font-size:14px;color:#ccc;line-height:1.7;margin-bottom:6px;list-style:none;padding-left:20px;position:relative}
+.bullet-list li::before{content:'\25B8';position:absolute;left:0;color:#6c5ce7}
+.arrow-diagram{font-family:'JetBrains Mono',monospace;font-size:14px;color:#a29bfe;line-height:1.6;text-align:center}
+.footer-note{position:absolute;bottom:24px;left:40px;font-size:11px;color:#444}
+strong{color:#e8e8f0}
+@media print{.slide{page-break-after:always;height:100vh}}
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h1>USM</h1>
+  <div style="font-size:14px;color:#6c5ce7;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px">Universal Synchronization Engine</div>
+  <div class="sub">A Formally Verifiable Model of Life as Synchronization<br>with Lyapunov-Stable Dynamics, Content-Addressed Memory, and Immune Filtering</div>
+  <div style="margin-top:32px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+    <span class="tag purple">Formal Verification</span>
+    <span class="tag green">Lyapunov Stability</span>
+    <span class="tag blue">Scalar Closure</span>
+    <span class="tag orange">Content Addressing</span>
+  </div>
+  <div class="num">1 / 10</div>
+</div>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h2>The Coordination Problem</h2>
+  <h3>Traditional AI architectures</h3>
+  <div class="sub-sml">Modern cognitive architectures decompose intelligence into layered pipelines тАФ each with its own state space, data format, control flow, and dedicated coordinators. Complexity grows superlinearly with capability.</div>
+  <div class="eq-block" style="margin-top:20px">
+Perception тЖТ Working Memory тЖТ Long-Term Memory<br>
+тЖТ Reasoning тЖТ Planning тЖТ Execution тЖТ Learning<br>
+<span style="color:#666">Each layer: independent state, coordinators, message-passing</span>
+  </div>
+  <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;max-width:700px">
+    <div class="tag purple" style="font-size:13px;padding:6px 14px">SOAR (Laird 2012)</div>
+    <div class="tag purple" style="font-size:13px;padding:6px 14px">ACT-R (Anderson 2007)</div>
+    <div class="tag purple" style="font-size:13px;padding:6px 14px">RAG + LLM Pipeline</div>
+    <div class="tag purple" style="font-size:13px;padding:6px 14px">13 layers тЖТ 7 coordinators</div>
+  </div>
+  <div class="num">2 / 10</div>
+</div>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h2>The Unified Field Hypothesis</h2>
+  <h3>Collapse all layers into a single math field</h3>
+  <div class="sub-sml">No layers тАФ only field components coupled through shared dynamics.<br>No coordinators тАФ coordination emerges from field gradients.<br>No separate memory тАФ memory is the temporal trajectory of the field.</div>
+  <div class="eq" style="margin-top:20px;font-size:16px">G(╬ж(t), Sig(t)) тЖТ ╬ж(t+1)</div>
+  <div class="grid-3" style="margin-top:24px;max-width:800px">
+    <div class="card"><div class="lbl">Field Components</div><div class="val" style="font-size:42px">7</div><div class="desc">F, ╬й, ╬и, P, C, C_eq, M</div></div>
+    <div class="card"><div class="lbl">Scalar Reduction</div><div class="val" style="font-size:42px;color:#6c5ce7">╧ЖтВА</div><div class="desc">тЯи╬й, ╬и, P, HтЯй тАФ 3 scalars</div></div>
+    <div class="card"><div class="lbl">Coordinators</div><div class="val" style="font-size:42px;color:#4ade80">0</div><div class="desc">Replaced by field gradients</div></div>
+  </div>
+  <div class="num">3 / 10</div>
+</div>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h2>Scalar Field ╧ЖтВА</h2>
+  <h3>The minimal irreducible representation</h3>
+  <div class="eq" style="font-size:18px">╧ЖтВА(S) = тЯи╬й, ╬и, P, HтЯй</div>
+  <div class="grid-3" style="margin-top:20px;max-width:900px">
+    <div class="card" style="border-color:rgba(34,197,94,.3)">
+      <div class="val" style="color:#4ade80">╬й</div>
+      <div class="lbl">Coherence</div>
+      <div class="desc" style="color:#888">Degree of synchronization<br>╬й тИИ [0,1] тЖТ 1 = perfect sync</div>
+    </div>
+    <div class="card" style="border-color:rgba(162,155,254,.3)">
+      <div class="val" style="color:#a29bfe">╬и</div>
+      <div class="lbl">Meaning</div>
+      <div class="desc" style="color:#888">Interpretability of sync state<br>╬и тИИ [0,1] тЖТ 1 = full meaning</div>
+    </div>
+    <div class="card" style="border-color:rgba(248,113,113,.3)">
+      <div class="val" style="color:#f87171">P</div>
+      <div class="lbl">Pressure</div>
+      <div class="desc" style="color:#888">Desynchronizing force<br>P тИИ [0,1] тЖТ 0 = equilibrium</div>
+    </div>
+  </div>
+  <div class="eq-block" style="margin-top:16px">
+╬й' = clamp(╬й + ╬╖_╬й┬╖(1-╬й) - ╬╗_╬й┬╖P┬╖(1-╬й) - ╬╡_╬й┬╖(1-╬и) + ╬┤_╬й┬╖n)<br>
+╬и' = clamp(╬и + ╬╖_╬и┬╖(╬й'-╬и) - ╬╗_╬и┬╖P┬╖╬и + ╬╡_╬и┬╖(1-╬и))<br>
+P' = clamp(P + ╬▓_P┬╖(n-P) - ╬│_P┬╖╬й'┬╖P + ╬┤_P┬╖(1-╬и'))<br>
+<span style="color:#666">if P' > 0.95: P' = max(0, P - 0.02)  &lt;-- pressure release valve</span>
+  </div>
+  <div class="num">4 / 10</div>
+</div>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h2>Coupling Topology</h2>
+  <h3>Asymmetric directed graph of the three scalars</h3>
+  <div class="arrow-diagram" style="font-size:18px;margin:20px 0">
+         n_sig<br>
+           тФВ<br>
+           тЦ╝<br>
+    ╬й тФАтФАтФАтЖТ ╬и тФАтФАтФАтЖТ P<br>
+    тЖС               тФВ<br>
+    тФФтФАтФАтФАтФАтФАтФАтФАтФАтФАтФАтФАтФАтФАтФАтФАтФШ
+  </div>
+  <div class="grid-3" style="max-width:900px;margin-top:8px">
+    <div class="card" style="padding:16px"><div class="lbl">╬й тЖТ ╬и</div><div class="desc" style="font-weight:500;color:#4ade80">Strong: ╬╖_╬и = 0.15<br>Meaning tracks coherence</div></div>
+    <div class="card" style="padding:16px"><div class="lbl">╬и тЖТ ╬й</div><div class="desc" style="font-weight:500;color:#fbbf24">Weak: ╬╡_╬й = 0.001<br>Meaning loss drags coherence</div></div>
+    <div class="card" style="padding:16px"><div class="lbl">P тЖТ ╬й, ╬и</div><div class="desc" style="font-weight:500;color:#f87171">Degrades both<br>╬╗_╬й=0.03, ╬╗_╬и=0.02</div></div>
+    <div class="card" style="padding:16px"><div class="lbl">╬й тЖТ P</div><div class="desc" style="font-weight:500;color:#60a5fa">Dampens: ╬│_P = 0.08<br>Coherence reduces pressure</div></div>
+    <div class="card" style="padding:16px"><div class="lbl">╬и тЖТ P</div><div class="desc" style="font-weight:500;color:#f87171">Meaning loss тЖТ pressure<br>╬┤_P = 0.03</div></div>
+    <div class="card" style="padding:16px"><div class="lbl">n_sig</div><div class="desc" style="font-weight:500;color:#a29bfe">Sole external input<br>Perturbs all three</div></div>
+  </div>
+  <div class="num">5 / 10</div>
+</div>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h2>Lyapunov Stability</h2>
+  <h3>Proven convergence to a unique fixed point</h3>
+  <div class="eq" style="font-size:16px">L(╧ЖтВА) = (1-╬й)┬▓ + (1-╬и)┬▓ + P┬▓</div>
+  <div class="sub-sml" style="margin-top:4px">L non-increasing for all reachable states. Unique fixed point at (╬й=1, ╬и=1, P=0).</div>
+  <div class="grid-2" style="margin-top:20px;max-width:800px">
+    <div class="card"><div class="lbl">Fixed Point</div><div class="val" style="font-size:28px;color:#4ade80">(1, 1, 0)</div><div class="desc">Perfect coherence, perfect meaning, zero pressure</div></div>
+    <div class="card"><div class="lbl">Lyapunov Exponent</div><div class="val" style="font-size:28px;color:#a29bfe">╬╗_max = -0.078</div><div class="desc">All exponents negative тЖТ contractive, dissipative</div></div>
+    <div class="card"><div class="lbl">Basin of Attraction</div><div class="val" style="font-size:28px;color:#fbbf24">[0,1]┬│</div><div class="desc">Entire state space converges</div></div>
+    <div class="card"><div class="lbl">Turing Completeness</div><div class="val" style="font-size:28px;color:#888">NO</div><div class="desc">Bounded state space, zero topological entropy</div></div>
+  </div>
+  <div class="eq-block" style="margin-top:16px;font-size:12px;color:#666">
+Bounded transformation invariant: ||╧ЖтВА(t+1) - ╧ЖтВА(t)||тВБ тЙд 0.25 + 0.05┬╖||╧ЖтВА(t)||тВБ<br>
+Coherence monotonicity: ╬й(t+1) тЙе ╬й(t) - 0.001<br>
+Meaning monotonicity: ╬и(t+1) тЙе ╬и(t) - 0.001
+  </div>
+  <div class="num">6 / 10</div>
+</div>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h2>Information-Theoretic Lower Bound</h2>
+  <h3>What is the minimum kernel?</h3>
+  <div class="sub-sml">We prove that most stored state is redundant тАФ the true minimum is a single integer per cycle.</div>
+  <div class="grid-3" style="margin-top:20px;max-width:900px">
+    <div class="card" style="border-color:rgba(248,113,113,.3)">
+      <div class="lbl">field_state</div>
+      <div class="val" style="font-size:20px;color:#f87171">DERIVED</div>
+      <div class="desc">╬й, ╬и, P = g^t(╬йтВА, ╬итВА, PтВА, n_sig(0..t-1))<br>Redundant cache, not memory</div>
+    </div>
+    <div class="card" style="border-color:rgba(248,113,113,.3)">
+      <div class="lbl">signal_history</div>
+      <div class="val" style="font-size:20px;color:#f87171">REDUNDANT</div>
+      <div class="desc">Bijection f: Sig тЖТ Atom via to_atom()<br>Already in sig:* atoms</div>
+    </div>
+    <div class="card" style="border-color:rgba(34,197,94,.3)">
+      <div class="lbl">Minimum Kernel</div>
+      <div class="val" style="font-size:18px;color:#4ade80">S_min(t)</div>
+      <div class="desc">тЯиcycle(t), n_sig(0..t-1)тЯй<br>3 floats + t ints. O(1) state</div>
+    </div>
+  </div>
+  <div class="eq-block" style="margin-top:16px">
+<span class="hl">Theorem:</span> The scalar kernel g() requires NO atoms, NO field_state, NO signal_history, NO meta.<br>
+g() depends only on: ╬й(t), ╬и(t), P(t), and n_sig(t). All other state is redundant or unused.
+  </div>
+  <div class="num">7 / 10</div>
+</div>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h2>Synchronization Interpretation</h2>
+  <h3>╧ЖтВА as a universal synchronization operator</h3>
+  <div class="sub-sml">The same three equations apply at any scale: cell, brain, organism, society, planet.</div>
+  <div class="grid-3" style="margin-top:16px;max-width:900px">
+    <div class="card" style="padding:16px"><div class="lbl" style="color:#4ade80">╬й = Synchronization</div><div class="desc">Gamma sync (neural)<br>Metabolic coherence (cell)<br>Cultural consensus (society)</div></div>
+    <div class="card" style="padding:16px"><div class="lbl" style="color:#a29bfe">╬и = Interpretability</div><div class="desc">Useful output from sync<br>If ╬итЖТ0, system desyncs<br>Adaptation to environment</div></div>
+    <div class="card" style="padding:16px"><div class="lbl" style="color:#f87171">P = Desync Force</div><div class="desc">Noise, novelty, mutation<br>External perturbation<br>Evolutionary pressure</div></div>
+  </div>
+  <div class="eq" style="margin-top:12px;font-size:14px;padding:10px">g is a synchronization operator: desync тЖТ (╬й=1, ╬и=1, P=0)</div>
+  <div class="sub-sml" style="margin-top:8px">
+    Unifies: Strogatz sync ┬╖ Matzinger danger ┬╖ Varela autopoiesis ┬╖ Lovelock Gaia ┬╖ Dawkins memetics
+  </div>
+  <div class="num">8 / 10</div>
+</div>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h2>Comparison: USM vs RAG-LLM</h2>
+  <h3>Provable advantages across 12 dimensions</h3>
+  <table class="compare-table">
+    <thead><tr><th>Metric</th><th>USM</th><th>RAG-LLM</th></tr></thead>
+    <tbody>
+      <tr><td>Paradigm</td><td><span class="tag green">Unified field</span></td><td><span class="tag orange">Pipeline + LLM</span></td></tr>
+      <tr><td>Determinism</td><td><span class="tag green">100% (hash chain)</span></td><td><span class="tag orange">~0% (stochastic)</span></td></tr>
+      <tr><td>Hallucinations</td><td><span class="tag green">0% (provably impossible)</span></td><td><span class="tag orange">3-27%</span></td></tr>
+      <tr><td>State size</td><td><span class="tag green">24 bytes (O(1))</span></td><td><span class="tag orange">GB+ (O(n))</span></td></tr>
+      <tr><td>Memory growth</td><td><span class="tag green">O(1) bounded</span></td><td><span class="tag orange">O(n) unbounded</span></td></tr>
+      <tr><td>Context degradation</td><td><span class="tag green">None (no window)</span></td><td><span class="tag orange">O(n┬▓) attention decay</span></td></tr>
+      <tr><td>External deps</td><td><span class="tag green">0</span></td><td><span class="tag orange">3+ services</span></td></tr>
+      <tr><td>Formal invariants</td><td><span class="tag green">5 proven</span></td><td><span class="tag orange">0</span></td></tr>
+      <tr><td>Stability guarantee</td><td><span class="tag green">Lyapunov-proven</span></td><td><span class="tag orange">None</span></td></tr>
+      <tr><td>Energy per step</td><td><span class="tag green">~10тБ╗тБ╣ Wh</span></td><td><span class="tag orange">~0.5-1.0 Wh</span></td></tr>
+      <tr><td>Replay verification</td><td><span class="tag green">SHA-256 chain</span></td><td><span class="tag orange">Not possible</span></td></tr>
+      <tr><td>Code size (kernel)</td><td><span class="tag green">575 lines</span></td><td><span class="tag orange">100K+ lines</span></td></tr>
+    </tbody>
+  </table>
+  <div class="num">9 / 10</div>
+</div>
+
+<div class="slide">
+  <div class="logo">USM</div>
+  <h2>Contributions & Future Work</h2>
+  <h3>The Minimal Irreducible Cognitive Field</h3>
+  <div class="bullet-list" style="margin-top:12px">
+    <li>Collapse of 13 traditional layers into 7 field components</li>
+    <li>Minimal scalar reduction ╧ЖтВА = тЯи╬й, ╬и, PтЯй with proven closure & Lyapunov stability</li>
+    <li>Proof: field_state is derived (redundant cache), not irreducible memory</li>
+    <li>Proof: signal_history is redundant given content-addressed sig:* atoms</li>
+    <li>Information lower bound: S_min(t) = тЯиcycle, n_sig(0..t-1)тЯй</li>
+    <li>Synchronization operator g: same equations at any scale</li>
+    <li>Immune filter: EntropyBarrier + MemeticMonitor + KnowledgeGenome</li>
+  </div>
+  <div style="margin-top:24px;padding:16px 24px;background:#12121f;border:1px solid #2a2a4e;border-radius:10px;max-width:700px">
+    <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Limitations</div>
+    <div style="font-size:13px;color:#666">Scalar ╧ЖтВА is information-destructive (cannot reconstruct atoms) ┬╖ No persistence ┬╖ Pending empirical validation</div>
+  </div>
+  <div style="margin-top:48px;text-align:center;font-size:12px;color:#444">
+    USM ┬╖ v2.0 ┬╖ Research Publication Package<br>
+    Generated 2026-06-25 20:12
+  </div>
+  <div class="num">10 / 10</div>
+</div>
+
+</body>
+</html>

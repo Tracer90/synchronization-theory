@@ -109,6 +109,13 @@ All metrics are reproducible. See [`metrics/metrics_master.json`](metrics/metric
 | 3 | [Universal Geometry Instantiation](papers/PAPER_UNIVERSAL_GEOMETRY.md) | Physics / Systems Theory | 64 KB |
 | 8 | [Cognitive Degrees of Freedom as Compactified Extra Dimensions](papers/PAPER_DARK_DIMENSION_COGNITION.md) | Theoretical Physics | 32 KB |
 
+### Earlier Research (Foundation)
+
+| # | Title | Domain | Size |
+|---|-------|--------|------|
+| 9 | [The Minimal Irreducible Cognitive Field φ₀ = ⟨Ω,Ψ,P⟩](papers/PAPER_USM_MINIMAL_COGNITIVE_FIELD.md) | Formal Methods / Math | 59 KB |
+| — | [USM Presentation (original)](presentations/USM_Presentation.html) | Slides | — |
+
 ### Neuroscience
 
 | # | Title | Domain | Size |
