@@ -1,0 +1,22 @@
+Creative Commons Attribution-NonCommercial 4.0 International License
+
+Copyright (c) 2026 NOESIS Research Group
+
+You are free to:
+  Share — copy and redistribute the material in any medium or format
+  Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+  Attribution — You must give appropriate credit to:
+    - Eva Goa (theoretical frameworks for Papers 2 and 3)
+    - NOESIS Research Group (computational implementation)
+  NonCommercial — You may not use the material for commercial purposes.
+  NoDerivatives — If you remix, transform, or build upon the material,
+    you may not distribute the modified material.
+
+The following is NOT covered by this license and remains proprietary:
+  - TheoreticalLimitFilter mechanism (trade secret)
+  - Cognitive filtering algorithm parameters
+  - InfiniteSystem recursion implementation
+
+Full license text: https://creativecommons.org/licenses/by-nc-nd/4.0/

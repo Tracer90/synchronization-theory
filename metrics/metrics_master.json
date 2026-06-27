@@ -1,0 +1,142 @@
+{
+  "filter": {
+    "clean_mean": 9.9,
+    "clean_std": 0.157,
+    "todo_mean": 9.271,
+    "todo_std": 0.258,
+    "bad_mean": 9.484,
+    "bad_std": 0.226,
+    "noise_mean": 9.216,
+    "noise_std": 0.321,
+    "delta_clean_noise": 0.684,
+    "n_per_cat": 20
+  },
+  "brain": {
+    "n": 500,
+    "mean_ms": 1.955,
+    "median_ms": 2.403,
+    "p95_ms": 4.463,
+    "p99_ms": 7.339,
+    "max_ms": 8.638,
+    "throughput_ops_s": 511.6,
+    "mean_confidence": 9.471,
+    "std_confidence": 0.346,
+    "level_counts": {
+      "HIGH": 246,
+      "MEDIUM": 254
+    }
+  },
+  "optics": {
+    "n": 200,
+    "stage_distribution": {
+      "illusion": 54,
+      "integration": 43,
+      "autonomy": 66,
+      "loss": 37
+    },
+    "autonomy_rate": 0.33,
+    "integration_rate": 0.215,
+    "loss_rate": 0.185,
+    "illusion_rate": 0.27,
+    "maturity_index": 0.06,
+    "mean_meta_awareness": 0.561,
+    "max_meta_awareness": 0.995
+  },
+  "hierarchy": {
+    "n": 200,
+    "mean_coherence": 0.911,
+    "median_coherence": 0.923,
+    "min_coherence": 0.657,
+    "max_coherence": 0.991,
+    "std_coherence": 0.054,
+    "stability_gt07": 0.995,
+    "stability_gt05": 1.0,
+    "mean_gradient": -0.083
+  },
+  "sync": {
+    "n": 500,
+    "mean_ms": 0.0142,
+    "p95_ms": 0.0156,
+    "p99_ms": 0.0389,
+    "throughput": 70558.0
+  },
+  "vector": {
+    "n": 300,
+    "mean_spread": 0.738,
+    "max_spread": 0.984,
+    "mean_overall": 6.626,
+    "std_overall": 1.573,
+    "balanced_rate": 1.0,
+    "stability_index": 0.926
+  },
+  "geometry": {
+    "n": 300,
+    "total_patterns_detected": 545,
+    "unique_patterns_seen": 8,
+    "avg_per_run": 1.82,
+    "per_10": 18.2,
+    "pattern_frequency": {
+      "resonance": 72,
+      "cycles": 72,
+      "recursion": 72,
+      "homeostasis": 72,
+      "trinity": 68,
+      "phase_transition": 67,
+      "collective_organism": 63,
+      "emergence": 59
+    },
+    "universal_coherence": 0.626,
+    "higher_self_connection": 0.586
+  },
+  "observer": {
+    "n": 200,
+    "mean_div": 0.574,
+    "std_div": 1.958,
+    "grounded": 0.685,
+    "overconf": 0.24,
+    "underconf": 0.075
+  },
+  "bias": {
+    "n_per_test": 100,
+    "loss_aversion_detection_rate": 0.23,
+    "gamblers_fallacy_detection_rate": 0.0,
+    "recency_bias_detection_rate": 0.6
+  },
+  "temporal_memory": {
+    "n": 500,
+    "mean_ms": 0.0018,
+    "p99_ms": 0.0041,
+    "throughput": 559848.0
+  },
+  "feedback": {
+    "n": 200,
+    "win_rate": 0.54,
+    "total_pnl": 355.865,
+    "mean_win_pnl": 8.196,
+    "mean_loss_pnl": -5.753,
+    "profit_factor": 1.425,
+    "fl_accuracy": 0.0
+  },
+  "attention": {
+    "n": 100,
+    "mean_load": 0.786,
+    "overload_rate": 0.0,
+    "focused_rate": 0.0,
+    "focus_stability": 1.0
+  },
+  "dreaming": {
+    "n": 50,
+    "mean_ms": 0.76,
+    "p95_ms": 3.91,
+    "throughput": 1321.5,
+    "avg_error": 2.782,
+    "scenarios": [
+      "human_feedback",
+      "perfect_market",
+      "chaotic_market",
+      "regime_change",
+      "edge_case",
+      "self_reflection"
+    ]
+  }
+}

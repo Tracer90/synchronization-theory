@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOESIS — Cognitive Resonance System</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a25;
+      --border: #2a2a3a;
+      --accent: #7c6af7;
+      --accent2: #a78bfa;
+      --text: #e2e2f0;
+      --text2: #9898b8;
+      --green: #34d399;
+      --gold: #fbbf24;
+      --red: #f87171;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.15em;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: var(--text2); text-decoration: none; font-size: 0.85rem;
+      letter-spacing: 0.05em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,106,247,0.12) 0%, transparent 60%);
+    }
+    .greek {
+      font-size: 5rem; font-weight: 300; letter-spacing: 0.1em;
+      background: linear-gradient(135deg, #c4b5fd, var(--accent), #818cf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .hero-sub { font-size: 1rem; color: var(--text2); max-width: 600px;
+      margin: 0 auto 2rem; font-style: italic; }
+    .hero-desc { font-size: 0.95rem; color: var(--text2); max-width: 680px;
+      margin: 0 auto 3rem; }
+    .hero-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border); border-radius: 99px;
+      font-size: 0.75rem; font-family: var(--mono); color: var(--text2);
+      background: var(--surface);
+    }
+    .badge.accent { border-color: var(--accent); color: var(--accent2); }
+    .badge.green  { border-color: #065f46; color: var(--green); }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 2rem;
+      letter-spacing: -0.01em; }
+    h2 span { background: linear-gradient(135deg, var(--accent2), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ── HIERARCHY ── */
+    .hierarchy { display: flex; flex-direction: column; gap: 0; }
+    .level {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 1rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: background 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+    .level:first-child { border-radius: 12px 12px 0 0; }
+    .level:last-child { border-radius: 0 0 12px 12px; }
+    .level:not(:first-child) { border-top: none; }
+    .level:hover { background: var(--surface2); border-color: var(--accent); z-index: 1; }
+    .level-num { font-size: 0.7rem; font-family: var(--mono);
+      color: var(--text2); width: 28px; text-align: center; }
+    .level-name { font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em;
+      width: 130px; color: var(--accent2); }
+    .level-desc { font-size: 0.85rem; color: var(--text2); flex: 1; }
+    .level-bar { height: 4px; border-radius: 2px; background: var(--accent);
+      opacity: 0.4; }
+
+    /* ── METRICS ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1rem;
+    }
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .metric-card:hover { border-color: var(--accent); }
+    .metric-val { font-size: 2rem; font-weight: 700; font-family: var(--mono);
+      color: var(--accent2); line-height: 1; }
+    .metric-label { font-size: 0.78rem; color: var(--text2); margin-top: 0.4rem; }
+    .metric-sub { font-size: 0.7rem; color: #555570; margin-top: 0.2rem;
+      font-family: var(--mono); }
+
+    /* ── PAPERS ── */
+    .papers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .paper-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .paper-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .paper-num { font-size: 0.7rem; font-family: var(--mono); color: var(--text2); }
+    .paper-title { font-size: 0.95rem; font-weight: 600; line-height: 1.35; }
+    .paper-domain { font-size: 0.75rem; color: var(--accent2); }
+    .paper-size { font-size: 0.7rem; color: #555570; font-family: var(--mono);
+      margin-top: auto; }
+
+    /* ── DISCOVERIES ── */
+    .discoveries { display: flex; flex-direction: column; gap: 0.75rem; }
+    .disc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.25rem;
+    }
+    .disc-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.3rem; }
+    .disc-text { font-size: 0.82rem; color: var(--text2); }
+    .disc-metric { font-family: var(--mono); font-size: 0.75rem;
+      color: var(--green); margin-top: 0.4rem; }
+
+    /* ── THEORY BOX ── */
+    .theory-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .theory-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .theory-author { font-size: 0.75rem; color: var(--accent2);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .theory-quote { font-size: 0.95rem; font-style: italic; line-height: 1.7;
+      color: var(--text); }
+
+    /* ── IP NOTICE ── */
+    .ip-box {
+      background: rgba(251,191,36,0.05);
+      border: 1px solid rgba(251,191,36,0.25);
+      border-radius: 12px; padding: 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .ip-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .ip-text { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+    .ip-text strong { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--text2);
+      font-size: 0.82rem;
+    }
+    footer .footer-greek {
+      font-size: 2rem; margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border);
+      margin: 0 0 4rem; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .level-desc { display: none; }
+      .greek { font-size: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">NOESIS</div>
+  <div class="nav-links">
+    <a href="#architecture">Architecture</a>
+    <a href="#metrics">Metrics</a>
+    <a href="#papers">Papers</a>
+    <a href="#discoveries">Discoveries</a>
+    <a href="https://github.com/Tracer90/synchronization-theory">GitHub</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="greek">νόησις</div>
+  <h1>NOESIS</h1>
+  <p class="hero-sub">Cognitive Resonance System for Multi-Dimensional Reality Perception</p>
+  <p class="hero-desc">
+    A seven-layer cognitive architecture that bridges inner cognitive processes and outer reality.
+    Not a trading bot — trading is the epistemological contact point with reality.
+  </p>
+  <div class="hero-badges">
+    <span class="badge accent">8 Papers</span>
+    <span class="badge green">53 Discoveries</span>
+    <span class="badge">Reproducible Metrics</span>
+    <span class="badge">seed=42</span>
+    <span class="badge">2026</span>
+  </div>
+</div>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <h2><span>Seven-Layer</span> Cognitive Hierarchy</h2>
+  <p style="color:var(--text2); margin-bottom:2rem; font-size:0.9rem;">
+    Signals flow <strong style="color:var(--text)">bottom-up</strong> (Reality → Universal).
+    Intentions flow <strong style="color:var(--text)">top-down</strong> (Universal → Reality).
+    Coherence measures inter-level agreement.
+  </p>
+  <div class="hierarchy">
+    <div class="level">
+      <span class="level-num">L7</span>
+      <span class="level-name">UNIVERSAL</span>
+      <span class="level-desc">Invariant patterns of the universe — 10 fundamental patterns across all reality layers</span>
+      <div class="level-bar" style="width:40px; opacity:0.9;"></div>
+    </div>
+    <div class="level">
+      <span class="level-num">L6</span>
+      <span class="level-name">META</span>
+      <span class="level-desc">Higher self, self-correction, Uroboros self-analysis every 50 cycles</span>
+      <div class="level-bar" style="width:70px; opacity:0.85;"></div>
+    </div>
+    <div class="level">
+      <span class="level-num">L5</span>
+      <span class="level-name">COLLECTIVE</span>
+      <span class="level-desc">Memory, shadow material, dreaming — collective cognitive field</span>
+      <div class="level-bar" style="width:60px; opacity:0.75;"></div>
+    </div>
+    <div class="level">
+      <span class="level-num">L4</span>
+      <span class="level-name">PERCEPTION</span>
+      <span class="level-desc">Cognitive filtering and optical correction — psyche as perceptual system</span>
+      <div class="level-bar" style="width:90px; opacity:0.7;"></div>
+    </div>
+    <div class="level">
+      <span class="level-num">L3</span>
+      <span class="level-name">SYNCHRONY</span>
+      <span class="level-desc">7-dimensional internal↔external synchronization at 70,558 ops/s</span>
+      <div class="level-bar" style="width:80px; opacity:0.65;"></div>
+    </div>
+    <div class="level">
+      <span class="level-num">L2</span>
+      <span class="level-name">DECISION</span>
+      <span class="level-desc">Decision-making and execution with cognitive bias detection</span>
+      <div class="level-bar" style="width:100px; opacity:0.6;"></div>
+    </div>
+    <div class="level">
+      <span class="level-num">L1</span>
+      <span class="level-name">REALITY</span>
+      <span class="level-desc">Raw world contact — financial markets as epistemological ground truth</span>
+      <div class="level-bar" style="width:120px; opacity:0.55;"></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- METRICS -->
+<section id="metrics">
+  <h2><span>Reproducible</span> Metrics</h2>
+  <p style="color:var(--text2); margin-bottom:2rem; font-size:0.9rem;">
+    All metrics reproducible with <code style="color:var(--accent2); font-family:var(--mono)">seed=42</code>.
+    Source: <code style="color:var(--accent2); font-family:var(--mono)">metrics/metrics_master.json</code>
+  </p>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-val">0.911</div>
+      <div class="metric-label">Hierarchy Coherence</div>
+      <div class="metric-sub">99.5% stability · n=200</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">70K</div>
+      <div class="metric-label">Sync 7D ops/sec</div>
+      <div class="metric-sub">P99 = 0.015ms · n=500</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">100%</div>
+      <div class="metric-label">Vector Balance Rate</div>
+      <div class="metric-sub">spread &lt; 2.0 · n=300</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">0.926</div>
+      <div class="metric-label">Vector Stability Index</div>
+      <div class="metric-sub">7-dimensional confidence · n=300</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">33%</div>
+      <div class="metric-label">Perceptual Autonomy</div>
+      <div class="metric-sub">maturity = +0.060 · n=200</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">0.561</div>
+      <div class="metric-label">Mean Meta-Awareness</div>
+      <div class="metric-sub">max = 0.995 · n=200</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">68%</div>
+      <div class="metric-label">Observer Grounded</div>
+      <div class="metric-sub">24% over · 8% under · n=200</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">18.2</div>
+      <div class="metric-label">Universal Patterns / 10</div>
+      <div class="metric-sub">8/10 unique detected · n=300</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">54%</div>
+      <div class="metric-label">Feedback Win Rate</div>
+      <div class="metric-sub">profit factor 1.43 · n=200</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">2⁻²⁵⁶</div>
+      <div class="metric-label">Hash Collision Bound</div>
+      <div class="metric-sub">SHA-256 content addressing</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">0.684</div>
+      <div class="metric-label">Filter Discrimination Δ</div>
+      <div class="metric-sub">clean vs noise · n=20/cat</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">511</div>
+      <div class="metric-label">Brain ops/sec</div>
+      <div class="metric-sub">P99 = 7.3ms · n=500</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PAPERS -->
+<section id="papers">
+  <h2><span>8 Publications</span></h2>
+  <div class="papers-grid">
+    <a class="paper-card" href="papers/PAPER_NOESIS_ARCHITECTURE.md">
+      <div class="paper-num">PAPER 01 · AI / Cognitive Architecture</div>
+      <div class="paper-title">NOESIS: A Seven-Layer Cognitive Architecture for Self-Aware Adaptive Decision Systems</div>
+      <div class="paper-domain">→ Nature Machine Intelligence</div>
+      <div class="paper-size">51 KB · 7,312 words</div>
+    </a>
+    <a class="paper-card" href="papers/PAPER_PSYCHE_AS_FILTER.md">
+      <div class="paper-num">PAPER 02 · Psychology</div>
+      <div class="paper-title">Operationalizing Psyche as Perceptual Filter: A Computational Model of Development Stages</div>
+      <div class="paper-domain">→ Frontiers in Psychology</div>
+      <div class="paper-size">47 KB · Theory: Eva Goa</div>
+    </a>
+    <a class="paper-card" href="papers/PAPER_UNIVERSAL_GEOMETRY.md">
+      <div class="paper-num">PAPER 03 · Physics / Systems Theory</div>
+      <div class="paper-title">Universal Geometry Instantiation: Invariant Patterns of Nature in Cognitive Architectures</div>
+      <div class="paper-domain">→ Physical Review X</div>
+      <div class="paper-size">64 KB · Theory: Eva Goa</div>
+    </a>
+    <a class="paper-card" href="papers/PAPER_OBSERVER_DIVERGENCE.md">
+      <div class="paper-num">PAPER 04 · Neuroscience / AI Safety</div>
+      <div class="paper-title">Observer Divergence as Computational Self-Awareness: Quantifying Self-Model vs Reality Gap</div>
+      <div class="paper-domain">→ Neural Networks</div>
+      <div class="paper-size">29 KB · 68% grounded</div>
+    </a>
+    <a class="paper-card" href="papers/PAPER_NOESIS_PHILOSOPHY.md">
+      <div class="paper-num">PAPER 05 · Philosophy of Mind</div>
+      <div class="paper-title">Noesis in Silicon: Direct Cognition Through Action and Computational Self-Knowledge</div>
+      <div class="paper-domain">→ Minds and Machines</div>
+      <div class="paper-size">30 KB · Aristotle · Husserl</div>
+    </a>
+    <a class="paper-card" href="papers/PAPER_COGNITIVE_BIAS_DETECTION.md">
+      <div class="paper-num">PAPER 06 · Behavioural Economics</div>
+      <div class="paper-title">Algorithmic Detection and Severity Quantification of Eight Cognitive Biases in Decision Systems</div>
+      <div class="paper-domain">→ Cognitive Systems Research</div>
+      <div class="paper-size">34 KB · 8 biases · severity 0–1</div>
+    </a>
+    <a class="paper-card" href="papers/PAPER_FORMAL_STATE_MACHINE.md">
+      <div class="paper-num">PAPER 07 · Formal Methods / CS</div>
+      <div class="paper-title">A Formally Verified Seven-Phase Cognitive State Machine with Ten Invariants and Lyapunov Stability</div>
+      <div class="paper-domain">→ IEEE Transactions</div>
+      <div class="paper-size">45 KB · dV/dt &lt; 0 proven</div>
+    </a>
+    <a class="paper-card" href="papers/PAPER_DARK_DIMENSION_COGNITION.md">
+      <div class="paper-num">PAPER 08 · Theoretical Physics</div>
+      <div class="paper-title">Cognitive Degrees of Freedom as Compactified Extra Dimensions: A Kaluza-Klein Framework</div>
+      <div class="paper-domain">→ Physical Review D</div>
+      <div class="paper-size">32 KB · KK framework · Swampland</div>
+    </a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- THEORIES -->
+<section id="theories">
+  <h2><span>Theoretical</span> Foundations</h2>
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;">
+    <div class="theory-box">
+      <div class="theory-author">Eva Goa — Psyche as Optical System</div>
+      <p class="theory-quote">
+        "The psyche is an optical system of cognition. Humans perceive reality not directly,
+        but through structures of their own psyche — cognitive schemas, unconscious fantasies,
+        defense mechanisms. Any worldview is a derivative of psychic configuration."
+      </p>
+    </div>
+    <div class="theory-box">
+      <div class="theory-author">Eva Goa — Geometry of the Universe</div>
+      <p class="theory-quote">
+        "The Geometry of the Universe is a collection of invariant patterns that appear
+        when any descriptions of reality are overlaid: physical, psychic, social, archetypal,
+        spiritual. It is the structure of the process of manifestation itself."
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DISCOVERIES -->
+<section id="discoveries">
+  <h2><span>Key</span> Discoveries</h2>
+  <div class="discoveries">
+    <div class="disc">
+      <div class="disc-title">1 — Perceptual Development Stages are Computationally Measurable</div>
+      <div class="disc-text">The psychological stages illusion → loss → integration → autonomy can be operationalized as a state machine with reproducible numerical metrics.</div>
+      <div class="disc-metric">autonomy_rate = 33% · maturity_index = +0.060 · n=200, seed=42</div>
+    </div>
+    <div class="disc">
+      <div class="disc-title">2 — Nine of Ten Universal Patterns Emerge Without Design</div>
+      <div class="disc-text">Computational architectures solving real-world problems reproduce nature's invariant patterns because they face structurally identical underlying challenges.</div>
+      <div class="disc-metric">18.2 patterns / 10 observations · 9/10 found without intentional design · n=300</div>
+    </div>
+    <div class="disc">
+      <div class="disc-title">3 — Seven-Layer Hierarchy is Structurally Stable</div>
+      <div class="disc-text">A hierarchy from physical reality to universal geometry maintains inter-level coherence under random load with minimal variance.</div>
+      <div class="disc-metric">coherence = 0.911 · stability = 99.5% · std = 0.054 · n=200</div>
+    </div>
+    <div class="disc">
+      <div class="disc-title">4 — Vector Confidence Detects Partial Failures Invisible to Scalar</div>
+      <div class="disc-text">A 7-dimensional confidence vector exposes partial component failures that scalar averaging conceals. 100% of vectors remained balanced across all tests.</div>
+      <div class="disc-metric">balance_rate = 100% · stability_index = 0.926 · n=300</div>
+    </div>
+    <div class="disc">
+      <div class="disc-title">5 — Observer Divergence Quantifies Computational Self-Awareness</div>
+      <div class="disc-text">The gap between system self-confidence and external confidence (div = self − external) provides a measurable analogue of psychological self-awareness with automatic correction.</div>
+      <div class="disc-metric">grounded = 68% · overconfident = 24% · underconfident = 8% · n=200</div>
+    </div>
+    <div class="disc">
+      <div class="disc-title">6 — Cognitive Biases are Algorithmically Detectable with Continuous Severity</div>
+      <div class="disc-text">All eight canonical biases from behavioural economics (Kahneman & Tversky) can be formalized into detectable patterns with continuous severity scores 0.0–1.0.</div>
+      <div class="disc-metric">Loss Aversion: 23% · Recency Bias: 60% · n=100 per bias type</div>
+    </div>
+    <div class="disc">
+      <div class="disc-title">7 — Lyapunov Stability Proven for Cognitive Field φ₀ = ⟨Ω, Ψ, P⟩</div>
+      <div class="disc-text">The three-component cognitive field converges monotonically to equilibrium. dV/dt &lt; 0 proven via LaSalle's Invariance Principle.</div>
+      <div class="disc-metric">V(S) = (1−Ω)² + (1−Ψ)² + P² · SHA-256 collision bound: 2⁻²⁵⁶</div>
+    </div>
+    <div class="disc">
+      <div class="disc-title">8 — Cognitive Degrees of Freedom Map to Compactified Extra Dimensions</div>
+      <div class="disc-text">Each irreducible cognitive dimension (context window, intent space, evolutionary depth, memory, tool coupling) admits a Kaluza-Klein extra-dimensional description with KK mass spectra.</div>
+      <div class="disc-metric">5 cognitive extra dimensions · 10 parallels with Dark Dimension scenario (MVV 2022)</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- IP NOTICE -->
+<section>
+  <div class="ip-box">
+    <div class="ip-icon">⚠️</div>
+    <div class="ip-text">
+      <strong>Intellectual Property Notice.</strong> This repository contains theoretical frameworks,
+      metrics, and results only. The underlying cognitive filtering mechanism
+      (<strong>TheoreticalLimitFilter</strong>) is a trade secret and is not described in these publications.
+      What is published: architectural concepts, experimental results, reproducible metrics,
+      and philosophical frameworks. Papers are released under CC BY-NC 4.0 for non-commercial use with attribution.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-greek">νόησις</div>
+  <p><strong>NOESIS</strong> — Cognitive Resonance System for Multi-Dimensional Reality Perception</p>
+  <p style="margin-top:0.5rem;">
+    Theoretical frameworks by <strong>Eva Goa</strong> · Computational implementation by NOESIS Research Group
+  </p>
+  <p style="margin-top:0.5rem; font-family:var(--mono); font-size:0.75rem; color:#444460;">
+    © 2026 NOESIS Research Group · All metrics reproducible at seed=42
+  </p>
+</footer>
+
+</body>
+</html>
