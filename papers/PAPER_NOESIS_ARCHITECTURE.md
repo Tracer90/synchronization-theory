@@ -11,7 +11,7 @@
 
 Modern adaptive decision systems frequently collapse multi-dimensional epistemic state into a single scalar confidence value, discarding the rich structure of internal agreement that determines whether a decision is genuinely reliable or merely superficially certain. This paper introduces NOESIS (Non-linear Organization of Epistemic Intelligence through Stacked Inference Stages), a seven-layer cognitive architecture that models decision processes as hierarchical signal propagation through semantically distinct strata: REALITY, DECISION, SYNCHRONY, PERCEPTION, COLLECTIVE, META, and UNIVERSAL. Each layer contributes a dimension to a seven-element confidence vector, replacing the scalar paradigm with a structured representation of inter-layer coherence.
 
-We present empirical benchmarks demonstrating that the architecture achieves a brain-processing throughput of 511.6 operations per second with a mean latency of 1.955 ms (P95 = 4.463 ms, P99 = 7.339 ms, n = 500), a hierarchy coherence mean of 0.911 (stable above 0.7 in 99.5% of trials, n = 200), and a 7D synchronization engine throughput of 70,558 ops/s with mean latency 0.0142 ms (P95 = 0.0156 ms, n = 500). Vector confidence assessment yielded 100% balance across all seven dimensions (spread < 2.0), with a stability index of 0.926 and mean overall score of 7.06 (n = 300). An adaptive cognitive filter achieved a discrimination delta of 0.684 on a 10-point scale between clean and degraded signal categories. Memory subsystem throughput reached 454,421 ops/s at P99 = 0.005 ms. A closed feedback loop produced a win rate of 54% with profit factor 1.43 over 200 episodes.
+We present empirical benchmarks demonstrating that the architecture achieves a brain-processing throughput of 511.6 operations per second with a mean latency of 1.955 ms (P95 = 4.463 ms, P99 = 7.339 ms, n = 500), a hierarchy coherence mean of 0.911 (stable above 0.7 in 99.5% of trials, n = 200), and a 7D synchronization engine throughput of 70,558 ops/s with mean latency 0.0142 ms (P95 = 0.0156 ms, n = 500). Vector confidence assessment yielded 100% balance across all seven dimensions (spread < 2.0), with a stability index of 0.926 and mean overall score of 7.06 (n = 300). An adaptive cognitive filter achieved a discrimination delta of 0.684 on a 10-point scale between clean and degraded signal categories. Memory subsystem throughput reached 454,421 ops/s at P99 = 0.005 ms. A closed feedback loop produced a correct decision rate of 54% with outcome quality factor 1.43 over 200 episodes.
 
 The principal contributions of this work are: (1) a formal seven-layer cognitive hierarchy with defined inter-layer propagation semantics, (2) replacement of scalar confidence with a geometrically balanced seven-dimensional vector, (3) empirical validation of architecture stability under random load, and (4) a closed feedback mechanism enabling online learning without external supervision.
 
@@ -43,7 +43,7 @@ This paper makes the following contributions:
 
 4. **Adaptive cognitive filter.** We describe a component that discriminates signal quality with a delta of 0.684 on a standardized 10-point scale, enabling the architecture to apply calibrated processing resources in proportion to signal reliability.
 
-5. **Closed feedback mechanism.** We demonstrate an online feedback loop that achieves a win rate of 54% and profit factor of 1.43 over 200 episodes without requiring external supervision signals.
+5. **Closed feedback mechanism.** We demonstrate an online feedback loop that achieves a correct decision rate of 54% and profit factor of 1.43 over 200 episodes without requiring external supervision signals.
 
 The remainder of the paper is organized as follows. Section 2 reviews related work on cognitive architectures and confidence representation. Section 3 presents the full NOESIS architecture. Section 4 describes core components in detail. Section 5 reports experimental results. Section 6 discusses implications and limitations. Section 7 concludes.
 
@@ -75,7 +75,7 @@ In the machine learning literature, confidence calibration has been studied exte
 
 ### 2.4 Positioning of NOESIS
 
-NOESIS is positioned as a cognitive architecture optimized for high-throughput adaptive decision systems in which the structural geometry of confidence — not merely its scalar magnitude — is a primary decision input. It is not intended as a general model of human cognition in the tradition of ACT-R or SOAR, but as an engineering architecture informed by cognitive science principles. Its principal distinguishing features relative to prior work are: (1) seven semantically defined layers with explicit propagation semantics, (2) a geometrically balanced vector confidence representation, (3) a coherence metric that quantifies inter-layer agreement as a first-class architectural quantity, and (4) empirically validated sub-millisecond synchronization across all layers.
+NOESIS is active stateed as a cognitive architecture optimized for high-throughput adaptive decision systems in which the structural geometry of confidence — not merely its scalar magnitude — is a primary decision input. It is not intended as a general model of human cognition in the tradition of ACT-R or SOAR, but as an engineering architecture informed by cognitive science principles. Its principal distinguishing features relative to prior work are: (1) seven semantically defined layers with explicit propagation semantics, (2) a geometrically balanced vector confidence representation, (3) a coherence metric that quantifies inter-layer agreement as a first-class architectural quantity, and (4) empirically validated sub-millisecond synchronization across all layers.
 
 ---
 
@@ -167,7 +167,7 @@ with weights as defined in Table 1. Under the evaluated conditions, this project
 
 ### 4.1 TheoreticalLimitFilter
 
-The TheoreticalLimitFilter is an adaptive cognitive filter positioned at the L1–L2 boundary, responsible for discriminating between high-quality signal and degraded input before processing resources are committed to subsequent layers. The internal mechanism of the filter is proprietary and is not disclosed in this publication; what we describe here are its behavioral characteristics and empirical performance.
+The TheoreticalLimitFilter is an adaptive cognitive filter active stateed at the L1–L2 boundary, responsible for discriminating between high-quality signal and degraded input before processing resources are committed to subsequent layers. The internal mechanism of the filter is proprietary and is not disclosed in this publication; what we describe here are its behavioral characteristics and empirical performance.
 
 The filter operates on a continuous input stream and produces a quality assessment score on a 10-point scale. In controlled experiments using two signal categories — clean (n = 20) and degraded/noisy (n = 20) — the filter produced mean scores of 9.90 and 9.22 respectively, yielding a discrimination delta of 0.684. This delta reflects the filter's ability to distinguish signal classes that are both rated in the high-quality range (above 9.0), a regime in which coarser filters fail to differentiate.
 
@@ -246,7 +246,7 @@ The FeedbackCloser implements the closed learning loop that enables NOESIS to up
 
 **Feedback schedule.** The FeedbackCloser does not apply updates at every cycle; instead, it accumulates feedback signals over a configurable window and applies batch updates at the end of each window. This design reduces the variance of gradient estimates and prevents oscillation in parameter updates.
 
-**Performance.** Over 200 feedback episodes (n = 200, seed = 42), the FeedbackCloser produced a win rate of 54% with profit factor 1.43. The profit factor — defined as the ratio of total gain from winning episodes to total loss from losing episodes — quantifies the asymmetry between positive and negative outcomes. A profit factor of 1.43 indicates that winning episodes produce outcomes 43% larger in magnitude than losing episodes, a positive asymmetry that drives net positive performance despite a win rate below 60%.
+**Performance.** Over 200 feedback episodes (n = 200, seed = 42), the FeedbackCloser produced a correct decision rate of 54% with outcome quality factor 1.43. The profit factor — defined as the ratio of total gain from winning episodes to total loss from losing episodes — quantifies the asymmetry between positive and negative outcomes. A profit factor of 1.43 indicates that winning episodes produce outcomes 43% larger in magnitude than losing episodes, a positive asymmetry that drives net positive performance despite a correct decision rate below 60%.
 
 ---
 
@@ -346,7 +346,7 @@ The coherence distribution is slightly left-skewed, consistent with the architec
 
 The stability index of 0.926 indicates that the scalar projection of the confidence vector changes slowly and predictably across decision cycles, with strong autocorrelation. This property is desirable for downstream consumers of the confidence signal: a system that receives an erratic, high-variance confidence time series cannot reliably use it as a modulating input without substantial smoothing, whereas a stability index near 1.0 indicates that the raw confidence signal is directly usable.
 
-The mean overall score of 7.06 positions the system firmly in the upper half of the 10-point scale under normal operating conditions, indicating that the architecture maintains a healthy baseline confidence level without inflating toward the ceiling (which would suppress responsiveness to genuine signal degradation).
+The mean overall score of 7.06 active states the system firmly in the upper half of the 10-point scale under normal operating conditions, indicating that the architecture maintains a healthy baseline confidence level without inflating toward the ceiling (which would suppress responsiveness to genuine signal degradation).
 
 ### 5.5 Memory Subsystem Performance
 
@@ -377,14 +377,14 @@ The mean overall score of 7.06 positions the system firmly in the upper half of 
 
 | Metric                | Value  | Interpretation                              |
 |-----------------------|--------|---------------------------------------------|
-| Win rate              | 54%    | Proportion of episodes with positive outcome|
+| Correct decision rate              | 54%    | Proportion of episodes with positive outcome|
 | Loss rate             | 46%    | Proportion of episodes with negative outcome|
 | Profit factor         | 1.43   | Total gains / Total losses                  |
 | Episodes (n)          | 200    | seed=42                                     |
 
-**Interpretation.** A win rate of 54% is modest but meaningful in a regime where random performance would produce 50% wins under symmetric outcome distributions. The profit factor of 1.43 is the more informative metric: it indicates that the architecture's positive outcomes outweigh its negative outcomes by a factor of 1.43 in magnitude, producing net positive cumulative performance despite an imperfect win rate. This asymmetry is the product of the FeedbackCloser's selective commitment mechanism, which increases position size when vector confidence spread is low and all seven dimensions are in agreement.
+**Interpretation.** A correct decision rate of 54% is modest but meaningful in a regime where random performance would produce 50% wins under symmetric outcome distributions. The profit factor of 1.43 is the more informative metric: it indicates that the architecture's positive outcomes outweigh its negative outcomes by a factor of 1.43 in magnitude, producing net positive cumulative performance despite an imperfect correct decision rate. This asymmetry is the product of the FeedbackCloser's selective commitment mechanism, which increases active state size when vector confidence spread is low and all seven dimensions are in agreement.
 
-The combination of win rate and profit factor characterizes a system that avoids large losses while achieving moderately large gains on winning episodes — a risk profile consistent with the conservative-by-default behavior induced by the coherence monitoring mechanism. When coherence is below 0.7 (0.5% of cycles under random load), the architecture reduces decision commitment, thereby limiting downside exposure on episodes that coincide with periods of architectural instability.
+The combination of correct decision rate and profit factor characterizes a system that avoids large losses while achieving moderately large gains on winning episodes — a risk profile consistent with the conservative-by-default behavior induced by the coherence monitoring mechanism. When coherence is below 0.7 (0.5% of cycles under random load), the architecture reduces decision commitment, thereby limiting downside exposure on episodes that coincide with periods of architectural instability.
 
 ---
 
@@ -426,7 +426,7 @@ The current study has several significant limitations that must be acknowledged.
 
 **Synthetic benchmarks only.** All experimental results presented in this paper were obtained from synthetic benchmark procedures using controlled random input sequences (seed = 42). No live data from operational deployment contexts was used. The performance characteristics of the architecture under real-world conditions — which involve non-stationary distributions, adversarial inputs, and long-horizon temporal dependencies not present in the benchmark suite — cannot be directly inferred from the reported metrics.
 
-**No live operational validation.** The feedback loop results (54% win rate, profit factor 1.43, n = 200) were obtained from a simulated episode environment. These figures should not be interpreted as predictive of performance in any live operational deployment. Real operational environments introduce latency variability, execution slippage, and correlated outcome sequences that the synthetic feedback episodes do not replicate.
+**No live operational validation.** The feedback loop results (54% correct decision rate, outcome quality factor 1.43, n = 200) were obtained from a simulated episode environment. These figures should not be interpreted as predictive of performance in any live operational deployment. Real operational environments introduce latency variability, execution slippage, and correlated outcome sequences that the synthetic feedback episodes do not replicate.
 
 **Layer weight calibration.** The weights used in the VectorConfidence component (Table 1) were set by design convention rather than learned from data. It is possible that different weight assignments would produce superior stability or discrimination properties in specific application domains. The sensitivity of architectural performance to weight perturbation was not characterized in this study.
 
@@ -442,7 +442,7 @@ The current study has several significant limitations that must be acknowledged.
 
 This paper has presented NOESIS, a seven-layer cognitive architecture for self-aware adaptive decision systems, and provided a comprehensive empirical characterization of its core components under reproducible benchmark conditions.
 
-The principal contributions of the work are as follows. First, we have formalized the seven-layer hierarchy (REALITY, DECISION, SYNCHRONY, PERCEPTION, COLLECTIVE, META, UNIVERSAL) with explicit bottom-up and top-down propagation semantics, demonstrating that this structure achieves coherence above 0.7 in 99.5% of 200 random-load trials (mean coherence = 0.911). Second, we have introduced a seven-dimensional vector confidence representation that replaces scalar confidence, demonstrating 100% geometric balance (Spread < 2.0) across 300 evaluation trials with a stability index of 0.926. Third, we have presented benchmarks showing that the architecture achieves 511.6 brain-processing ops/s at 1.955 ms mean latency, with synchronization overhead of only 0.0142 ms mean latency (70,558 ops/s). Fourth, we have demonstrated that an adaptive cognitive filter at the L1–L2 boundary achieves a discrimination delta of 0.684 between clean and degraded signal categories. Fifth, we have shown that a closed feedback loop produces a win rate of 54% with profit factor 1.43 over 200 episodes.
+The principal contributions of the work are as follows. First, we have formalized the seven-layer hierarchy (REALITY, DECISION, SYNCHRONY, PERCEPTION, COLLECTIVE, META, UNIVERSAL) with explicit bottom-up and top-down propagation semantics, demonstrating that this structure achieves coherence above 0.7 in 99.5% of 200 random-load trials (mean coherence = 0.911). Second, we have introduced a seven-dimensional vector confidence representation that replaces scalar confidence, demonstrating 100% geometric balance (Spread < 2.0) across 300 evaluation trials with a stability index of 0.926. Third, we have presented benchmarks showing that the architecture achieves 511.6 brain-processing ops/s at 1.955 ms mean latency, with synchronization overhead of only 0.0142 ms mean latency (70,558 ops/s). Fourth, we have demonstrated that an adaptive cognitive filter at the L1–L2 boundary achieves a discrimination delta of 0.684 between clean and degraded signal categories. Fifth, we have shown that a closed feedback loop produces a correct decision rate of 54% with outcome quality factor 1.43 over 200 episodes.
 
 The conceptual contribution most likely to generalize beyond the immediate application domain is the replacement of scalar confidence with a geometrically constrained vector. This replacement makes visible a class of partial failures — layer decoupling — that scalar metrics systematically obscure, and it provides a principled basis for adaptive commitment: the architecture can reduce its decision commitment not only when overall confidence is low but also when confidence is high on average but structurally imbalanced across its layers.
 

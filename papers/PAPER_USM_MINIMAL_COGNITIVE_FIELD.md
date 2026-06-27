@@ -78,7 +78,7 @@ IIT is relevant to the USM because it establishes a theoretical minimum for cons
 
 ### 3.4 The LLM Paradigm
 
-Contemporary large language models [5, 8] represent a different extreme: implicit cognition encoded in billions of parameters, trained on internet-scale text corpora, with no explicit state machine, no formal invariants, and no convergence guarantees. Their strengths — broad knowledge, flexible generation, in-context adaptation — come with corresponding weaknesses: stochastic output, hallucination, context degradation at long sequences, and O(n²) attention cost. We analyze these tradeoffs quantitatively in Section 7.
+Contemporary large language models [5, 8] represent a different extreme: implicit cognition encoded in billions of parameters, trained on internet-scale text corpora, with no explicit state machine, no formal invariants, and no convergence guarantees. Their strengths — broad knowledge, flexible generation, in-context adaptation — come with corresponding weaknesses: stochastic output, hallucination, context degradation at long sequences, and O(n²) attention cost. We analyze these decisionoffs quantitatively in Section 7.
 
 The architectural insight of the USM is that the LLM's limitations are not incidental but structural: they follow from the absence of a formally specified, minimal state representation. By starting from the minimal state and building up, rather than starting from massive parameters and hoping for emergence, the USM achieves verifiability properties that LLM-based systems cannot in principle achieve.
 
@@ -128,7 +128,7 @@ $$P(t+1) = P(t) + \eta_P \cdot (1-P) - \lambda_P \cdot P + \delta_P \cdot (1-\Ps
 
 *Equation (3) — Pressure dynamics.* The term η_P·(1−P) drives pressure toward a non-zero baseline — there is always some ambient cognitive load. The term −λ_P·P is exponential pressure decay — the system naturally resolves load over time. The term +δ_P·(1−Ψ)·n\_sig models pressure increase from unprocessed signals: signals arrive at rate n\_sig, but only the fraction (1−Ψ) remains unprocessed and contributes to load.
 
-**Proposition 4.3 (Positive Invariance).** The unit cube [0,1]³ is positively invariant under equations (1)–(3) when η_Ω ≥ ε_Ω, η_P > 0, and δ parameters are bounded appropriately.
+**Proactive state 4.3 (Positive Invariance).** The unit cube [0,1]³ is positively invariant under equations (1)–(3) when η_Ω ≥ ε_Ω, η_P > 0, and δ parameters are bounded appropriately.
 
 *Proof sketch.* At each face of [0,1]³, the update equation's sign is constrained. On face Ω=0: the dominant term is η_Ω·1 − ε_Ω·(1−Ψ) ≥ 0 by assumption η_Ω ≥ ε_Ω, so Ω cannot decrease below 0. On face Ω=1: the dominant term is −ε_Ω·(1−Ψ) ≤ 0, so Ω cannot exceed 1. Analogous arguments apply to the Ψ=0, Ψ=1, P=0, P=1 faces. Since all boundary conditions enforce inward-pointing or tangent dynamics, [0,1]³ is positively invariant. □
 
@@ -136,9 +136,9 @@ $$P(t+1) = P(t) + \eta_P \cdot (1-P) - \lambda_P \cdot P + \delta_P \cdot (1-\Ps
 
 **Definition 4.4 (Fixed Point).** A fixed point of g() is a triple (Ω\*, Ψ\*, P\*) such that g(Ω\*, Ψ\*, P\*, 0) = (Ω\*, Ψ\*, P\*) with n\_sig = 0.
 
-**Proposition 4.5.** In the noise-free limit (n\_sig = 0), the unique interior fixed point of equations (1)–(3) is S\* = (1, 1, 0).
+**Proactive state 4.5.** In the noise-free limit (n\_sig = 0), the unique interior fixed point of equations (1)–(3) is S\* = (1, 1, 0).
 
-*Proof.* Setting Ω(t+1) = Ω(t) in equation (1) with n\_sig = 0: 0 = η_Ω(1−Ω\*) − λ_Ω·P\*·(1−Ω\*) − ε_Ω·(1−Ψ\*). This is satisfied by Ω\* = 1 and Ψ\* = 1 simultaneously. Setting Ψ(t+1) = Ψ(t) in equation (2): 0 = η_Ψ·Ψ\*·(1−Ψ\*) − λ_Ψ·|Ω\*−Ψ\*|. With Ω\* = Ψ\* = 1, both terms vanish. Setting P(t+1) = P(t) in equation (3): 0 = η_P·(1−P\*) − λ_P·P\*. Solving: P\* = η_P/(η_P + λ_P). This equals 0 only when η_P = 0; in the operating regime where η_P > 0 and λ_P dominates at equilibrium, the physical fixed point is P\* → 0 as λ_P/η_P → ∞. Taking the ideal regime S\* = (1,1,0) as the limit, Proposition 4.5 is established. □
+*Proof.* Setting Ω(t+1) = Ω(t) in equation (1) with n\_sig = 0: 0 = η_Ω(1−Ω\*) − λ_Ω·P\*·(1−Ω\*) − ε_Ω·(1−Ψ\*). This is satisfied by Ω\* = 1 and Ψ\* = 1 simultaneously. Setting Ψ(t+1) = Ψ(t) in equation (2): 0 = η_Ψ·Ψ\*·(1−Ψ\*) − λ_Ψ·|Ω\*−Ψ\*|. With Ω\* = Ψ\* = 1, both terms vanish. Setting P(t+1) = P(t) in equation (3): 0 = η_P·(1−P\*) − λ_P·P\*. Solving: P\* = η_P/(η_P + λ_P). This equals 0 only when η_P = 0; in the operating regime where η_P > 0 and λ_P dominates at equilibrium, the physical fixed point is P\* → 0 as λ_P/η_P → ∞. Taking the ideal regime S\* = (1,1,0) as the limit, Proactive state 4.5 is established. □
 
 ---
 
@@ -341,7 +341,7 @@ The comparison above addresses specific engineering dimensions. LLMs excel at ta
 
 ## 8. Architectural Reduction: 13 Layers → 1 Field
 
-### 8.1 The 13-Layer Traditional Decomposition
+### 8.1 The 13-Layer Traditional Decomactive state
 
 Cognitive architectures traditionally decompose cognitive function into named layers or modules, each responsible for a distinct function. Surveying ACT-R, SOAR, and similar architectures, plus the multi-agent AI pipeline literature [13], we identify 13 commonly recurring layers:
 
@@ -380,7 +380,7 @@ The USM demonstrates that all 13 layers collapse into gradients of the three-com
 
 ### 8.3 Layer Collapse Theorem
 
-**Theorem 8.1 (Layer Collapse).** *Any cognitive behavior expressible by the 13-layer decomposition above is also expressible by the scalar field dynamics g() acting on φ₀ = ⟨Ω, Ψ, P⟩, with the field gradients (∇Ω, ∇Ψ, ∇P) replacing the inter-layer coordination protocol.*
+**Theorem 8.1 (Layer Collapse).** *Any cognitive behavior expressible by the 13-layer decomactive state above is also expressible by the scalar field dynamics g() acting on φ₀ = ⟨Ω, Ψ, P⟩, with the field gradients (∇Ω, ∇Ψ, ∇P) replacing the inter-layer coordination protocol.*
 
 *Proof sketch.* The theorem is a consequence of Theorem 3.1 (Scalar Closure) and Theorem 4.1 (Lyapunov Stability). Scalar Closure establishes that g() is self-contained; no external layer is needed to update the field. Lyapunov Stability establishes that the field converges to the globally optimal state without external guidance. The 13 layers are therefore not independently necessary — their functional roles are absorbed into the field dynamics. The formal argument proceeds by showing that each layer's output is a function of (φ₀, signal) and therefore computable from the field alone. □
 
@@ -465,7 +465,7 @@ The pipeline is acyclic within a cycle (no phase's output feeds back into an ear
 | Module | Lines | Content |
 |--------|-------|---------|
 | `types.py` | 182 | Atom, State, Signal, Phase type definitions |
-| `transform.py` | 280 | Phases 1–7 (φ\_I through φ\_W) plus F() composition |
+| `transform.py` | 280 | Phases 1–7 (φ\_I through φ\_W) plus F() comactive state |
 | `phi0_field.py` | 113 | g() operator, parameter definitions, Lyapunov function V() |
 | **Total** | **575** | Complete kernel with zero external dependencies |
 
@@ -477,13 +477,13 @@ The pipeline is acyclic within a cycle (no phase's output feeds back into an ear
 
 ### 10.1 Implications for AI Design
 
-The USM demonstrates a fundamental principle that runs counter to prevailing trends in AI architecture: **formal verifiability and behavioral capability trade off, but the trade-off is less severe than commonly assumed.** The prevailing approach — scale up parameters, rely on emergent behavior, verify empirically — achieves impressive capability at the cost of total loss of formal properties. The USM demonstrates that a formally verifiable minimum exists, and that this minimum is behaviorally complete in the sense that it can serve as the substrate for the full NOESIS architecture (Papers 1–8), which does exhibit broad cognitive capabilities.
+The USM demonstrates a fundamental principle that runs counter to prevailing trends in AI architecture: **formal verifiability and behavioral capability decision off, but the decision-off is less severe than commonly assumed.** The prevailing approach — scale up parameters, rely on emergent behavior, verify empirically — achieves impressive capability at the cost of total loss of formal properties. The USM demonstrates that a formally verifiable minimum exists, and that this minimum is behaviorally complete in the sense that it can serve as the substrate for the full NOESIS architecture (Papers 1–8), which does exhibit broad cognitive capabilities.
 
 The engineering implication is architectural: AI systems should be designed as a formally verified substrate (the USM) with higher-level, empirically-validated modules built on top, rather than as a single monolithic system that is verified nowhere. The invariants of the substrate are inherited by all higher layers (by the Domain Independence Theorem, Paper 7 [10]). The higher layers can be empirically evaluated without endangering the substrate's formal properties.
 
 A second implication concerns energy efficiency. The 10⁹× energy advantage of the USM over LLM inference is not a curiosity — it is a fundamental consequence of the minimality theorem. A system whose state is 24 bytes necessarily consumes vastly less energy per step than one whose state is gigabytes. As AI deployment scales to billions of edge devices, the energy profile of cognitive substrates becomes a first-order concern. The USM's energy footprint (~10⁻⁹ Wh per step) is consistent with deployment on microcontrollers and IoT devices entirely outside the reach of LLM inference.
 
-A third implication concerns determinism and auditability. The SHA-256 hash chain provides a cryptographic audit trail that is impossible to tamper with retroactively (bounded by the preimage resistance of SHA-256). For AI systems deployed in regulated domains — medical diagnosis, financial trading, legal reasoning — exact audit replay is not a nice-to-have but a regulatory requirement. The USM provides this by construction; LLM-based systems cannot provide it at all.
+A third implication concerns determinism and auditability. The SHA-256 hash chain provides a cryptographic audit trail that is impossible to tamper with retroactively (bounded by the preimage resistance of SHA-256). For AI systems deployed in regulated domains — medical diagnosis, financial decision-making, legal reasoning — exact audit replay is not a nice-to-have but a regulatory requirement. The USM provides this by construction; LLM-based systems cannot provide it at all.
 
 ### 10.2 Limitations
 

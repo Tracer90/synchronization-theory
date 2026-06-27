@@ -150,7 +150,7 @@ The Confidence Extractor samples the primary system's output at each decision ti
 
 **Component 2: External Validator**
 
-The External Validator computes `C_ext` from observable performance signals. In asynchronous feedback environments (where ground truth is not immediately available), the validator uses a rolling window of recent performance metrics—accuracy on confirmed predictions, profit-and-loss in trading systems, or task completion rates in goal-directed agents. In synchronous feedback environments, immediate outcome signals can be used directly. The validator is deliberately decoupled from the primary system's internal state to ensure independence.
+The External Validator computes `C_ext` from observable performance signals. In asynchronous feedback environments (where ground truth is not immediately available), the validator uses a rolling window of recent performance metrics—accuracy on confirmed predictions, profit-and-loss in adaptive decision systems, or task completion rates in goal-directed agents. In synchronous feedback environments, immediate outcome signals can be used directly. The validator is deliberately decoupled from the primary system's internal state to ensure independence.
 
 **Component 3: Divergence Tracker**
 

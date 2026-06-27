@@ -132,8 +132,8 @@
     "avg_error": 2.782,
     "scenarios": [
       "human_feedback",
-      "perfect_market",
-      "chaotic_market",
+      "perfect_environment",
+      "chaotic_environment",
       "regime_change",
       "edge_case",
       "self_reflection"

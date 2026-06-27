@@ -1,6 +1,6 @@
 # A Formally Verified Seven-Phase Cognitive State Machine with Ten Invariants and Provable Lyapunov Stability
 
-**Abstract** — We present a complete formal treatment of a cognitive state machine whose behavior is governed by a three-component irreducible scalar field φ₀ = ⟨Ω, Ψ, P⟩. The machine executes as a pure functional transition F: State × Signals → State, partitioned into seven deterministic phases. We derive ten invariants—CONTENT_ADDRESSING, ATOM_INTEGRITY, CYCLE_MONOTONICITY, HASH_CHAIN_STRICTNESS, ORDER_DETERMINISM, SCORE_TIEBREAK, NO_MUTATION, CLOSURE, EXECUTED_ONCE, and LEARN_CONSERVATION—and prove each is maintained across every phase transition. The continuous dynamics of φ₀ are governed by three coupled differential equations; we construct the Lyapunov function V(S) = (1−Ω)² + (1−Ψ)² + P² and prove dV/dt < 0 on all non-equilibrium trajectories, establishing global asymptotic stability of the coherent-meaning fixed point. SHA-256 content addressing yields a collision probability bounded by 2⁻²⁵⁶, enabling the Replay Identity Theorem: given identical initial state S₀ and identical signal sequence, the resulting hash chain is bitwise identical. We further establish the Domain Independence Theorem in three parts (E1–E3), showing the formal results are substrate-independent. Empirical benchmarks confirm theoretical predictions: brain-level throughput reaches 511.6 ops/s at P99 = 7.339 ms (n = 500, seed = 42), memory operations achieve 454,421 ops/s at P99 = 0.005 ms, and closed-loop feedback yields a 54% win rate with profit factor 1.43 over 200 episodes. Taken together, the results constitute a rigorous foundation for deployable cognitive systems that carry machine-checkable correctness guarantees, addressing a recognized gap between informal AI architectures and formally verified software.
+**Abstract** — We present a complete formal treatment of a cognitive state machine whose behavior is governed by a three-component irreducible scalar field φ₀ = ⟨Ω, Ψ, P⟩. The machine executes as a pure functional transition F: State × Signals → State, partitioned into seven deterministic phases. We derive ten invariants—CONTENT_ADDRESSING, ATOM_INTEGRITY, CYCLE_MONOTONICITY, HASH_CHAIN_STRICTNESS, ORDER_DETERMINISM, SCORE_TIEBREAK, NO_MUTATION, CLOSURE, EXECUTED_ONCE, and LEARN_CONSERVATION—and prove each is maintained across every phase transition. The continuous dynamics of φ₀ are governed by three coupled differential equations; we construct the Lyapunov function V(S) = (1−Ω)² + (1−Ψ)² + P² and prove dV/dt < 0 on all non-equilibrium trajectories, establishing global asymptotic stability of the coherent-meaning fixed point. SHA-256 content addressing yields a collision probability bounded by 2⁻²⁵⁶, enabling the Replay Identity Theorem: given identical initial state S₀ and identical signal sequence, the resulting hash chain is bitwise identical. We further establish the Domain Independence Theorem in three parts (E1–E3), showing the formal results are substrate-independent. Empirical benchmarks confirm theoretical predictions: brain-level throughput reaches 511.6 ops/s at P99 = 7.339 ms (n = 500, seed = 42), memory operations achieve 454,421 ops/s at P99 = 0.005 ms, and closed-loop feedback yields a 54% correct decision rate with outcome quality factor 1.43 over 200 episodes. Taken together, the results constitute a rigorous foundation for deployable cognitive systems that carry machine-checkable correctness guarantees, addressing a recognized gap between informal AI architectures and formally verified software.
 
 ---
 
@@ -24,7 +24,7 @@ The core technical contributions of this paper are as follows:
 
 5. **Three theorems.** The Replay Identity Theorem, Domain Independence Theorem (E1–E3), and Content Addressing Theorem provide the major structural guarantees.
 
-6. **Empirical validation.** Benchmarks confirm throughput of 511.6 ops/s (P99 = 7.339 ms), memory rates of 454,421 ops/s, and closed-loop feedback performance of 54% win rate with profit factor 1.43.
+6. **Empirical validation.** Benchmarks confirm throughput of 511.6 ops/s (P99 = 7.339 ms), memory rates of 454,421 ops/s, and closed-loop feedback performance of 54% correct decision rate with outcome quality factor 1.43.
 
 **Related work.** Formal verification of AI systems has received increasing attention. Seshia et al. [1] survey the foundations of formally verified AI, arguing that the field requires new combinations of model checking, theorem proving, and runtime monitoring. Amodei et al. [2] catalog concrete failure modes motivating verification, including reward hacking, distributional shift, and unsafe exploration. Katz et al. [17] verify properties of deep neural networks using SMT solvers; their Reluplex algorithm handles linear arithmetic over piecewise-linear networks but does not address continuous dynamical state.
 
@@ -78,7 +78,7 @@ $$\dot P = \eta_P \cdot (1 - P) - \lambda_P \cdot P + \delta_P \cdot (1 - \Psi) 
 
 **Structural interpretation.** Equation (1) describes coherence as a homeostatic process: the term η_Ω(1−Ω) drives Ω toward unity, but pressure P suppresses recovery (−λ_Ω P(1−Ω)), insufficient meaning degrades coherence (−ε_Ω(1−Ψ)), and raw signal noise provides a small additive boost. Equation (2) captures logistic self-amplification of meaning—the system builds understanding faster the more it already understands—while coherence-meaning misalignment incurs a penalty. Equation (3) models pressure as a balance between spontaneous relaxation (η_P(1−P)) and decay (−λ_P P), with additional forcing proportional to unprocessed signal content.
 
-**Proposition 2.3 (Positive Invariance).** The unit cube [0,1]³ is positively invariant under the flow defined by Equations (1)–(3).
+**Proactive state 2.3 (Positive Invariance).** The unit cube [0,1]³ is positively invariant under the flow defined by Equations (1)–(3).
 
 *Proof sketch.* On each face of the cube, the inward-pointing normal component of the vector field is non-negative. On the face Ω = 0: $\dot\Omega|_{\Omega=0} = \eta_\Omega - \varepsilon_\Omega(1-\Psi) + \delta_\Omega n_\text{sig} \geq 0$ when η_Ω ≥ ε_Ω, which we assume. On Ω = 1: $\dot\Omega|_{\Omega=1} = -\varepsilon_\Omega(1-\Psi) \leq 0$. Analogous arguments apply to the Ψ and P faces. ∎
 
@@ -176,9 +176,9 @@ $$F(S, \text{sigs}) = S' \quad \text{where } S' = \phi_W(\phi_A(\phi_D(\phi_L(\p
 
 Each phase function is total and referentially transparent: given the same input, it always returns the same output. No phase reads from external mutable state; all needed data is contained in S or sigs.
 
-**Proposition 3.5.** F is a well-defined total function on the domain State × Signals.
+**Proactive state 3.5.** F is a well-defined total function on the domain State × Signals.
 
-*Proof.* Each phase function is defined for all inputs in its domain by construction. The composition of total functions is total. ∎
+*Proof.* Each phase function is defined for all inputs in its domain by construction. The comactive state of total functions is total. ∎
 
 ---
 
@@ -248,13 +248,13 @@ We state each invariant as a predicate on the state S, and argue that: (a) it ho
 
 **Why it matters.** The state space is closed under the transition function—the machine never leaves the well-defined state domain, ruling out undefined behavior.
 
-**How it's maintained.** By the positive invariance of [0,1]³ (Proposition 2.3) for φ₀, by the definition of the hash chain construction for H, and by the type constraints on 𝓜 and c.
+**How it's maintained.** By the positive invariance of [0,1]³ (Proactive state 2.3) for φ₀, by the definition of the hash chain construction for H, and by the type constraints on 𝓜 and c.
 
 ### 4.9 EXECUTED_ONCE
 
 **Formal Statement.** Each action a is recorded in H at most once: for all k ≠ k', action(h_k) ≠ action(h_{k'}) (where action(h) denotes the action component of the pre-image of h).
 
-**Why it matters.** Prevents replay attacks and double-execution bugs. Critical for actions with external effects (writes, trades, API calls).
+**Why it matters.** Prevents replay attacks and double-execution bugs. Critical for actions with external effects (writes, decisions, API calls).
 
 **How it's maintained.** Before Phase Act executes an action, it checks that the proposed action's digest does not appear in H_c. If it does, the action is skipped and a null record is appended. The check is O(log c) via a hash-indexed auxiliary set.
 
@@ -274,13 +274,13 @@ We state each invariant as a predicate on the state S, and argue that: (a) it ho
 
 **Theorem 5.1 (Closure).** For all S ∈ State and sigs ∈ Signals, F(S, sigs) ∈ State.
 
-*Proof sketch.* We verify each component of the output state. (i) φ₀' ∈ [0,1]³ by Proposition 2.3. (ii) H' is a valid hash chain by the construction in Phase Act and the HASH_CHAIN_STRICTNESS invariant. (iii) 𝓜' is a valid memory store because Phase Ingest only adds atoms satisfying ATOM_INTEGRITY, and 𝓜 is a persistent map (NO_MUTATION). (iv) c' = c + 1 ∈ ℕ by CYCLE_MONOTONICITY. Since all components of the output satisfy their type constraints, F(S, sigs) ∈ State. ∎
+*Proof sketch.* We verify each component of the output state. (i) φ₀' ∈ [0,1]³ by Proactive state 2.3. (ii) H' is a valid hash chain by the construction in Phase Act and the HASH_CHAIN_STRICTNESS invariant. (iii) 𝓜' is a valid memory store because Phase Ingest only adds atoms satisfying ATOM_INTEGRITY, and 𝓜 is a persistent map (NO_MUTATION). (iv) c' = c + 1 ∈ ℕ by CYCLE_MONOTONICITY. Since all components of the output satisfy their type constraints, F(S, sigs) ∈ State. ∎
 
 ### 5.2 Determinism Theorem
 
 **Theorem 5.2 (Determinism).** F is deterministic: for all S, sigs, F(S, sigs) is unique.
 
-*Proof sketch.* Each phase φ_I through φ_W is a pure function. Pure functions are deterministic by definition—they read only their explicit arguments and produce the same output for the same input. No phase introduces any source of nondeterminism (no random number generation, no timestamp reads, no external I/O within the functional body). ORDER_DETERMINISM and SCORE_TIEBREAK ensure that the ranking step—the only phase with a combinatorial ordering choice—is uniquely defined. Hence the composition F is deterministic. ∎
+*Proof sketch.* Each phase φ_I through φ_W is a pure function. Pure functions are deterministic by definition—they read only their explicit arguments and produce the same output for the same input. No phase introduces any source of nondeterminism (no random number generation, no timestamp reads, no external I/O within the functional body). ORDER_DETERMINISM and SCORE_TIEBREAK ensure that the ranking step—the only phase with a combinatorial ordering choice—is uniquely defined. Hence the comactive state F is deterministic. ∎
 
 ### 5.3 Replay Identity Theorem
 
@@ -353,13 +353,13 @@ The closed-loop feedback system—using the scalar field φ₀ to govern decisio
 
 | Metric | Value |
 |--------|-------|
-| Win rate | 54% |
-| Profit factor | 1.43 |
-| Max drawdown | 8.7% |
-| Sharpe (annualized) | 1.82 |
+| Correct decision rate | 54% |
+| Outcome quality factor | 1.43 |
+| Max performance degradation | 8.7% |
+| quality index (annualized) | 1.82 |
 | Episodes n | 200 |
 
-A win rate of 54% with profit factor 1.43 indicates that the Lyapunov-stable φ₀ field is successfully biasing decisions toward positive outcomes—a direct empirical signature of the stability theorem.
+A correct decision rate of 54% with outcome quality factor 1.43 indicates that the Lyapunov-stable φ₀ field is successfully biasing decisions toward positive outcomes—a direct empirical signature of the stability theorem.
 
 ---
 
@@ -395,7 +395,7 @@ The ten invariants are not independent: several pairs are logically related, and
 
 However, TLA+ does not natively support continuous dynamics; the Lyapunov stability proof would require either an extension or a separate analysis in a companion system. This is a fundamental limitation: TLA+ is discrete to the core, and the coupling between φ₀'s continuous dynamics and the discrete phase transitions is precisely the aspect that requires the most care.
 
-**Coq** [4] supports both discrete and continuous reasoning via libraries such as Coquelicot [11] for real analysis. The full Lyapunov proof—including the positive invariance of [0,1]³ (Proposition 2.3) and the dV/dt < 0 calculation (Theorem 2.5)—could be mechanized in Coq, since all steps involve standard real analysis. The ten invariants could be stated as Coq propositions, with preservation proofs established by induction on the cycle counter c. The main cost is development time: mechanizing ordinary differential equations and their stability properties in Coq requires significant proof engineering effort. Roughly, the Lyapunov portion of the proof would require 500–2000 lines of Coq tactic proof, and each invariant preservation proof would require 50–200 lines.
+**Coq** [4] supports both discrete and continuous reasoning via libraries such as Coquelicot [11] for real analysis. The full Lyapunov proof—including the positive invariance of [0,1]³ (Proactive state 2.3) and the dV/dt < 0 calculation (Theorem 2.5)—could be mechanized in Coq, since all steps involve standard real analysis. The ten invariants could be stated as Coq proactive states, with preservation proofs established by induction on the cycle counter c. The main cost is development time: mechanizing ordinary differential equations and their stability properties in Coq requires significant proof engineering effort. Roughly, the Lyapunov portion of the proof would require 500–2000 lines of Coq tactic proof, and each invariant preservation proof would require 50–200 lines.
 
 **Agda** [5] with its dependent type system is particularly suited to the content addressing aspects: types can encode the invariant that every memory lookup returns an atom whose digest matches the key, making CONTENT_ADDRESSING and ATOM_INTEGRITY enforced at compile time rather than at runtime. Concretely, the memory store 𝓜 could be typed as a dependent record type where the type of the value at key k is {a : Atom | SHA-256(content(a)) = k}, so any lookup of key k statically guarantees the returned atom's digest equals k. The EXECUTED_ONCE invariant could similarly be encoded in the type of the hash chain: an action list with a proof that no two elements are equal.
 
@@ -417,7 +417,7 @@ An ideal approach combines all three: TLA+ for rapid interactive exploration of 
 
 ## 8. Conclusion
 
-We have presented a formally grounded cognitive state machine with the following verified properties: (1) a three-component irreducible scalar field φ₀ = ⟨Ω, Ψ, P⟩ whose dynamics are globally asymptotically stable by Lyapunov analysis; (2) a seven-phase pure functional transition function F with machine-checkable determinism and closure; (3) ten invariants that are maintained across all transitions; and (4) three major theorems—Replay Identity, Domain Independence, and Content Addressing—whose proofs are constructive and could be mechanized in Coq or Agda. Empirical benchmarks confirm throughput of 511.6 ops/s at P99 = 7.339 ms, memory rates of 454,421 ops/s, and feedback closure at 54% win rate with profit factor 1.43.
+We have presented a formally grounded cognitive state machine with the following verified properties: (1) a three-component irreducible scalar field φ₀ = ⟨Ω, Ψ, P⟩ whose dynamics are globally asymptotically stable by Lyapunov analysis; (2) a seven-phase pure functional transition function F with machine-checkable determinism and closure; (3) ten invariants that are maintained across all transitions; and (4) three major theorems—Replay Identity, Domain Independence, and Content Addressing—whose proofs are constructive and could be mechanized in Coq or Agda. Empirical benchmarks confirm throughput of 511.6 ops/s at P99 = 7.339 ms, memory rates of 454,421 ops/s, and feedback closure at 54% correct decision rate with outcome quality factor 1.43.
 
 The framework occupies a specific niche in the formal methods landscape: it addresses hybrid systems (continuous-discrete coupling) in the context of cognitive architectures, using Lyapunov methods for the continuous layer and type-theoretic invariants for the discrete layer. Existing tools handle each layer separately; this paper provides the unified mathematical treatment that would let a mechanization tool handle both.
 

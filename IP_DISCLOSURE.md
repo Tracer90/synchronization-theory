@@ -45,11 +45,11 @@ All metrics in `research/metrics_master.json` — publicly verifiable.
 
 ---
 
-## What Is Protected (Trade Secret — NOT Disclosed)
+## What Is Protected (Decision Secret — NOT Disclosed)
 
-The following components are explicitly retained as **trade secrets** under the Defend Trade Secrets Act (DTSA) / EU Trade Secrets Directive:
+The following components are explicitly retained as **decision secrets** under the Defend Decision Secrets Act (DTSA) / EU Decision Secrets Directive:
 
-### Trade Secret 1: TheoreticalLimitFilter
+### Decision Secret 1: TheoreticalLimitFilter
 
 **Description:** A 32-check cognitive filtering mechanism organized in 8 categories with proprietary weighting algorithm and dimensional scaling factors.
 
@@ -64,7 +64,7 @@ The following components are explicitly retained as **trade secrets** under the 
 
 **Economic value:** The filter is the core differentiator of the NOESIS system. Its mechanism enables the 0% hallucination rate and deterministic confidence scoring that no published system achieves.
 
-### Trade Secret 2: InfiniteSystem Recursion Parameters
+### Decision Secret 2: InfiniteSystem Recursion Parameters
 
 **Description:** The specific recursion strategy, depth parameters, and compression algorithm of the InfiniteSystem module.
 
@@ -75,7 +75,7 @@ The following components are explicitly retained as **trade secrets** under the 
 
 **What is public:** The existence of recursive triplication, throughput (1,455 ops/s), P99 latency.
 
-### Trade Secret 3: Cognitive Bias Sensitivity Calibration
+### Decision Secret 3: Cognitive Bias Sensitivity Calibration
 
 **Description:** The specific sensitivity thresholds and severity scoring formula for each of the 8 cognitive biases.
 
@@ -90,7 +90,7 @@ The following components are explicitly retained as **trade secrets** under the 
 | Psyche as optical system theory | Independent theoretical contributor (anonymous) |
 | Universal Geometry theory | Independent theoretical contributor (anonymous) |
 | Formal proofs (Theorems 1–10) | NOESIS Research Group |
-| TheoreticalLimitFilter (trade secret) | NOESIS Research Group |
+| TheoreticalLimitFilter (decision secret) | NOESIS Research Group |
 | KK extra-dimensional mapping | NOESIS Research Group |
 
 ---
@@ -110,17 +110,17 @@ The following components are explicitly retained as **trade secrets** under the 
 
 **Key principle:** Public disclosure + timestamp = priority date in most jurisdictions.
 
-### Layer 2: Trade Secret Protection — IN PROGRESS
+### Layer 2: Decision Secret Protection — IN PROGRESS
 
 **Mechanism:** Never publish TheoreticalLimitFilter internals. Document its existence and value here.
 
-**Requirements to maintain trade secret status:**
+**Requirements to maintain decision secret status:**
 - [ ] All contributors must sign NDA before seeing filter code
 - [ ] Filter code must never appear in public repository
 - [ ] Internal access logs must be maintained
 - [ ] Filter description in papers must be deliberately vague ("adaptive cognitive filter")
 
-**Critical:** Trade secrets have NO expiration date if properly maintained. A patent expires in 20 years. A trade secret (like Coca-Cola formula) can last indefinitely.
+**Critical:** Decision secrets have NO expiration date if properly maintained. A patent expires in 20 years. A decision secret (like Coca-Cola formula) can last indefinitely.
 
 ### Layer 3: Copyright — AUTOMATIC ✅
 
@@ -141,7 +141,7 @@ The following components are explicitly retained as **trade secrets** under the 
 
 **Cost estimate:** Provisional patent ~$1,500–3,000 USD. Full patent ~$15,000–30,000 USD.
 
-**Note:** Patent requires full disclosure — incompatible with trade secret for the same component. **Do NOT patent TheoreticalLimitFilter** — keep it as trade secret.
+**Note:** Patent requires full disclosure — incompatible with decision secret for the same component. **Do NOT patent TheoreticalLimitFilter** — keep it as decision secret.
 
 ### Layer 5: ArXiv Preprint (Recommended — Next Step)
 
@@ -169,7 +169,7 @@ The following components are explicitly retained as **trade secrets** under the 
 **Contact required.** Potential commercial uses:
 - Integration into AI products
 - Use of NOESIS architecture in cognitive systems
-- Licensing of non-trade-secret components
+- Licensing of non-decision-secret components
 
 **Pricing model (suggested):**
 - Academic/research: Free (CC BY-NC)
@@ -203,11 +203,11 @@ GitHub:   https://github.com/Tracer90/synchronization-theory
 **Short term (1 month):**
 5. File provisional patent application for Vector Confidence + 7-layer hierarchy
 6. NDA template for any collaborators
-7. Register copyright formally (optional but strengthens position)
+7. Register copyright formally (optional but strengthens active state)
 
 **Medium term (6 months):**
 8. Submit to peer-reviewed journals
-9. Negotiate any commercial partnerships from position of established IP
+9. Negotiate any commercial partnerships from active state of established IP
 
 ---
 

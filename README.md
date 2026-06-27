@@ -10,7 +10,7 @@
 
 <div align="center">
 
-[![Papers](https://img.shields.io/badge/Papers-8-blue?style=for-the-badge)](papers/)
+[![Papers](https://img.shields.io/badge/Papers-10-blue?style=for-the-badge)](papers/)
 [![Metrics](https://img.shields.io/badge/Metrics-Reproducible-green?style=for-the-badge)](metrics/metrics_master.json)
 [![License](https://img.shields.io/badge/License-CC_BY_NC_4.0-lightgrey?style=for-the-badge)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Active_Research-orange?style=for-the-badge)]()
@@ -21,23 +21,23 @@
 
 ## What is NOESIS?
 
-NOESIS is a **seven-layer cognitive architecture** that bridges inner cognitive processes and outer reality through a continuous cycle:
+NOESIS is a **seven-layer cognitive architecture** for self-aware adaptive decision systems. It proposes a minimal scalar field φ₀ = ⟨Ω, Ψ, P⟩ as the irreducible substrate of any system that receives signals, maintains coherence, integrates meaning, and manages pressure.
+
+The system operates through a continuous cycle:
 
 ```
 perception → filtering → decision → action → feedback → learning
 ```
 
-Unlike conventional AI systems that learn from static datasets, NOESIS learns through **embodied contact with reality** — financial markets serve as the real-world testing ground, providing unambiguous, low-latency ground truth signals.
-
-The system is not primarily a trading bot. **Trading is the epistemological contact point.** The primary contribution is the cognitive architecture itself.
+The primary contribution is **the cognitive architecture and its formal properties** — provable Lyapunov stability, content-addressed memory, zero hallucination by construction, and structural correspondence to known physics (Kaluza-Klein, Dark Dimension scenario, Swampland conjectures).
 
 ---
 
 ## Theoretical Foundations
 
-This research builds on two independent theoretical frameworks:
+This research builds on two independent frameworks:
 
-### the contributing theorist — Theory of Psyche as Optical System
+### Independent Theoretical Contributor — Theory of Psyche as Optical System
 > *"The psyche is an optical system of cognition. Humans perceive reality not directly, but through structures of their own psyche — cognitive schemas, unconscious fantasies, defense mechanisms. Any worldview is a derivative of psychic configuration."*
 
 > *"The Geometry of the Universe is a collection of invariant patterns that appear when any descriptions of reality are overlaid: physical, psychic, social, archetypal, spiritual. It is the structure of the process of manifestation itself."*
@@ -49,164 +49,117 @@ Operationalizing these philosophical frameworks into measurable, reproducible co
 
 ## The Seven Levels
 
-| Level | Name | Function | Module |
-|-------|------|----------|--------|
-| L1 | **REALITY** | Raw world contact (market, data, events) | Trading Interface |
-| L2 | **DECISION** | Decision-making and execution | DecisionGate / ExecutionAuthority |
-| L3 | **SYNCHRONY** | Internal↔external synchronization | SynchronizationEngine (7D) |
-| L4 | **PERCEPTION** | Cognitive filtering and optical correction | PerceptualOptics / CognitiveFilter |
-| L5 | **COLLECTIVE** | Memory, shadow material, dreaming | TemporalMemory / Shadow / DreamingMode |
-| L6 | **META** | Higher self, self-correction, meta-learning | Brain / Observer / MetaLearner |
-| L7 | **UNIVERSAL** | Invariant patterns of the universe | UniversalGeometry |
+| Level | Name | Function |
+|-------|------|----------|
+| L1 | **REALITY** | Raw world contact — signals, data, events |
+| L2 | **DECISION** | Decision-making and action execution |
+| L3 | **SYNCHRONY** | Internal↔external 7D synchronization |
+| L4 | **PERCEPTION** | Cognitive filtering and optical correction |
+| L5 | **COLLECTIVE** | Memory, shadow material, dreaming |
+| L6 | **META** | Self-observation, self-correction, meta-learning |
+| L7 | **UNIVERSAL** | Invariant patterns of the universe |
 
-Signals flow **bottom-up** (reality → universal).  
-Intentions flow **top-down** (universal → reality).  
+Signals flow **bottom-up** (Reality → Universal).  
+Intentions flow **top-down** (Universal → Reality).  
 **Coherence** measures inter-level agreement.
 
 ---
 
 ## Key Metrics (Reproducible, seed=42)
 
-| Metric | Value | n | Interpretation |
-|--------|-------|---|----------------|
-| Hierarchy coherence | **0.911** | 200 | Near-perfect inter-level agreement |
-| Hierarchy stability (>0.7) | **99.5%** | 200 | Stable under random load |
-| 7D Synchronization | **70,558 ops/s** | 500 | Deterministic, P99=0.015ms |
-| Vector confidence balance | **100%** | 300 | All 7 dimensions balanced |
-| Perceptual autonomy rate | **33%** | 200 | System in mature perceptual state |
-| Maturity index | **+0.060** | 200 | Autonomy > Illusion |
-| Meta-awareness (mean) | **0.561** | 200 | Active Higher Self connection |
-| Observer grounded state | **68%** | 200 | Realistic self-assessment |
-| Feedback win rate | **54%** | 200 | Above-chance decision quality |
-| Profit factor | **1.43** | 200 | Positive expectancy |
-| Universal patterns detected | **18.2 / 10** | 300 | Nature's invariants present |
+| Metric | Value | n |
+|--------|-------|---|
+| Hierarchy coherence | **0.911** | 200 |
+| Hierarchy stability (>0.7) | **99.5%** | 200 |
+| 7D Synchronization throughput | **70,558 ops/s** | 500 |
+| Vector confidence balance | **100%** | 300 |
+| Perceptual autonomy rate | **33%** | 200 |
+| Mean meta-awareness | **0.561** (max 0.995) | 200 |
+| Observer grounded state | **68%** | 200 |
+| Universal patterns detected | **18.2 / 10 observations** | 300 |
+| Hash collision bound | **2⁻²⁵⁶** | — |
+| State size vs. LLM | **24 bytes vs. GB+** | — |
 
-All metrics are reproducible. See [`metrics/metrics_master.json`](metrics/metrics_master.json).
+All metrics reproducible: [`metrics/metrics_master.json`](metrics/metrics_master.json)
 
 ---
 
-## Publications
+## Publications — 10 Papers
+
+### Flagship
+
+| # | Title | Domain |
+|---|-------|--------|
+| **10** | [Toward a Unified Theory of Cognition, Physics, and Reality](papers/PAPER_THEORY_OF_EVERYTHING.md) | Physics / Cosmology / Mind |
 
 ### Core Architecture
 
-| # | Title | Domain | Size |
-|---|-------|--------|------|
-| 1 | [NOESIS: A Seven-Layer Cognitive Architecture](papers/PAPER_NOESIS_ARCHITECTURE.md) | AI / Cognitive Science | 51 KB |
-| 7 | [A Formally Verified Seven-Phase Cognitive State Machine](papers/PAPER_FORMAL_STATE_MACHINE.md) | Formal Methods / CS | 45 KB |
+| # | Title | Domain |
+|---|-------|--------|
+| 1 | [NOESIS: A Seven-Layer Cognitive Architecture](papers/PAPER_NOESIS_ARCHITECTURE.md) | AI / Cognitive Science |
+| 7 | [A Formally Verified Seven-Phase Cognitive State Machine](papers/PAPER_FORMAL_STATE_MACHINE.md) | Formal Methods / CS |
+| 9 | [The Minimal Irreducible Cognitive Field φ₀ = ⟨Ω,Ψ,P⟩](papers/PAPER_USM_MINIMAL_COGNITIVE_FIELD.md) | Mathematics |
 
 ### Psychology & Philosophy
 
-| # | Title | Domain | Size |
-|---|-------|--------|------|
-| 2 | [Operationalizing Psyche as Perceptual Filter](papers/PAPER_PSYCHE_AS_FILTER.md) | Psychology | 47 KB |
-| 5 | [Noesis in Silicon: Direct Cognition Through Action](papers/PAPER_NOESIS_PHILOSOPHY.md) | Philosophy of Mind | 30 KB |
-| 6 | [Algorithmic Detection of Eight Cognitive Biases](papers/PAPER_COGNITIVE_BIAS_DETECTION.md) | Behavioural Economics | 34 KB |
+| # | Title | Domain |
+|---|-------|--------|
+| 2 | [Operationalizing Psyche as Perceptual Filter](papers/PAPER_PSYCHE_AS_FILTER.md) | Psychology |
+| 5 | [Noesis in Silicon: Direct Cognition Through Action](papers/PAPER_NOESIS_PHILOSOPHY.md) | Philosophy of Mind |
+| 6 | [Algorithmic Detection of Eight Cognitive Biases](papers/PAPER_COGNITIVE_BIAS_DETECTION.md) | Behavioural Science |
 
 ### Physics & Cosmology
 
-| # | Title | Domain | Size |
-|---|-------|--------|------|
-| 3 | [Universal Geometry Instantiation](papers/PAPER_UNIVERSAL_GEOMETRY.md) | Physics / Systems Theory | 64 KB |
-| 8 | [Cognitive Degrees of Freedom as Compactified Extra Dimensions](papers/PAPER_DARK_DIMENSION_COGNITION.md) | Theoretical Physics | 32 KB |
-
-### Earlier Research (Foundation)
-
-| # | Title | Domain | Size |
-|---|-------|--------|------|
-| 9 | [The Minimal Irreducible Cognitive Field φ₀ = ⟨Ω,Ψ,P⟩](papers/PAPER_USM_MINIMAL_COGNITIVE_FIELD.md) | Formal Methods / Math | 59 KB |
-| — | [USM Presentation (original)](presentations/USM_Presentation.html) | Slides | — |
+| # | Title | Domain |
+|---|-------|--------|
+| 3 | [Universal Geometry Instantiation: Invariant Patterns of Nature](papers/PAPER_UNIVERSAL_GEOMETRY.md) | Physics / Systems Theory |
+| 8 | [Cognitive Degrees of Freedom as Compactified Extra Dimensions](papers/PAPER_DARK_DIMENSION_COGNITION.md) | Theoretical Physics |
 
 ### Neuroscience
 
-| # | Title | Domain | Size |
-|---|-------|--------|------|
-| 4 | [Observer Divergence as Computational Self-Awareness](papers/PAPER_OBSERVER_DIVERGENCE.md) | Neuroscience / AI Safety | 29 KB |
+| # | Title | Domain |
+|---|-------|--------|
+| 4 | [Observer Divergence as Computational Self-Awareness](papers/PAPER_OBSERVER_DIVERGENCE.md) | Neuroscience / AI Safety |
 
 ---
 
 ## Key Discoveries
 
-### 1. Perceptual Development Stages are Measurable
-
-The psychological stages illusion → loss → integration → autonomy  
-can be operationalized as a computational state machine with reproducible metrics.
-
-> autonomy_rate = 33%, maturity_index = +0.060 (n=200, seed=42)
-
-### 2. 9/10 Universal Patterns Emerge Without Design
-
-Computational architectures solving real problems reproduce  
-nature's invariant patterns — because they face the same underlying problems.
-
-> 18.2 patterns detected per 10 observations; 9/10 patterns found in architecture without intentional design
-
-### 3. Seven-Layer Hierarchy is Structurally Stable
-
-A hierarchy from physical reality to universal geometry  
-maintains coherence under random load with minimal variance.
-
-> coherence = 0.911 mean, stability = 99.5% (n=200)
-
-### 4. Vector Confidence Detects Partial Failures Invisible to Scalar
-
-A 7-dimensional confidence vector (logical, numeric, structural, temporal,  
-semantic, reality, execution) exposes failures that scalar averaging conceals.
-
-> 100% balanced vectors; stability index = 0.926
-
-### 5. Observer Divergence Quantifies Self-Awareness
-
-The gap between a system's self-confidence and external confidence  
-is a measurable analogue of psychological self-awareness.
-
-> 68% grounded, 24% overconfident, 8% underconfident (n=200)
-
-### 6. Cognitive Biases are Algorithmically Detectable
-
-All eight canonical biases from behavioural economics  
-can be formalized into detectable patterns with continuous severity scores.
-
-> Loss Aversion: 23%, Recency Bias: 60% detection rate
-
-### 7. Lyapunov Stability is Provable
-
-The three-component cognitive field φ₀ = ⟨Ω, Ψ, P⟩  
-converges monotonically: dV/dt < 0 (proven).
-
-> SHA-256 collision bound: 2⁻²⁵⁶
+1. **φ₀ = ⟨Ω, Ψ, P⟩ is the minimal irreducible cognitive field** — Lyapunov-stable, formally closed, 24 bytes of state
+2. **9/10 universal patterns emerge without design** — 18.2 patterns per 10 observations (n=300)
+3. **Seven-layer hierarchy is structurally stable** — coherence 0.911, stability 99.5% under random load
+4. **Vector confidence detects partial failures invisible to scalar** — 100% balanced vectors
+5. **Observer divergence = computational self-awareness** — 68% grounded, mirrors Dunning-Kruger
+6. **Eight cognitive biases are algorithmically detectable** with continuous severity 0.0–1.0
+7. **Lyapunov stability proven** — dV/dt < 0 for V = (1−Ω)² + (1−Ψ)² + P²
+8. **Structural isomorphism with Dark Dimension** — R₁ ~ P^(−1/4) scaling, Swampland correspondence
+9. **Psyche as perceptual filter** — illusion→loss→integration→autonomy, maturity index +0.060
+10. **Higher Self connection measurable** — 0.0 to 0.995 scale
 
 ---
 
-## Intellectual Property Notice
+## Intellectual Property
 
-This repository contains **theoretical frameworks, metrics, and results only**.
+**Open (CC BY-NC 4.0):** All theories, architectures, proofs, and metrics in this repository.
 
-The underlying filtering mechanism (TheoreticalLimitFilter) is a **trade secret** and is not described in these publications. What is published:
-- Architectural concepts and principles
-- Experimental results and reproducible metrics
-- Philosophical and theoretical frameworks
+**Protected (Trade Secret):** The internal mechanism of the cognitive filtering system. Its existence and performance are disclosed; its implementation is not.
 
 ---
 
 ## Theoretical Credits
 
-**the contributing theorist** — original theoretical frameworks:
-- *"Psyche as Optical System of Cognition"* → [Paper 2](papers/PAPER_PSYCHE_AS_FILTER.md)
-- *"Geometry of the Universe as Invariant Patterns"* → [Paper 3](papers/PAPER_UNIVERSAL_GEOMETRY.md)
-- *"Society as Collective Organism"* → [Paper 3](papers/PAPER_UNIVERSAL_GEOMETRY.md)
+**Independent Theoretical Contributor** (anonymous) — original frameworks for Papers 2 and 3:
+- *"Psyche as Optical System of Cognition"*
+- *"Geometry of the Universe as Invariant Patterns"*
 
-**NOESIS Research Group** — computational implementation of all frameworks.
+**NOESIS Research Group** — computational implementation.
 
 ---
 
 ## License
 
-© 2026 NOESIS Research Group. All rights reserved.
-
-Papers are released under [CC BY-NC 4.0](LICENSE) —  
-free to share and adapt for non-commercial purposes with attribution.
-
-The cognitive filtering system (TheoreticalLimitFilter) is proprietary and not covered by this license.
+© 2026 NOESIS Research Group.  
+Papers: [CC BY-NC 4.0](LICENSE) — free for non-commercial use with attribution.
 
 ---
 

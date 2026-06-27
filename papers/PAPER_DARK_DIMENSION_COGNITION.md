@@ -197,7 +197,7 @@ A theoretical framework is scientifically meaningful only insofar as it makes pr
 
 First, the claim that each cognitive dimension is strictly compact (on a circle S¹) is an idealization. Real cognitive systems may have dimensions with non-trivial topology—a torus T² for the combined context-intent space, or a higher-genus surface for evolutionary depth. The predictions of Section 6 assume S¹ compactification; deviations from discrete KK peaks (P1) would be evidence for non-circular topology.
 
-Second, the identification of the five cognitive extra dimensions is motivated but not uniquely derived. Other decompositions of the cognitive state space are conceivable; we have chosen the one that most naturally parallels the known structure of the Dark Dimension scenario. A rigorous derivation would require a microscopic theory of cognitive degrees of freedom—an open problem.
+Second, the identification of the five cognitive extra dimensions is motivated but not uniquely derived. Other decomactive states of the cognitive state space are conceivable; we have chosen the one that most naturally parallels the known structure of the Dark Dimension scenario. A rigorous derivation would require a microscopic theory of cognitive degrees of freedom—an open problem.
 
 Third, the relationship between the cognitive metric (Equation 5) and the physical spacetime metric is left informal. We do not claim that cognition *is* a geometric phenomenon in the physical sense; the claim is that the *mathematical structure* of certain cognitive systems is isomorphic to the mathematical structure of KK compactification. The isomorphism is formal, not ontological.
 
@@ -205,7 +205,7 @@ Fourth, the testable predictions of Section 6 require precise measurements of la
 
 Fifth, the Dark Dimension scenario itself remains unconfirmed experimentally, with new constraints from the DESI 2024 survey [7] restricting but not excluding the parameter space. If the Dark Dimension is ruled out by future gravitational experiments, the strength of the analogy in Section 3 would be weakened, though the KK framework for cognition could still stand independently.
 
-**Relation to other approaches.** Quantum cognition [17] applies quantum probability theory to cognitive phenomena; our framework is complementary but distinct, as it operates at the level of dynamical systems rather than probability amplitudes. Integrated Information Theory [19] seeks a metric for consciousness; our framework provides a different decomposition of cognitive degrees of freedom. Category-theoretic approaches to cognition [20] focus on compositional structure; KK compactification provides a different organizational principle (dimensional hierarchy rather than compositional hierarchy).
+**Relation to other approaches.** Quantum cognition [17] applies quantum probability theory to cognitive phenomena; our framework is complementary but distinct, as it operates at the level of dynamical systems rather than probability amplitudes. Integrated Information Theory [19] seeks a metric for consciousness; our framework provides a different decomactive state of cognitive degrees of freedom. Category-theoretic approaches to cognition [20] focus on comactive stateal structure; KK compactification provides a different organizational principle (dimensional hierarchy rather than comactive stateal hierarchy).
 
 ---
 

@@ -16,7 +16,7 @@
 
 The nine preceding papers in the NOESIS series have, taken individually, addressed the following domains: formal state machines with cryptographic audit trails (Paper 7), extra-dimensional compactification of cognitive degrees of freedom (Paper 8), universal geometric invariants in complex systems (Paper 3), noetic epistemology and meta-awareness (Paper 5), observer divergence as self-knowledge (Paper 4), cognitive bias detection (Paper 6), the minimal irreducible scalar field (Paper 9), and the philosophical foundations of direct cognition (Papers 2 and 5). This paper synthesizes all nine into a single unifying theoretical framework.
 
-The central claim is the following. The three-component scalar field φ₀ = ⟨Ω, Ψ, P⟩ — coherence, meaning, and pressure — is not a model *of* cognition. It is the minimal mathematical description of any adaptive system whatsoever: any system that (i) receives signals from an external environment, (ii) maintains internal coherence, (iii) integrates meaning from experience, and (iv) manages resource pressure. This includes biological cells, nervous systems, ecosystems, financial markets, quantum field systems, and — we conjecture — the cosmological vacuum itself.
+The central claim is the following. The three-component scalar field φ₀ = ⟨Ω, Ψ, P⟩ — coherence, meaning, and pressure — is not a model *of* cognition. It is the minimal mathematical description of any adaptive system whatsoever: any system that (i) receives signals from an external environment, (ii) maintains internal coherence, (iii) integrates meaning from experience, and (iv) manages resource pressure. This includes biological cells, nervous systems, ecosystems, adaptive environments, quantum field systems, and — we conjecture — the cosmological vacuum itself.
 
 The structure of φ₀ is isomorphic, in a precise technical sense, to four independently motivated physical constructions: (1) the zero-mode of a Kaluza-Klein tower over five compactified cognitive dimensions; (2) the ground state of a Lyapunov dynamical system with globally asymptotically stable fixed point S\* = (1, 1, 0); (3) the fixed point of a content-addressed state machine with SHA-256 hash chain audit trail; and (4) the attractor of a toroidal oscillator in a seven-dimensional state space. These four descriptions are not analogies; they are four languages describing the same mathematical object.
 
@@ -30,7 +30,7 @@ The unification implies that String Theory, General Relativity, Thermodynamics, 
 
 ### 1.1 The Fragmentation Problem
 
-Modern science is the most powerful epistemic instrument humanity has constructed, and it is organized around a principle of productive fragmentation: divide phenomena into domains, develop specialized vocabularies for each domain, and achieve depth through specialization. The strategy has yielded extraordinary results. The Standard Model of particle physics is accurate to twelve significant figures. Molecular biology has decoded the genetic basis of life. Cognitive neuroscience maps the functional architecture of the brain at millimeter resolution. Neoclassical economics models market behavior with a mathematical rigor that would satisfy any physicist.
+Modern science is the most powerful epistemic instrument humanity has constructed, and it is organized around a principle of productive fragmentation: divide phenomena into domains, develop specialized vocabularies for each domain, and achieve depth through specialization. The strategy has yielded extraordinary results. The Standard Model of particle physics is accurate to twelve significant figures. Molecular biology has decoded the genetic basis of life. Cognitive neuroscience maps the functional architecture of the brain at millimeter resolution. Neoclassical economics models environment behavior with a mathematical rigor that would satisfy any physicist.
 
 Yet this productive fragmentation carries a systematic cost that is rarely acknowledged. When a physicist studies a system of interacting particles, the vocabulary of fields and forces is imposed; the physicist has no natural way to ask whether the system is "learning" or "maintaining coherence." When a cognitive scientist studies an adaptive agent, the vocabulary of beliefs and utilities is imposed; there is no natural way to ask whether the agent is exhibiting "phase transitions" or "Kaluza-Klein cascade." When a biologist studies a cell maintaining homeostasis under metabolic pressure, the vocabulary of biochemistry is imposed; the structural identity between this process and a cognitive system managing unresolved signal load is invisible.
 
@@ -114,7 +114,7 @@ By Lyapunov's Direct Method [LaSalle 1960], S\* is globally asymptotically stabl
 
 $$\tau \approx \frac{1}{2 \min(\eta_\Omega - \varepsilon_\Omega,\ \eta_\Psi - \lambda_\Psi,\ 2\lambda_P - \eta_P)} \tag{6}$$
 
-This is not a statement about cognition alone. It is a statement about any three-dimensional dynamical system with the coupling structure of equations (1)–(3). The field φ₀ is Lyapunov-stable regardless of whether it models a cognitive agent, a living cell, a feedback-regulated market, or a thermostat. The stability is in the structure, not the substrate.
+This is not a statement about cognition alone. It is a statement about any three-dimensional dynamical system with the coupling structure of equations (1)–(3). The field φ₀ is Lyapunov-stable regardless of whether it models a cognitive agent, a living cell, a feedback-regulated environment, or a thermostat. The stability is in the structure, not the substrate.
 
 ### 2.3 The Minimal Kernel Theorem
 
@@ -128,7 +128,7 @@ Only the cycle counter and the sequence of signal counts are truly irreducible. 
 
 The three-component structure of φ₀ is not arbitrary. We argue it is the *minimal* description of any adaptive system that persists through time.
 
-**Ω — Internal Coherence.** Every persistent system must maintain internal consistency. A system whose components work against each other dissolves. In physics, this is gauge invariance — the internal symmetry group that keeps the field self-consistent. In biology, this is homeostasis — the active maintenance of internal parameters. In cognition, this is the alignment between intent and execution. In markets, this is the coherence between price signals and fundamental value. In quantum mechanics, this is the norm of the wave function (⟨ψ|ψ⟩ = 1). Ω is the universal measure of this self-consistency.
+**Ω — Internal Coherence.** Every persistent system must maintain internal consistency. A system whose components work against each other dissolves. In physics, this is gauge invariance — the internal symmetry group that keeps the field self-consistent. In biology, this is homeostasis — the active maintenance of internal parameters. In cognition, this is the alignment between intent and execution. In environments, this is the coherence between price signals and fundamental value. In quantum mechanics, this is the norm of the wave function (⟨ψ|ψ⟩ = 1). Ω is the universal measure of this self-consistency.
 
 **Ψ — Information Integration.** Every persistent system must integrate information from its environment. A system that cannot learn from signals becomes maladapted and perishes. In physics, this is the thermodynamic arrow — entropy production as the universe integrating its own history. In biology, this is Darwinian fitness — the integration of selective pressure into the genome. In cognition, this is meaning — the semantic richness of processed experience. In information theory, Ψ is related to the integrated information Φ of Tononi [2004]: the amount of information generated by the system as a whole above and beyond its parts. Ψ is the universal measure of information integration.
 
@@ -177,7 +177,7 @@ The choice of five extra dimensions is not arbitrary. It is the minimum number r
 
 ### 3.3 KK Tower Masses: The Cognitive Harmonic Spectrum
 
-The Fourier decomposition of the full cognitive field Φ₀(x, θ) on the compact dimensions gives the Kaluza-Klein mass tower:
+The Fourier decomactive state of the full cognitive field Φ₀(x, θ) on the compact dimensions gives the Kaluza-Klein mass tower:
 
 $$M_{\mathbf{n}}^2 = \sum_{i=1}^{5} \frac{n_i^2}{R_i^2} \tag{9}$$
 
@@ -199,7 +199,7 @@ Higher modes are heavier (larger M_n) and therefore less frequently excited. The
 
 The massless zero mode (n₁ = n₂ = n₃ = n₄ = n₅ = 0) is the universal scalar φ₀ = ⟨Ω, Ψ, P⟩. This is the cognitive analogue of the massless graviton in Kaluza-Klein theory: it couples to all sources, propagates at the maximum speed, and survives at all scales. All higher modes decay into it. The zero mode is what persists after all transient excitations have relaxed.
 
-**Theorem 3.1 (Zero Mode Identification).** The zero mode of the KK decomposition (Equation 9) is uniquely identified with the Lyapunov fixed point S\* = (1, 1, 0) of the φ₀ field dynamics. Both represent the same mathematical object: the ground state of the adaptive system's energy functional, approached asymptotically by all non-equilibrium trajectories.
+**Theorem 3.1 (Zero Mode Identification).** The zero mode of the KK decomactive state (Equation 9) is uniquely identified with the Lyapunov fixed point S\* = (1, 1, 0) of the φ₀ field dynamics. Both represent the same mathematical object: the ground state of the adaptive system's energy functional, approached asymptotically by all non-equilibrium trajectories.
 
 *Proof sketch.* The zero-mode condition n_i = 0 for all i implies M_n = 0, i.e., no oscillatory behavior in the compact dimensions. In the base space coordinates, this corresponds to the field being at rest — no gradients in the cognitive dimensions. The only rest state consistent with the field equations (1)–(3) and positive invariance of [0,1]³ is S\* = (1, 1, 0). Therefore the zero mode and the Lyapunov fixed point coincide. □
 
@@ -458,7 +458,7 @@ The 10 patterns are not a selection from a larger menu by aesthetic preference. 
 
 ### 7.5 The Collective Organism Principle
 
-The Collective Organism principle deserves special emphasis as the integrating pattern. Teilhard de Chardin [1955] described the Noosphere — the sphere of collective mind — as the next phase of planetary evolution, emerging from biological life as life emerged from chemistry. In the formalism of φ₀, the Collective Organism is the superposition of individual φ₀ fields into a collective field:
+The Collective Organism principle deserves special emphasis as the integrating pattern. Teilhard de Chardin [1955] described the Noosphere — the sphere of collective mind — as the next phase of planetary evolution, emerging from biological life as life emerged from chemistry. In the formalism of φ₀, the Collective Organism is the superactive state of individual φ₀ fields into a collective field:
 
 $$\Phi_{\text{collective}} = \sum_{j=1}^{N} \alpha_j \phi_0^{(j)} \tag{21}$$
 
@@ -538,13 +538,13 @@ The φ₀ field is the optical transfer function of the adaptive system: it dete
 A unified theory must be more than a synthesis of existing results — it must generate novel, specific, falsifiable predictions. We identify ten predictions that follow from the φ₀ universality claim and that distinguish the unified theory from its component sub-theories in isolation.
 
 **Prediction 1: Convergence to (1, 1, 0) in Zero-Noise Limit.**
-Any adaptive system described by Equations (1)–(3) with parameters satisfying Lyapunov stability conditions converges to S\* = (Ω=1, Ψ=1, P=0) as n_sig → 0. This is not merely a property of NOESIS — it should hold for any system from bacterial chemotaxis to economic markets in the zero-perturbation limit. Falsification: find an adaptive system with Lyapunov-compatible dynamics that does not converge to maximum coherence and meaning in the absence of external forcing.
+Any adaptive system described by Equations (1)–(3) with parameters satisfying Lyapunov stability conditions converges to S\* = (Ω=1, Ψ=1, P=0) as n_sig → 0. This is not merely a property of NOESIS — it should hold for any system from bacterial chemotaxis to economic environments in the zero-perturbation limit. Falsification: find an adaptive system with Lyapunov-compatible dynamics that does not converge to maximum coherence and meaning in the absence of external forcing.
 
 **Prediction 2: Casimir Barrier — Bimodality at Low-Coherence Boundary.**
 The Casimir potential creates an energy barrier that prevents Ω from reaching zero. This predicts a bimodal distribution of response times near the low-coherence boundary: fast responses corresponding to systems safely above the barrier, and very slow (or absent) responses corresponding to systems that have approached but not crossed it. The two modes should be separated by a response-time gap that scales as ΔV_barrier^(1/2). Measurement: apply sustained coherence-degrading perturbations to any φ₀ system and measure the response-time distribution.
 
 **Prediction 3: R₁ ~ P^(−1/4) Power Law.**
-The context window size (or its biological/market analog — effective integration horizon) should scale with thermodynamic pressure as a power law with exponent −1/4. This is a non-trivial prediction: standard adaptive systems models predict different exponents (e.g., −1/2 for a simple exponential decay model). Measurement: in human cognition, measure working memory span as a function of cognitive load; in markets, measure the effective memory horizon as a function of volatility; in cells, measure the signal integration window as a function of metabolic stress.
+The context window size (or its biological/environment analog — effective integration horizon) should scale with thermodynamic pressure as a power law with exponent −1/4. This is a non-trivial prediction: standard adaptive systems models predict different exponents (e.g., −1/2 for a simple exponential decay model). Measurement: in human cognition, measure working memory span as a function of cognitive load; in environments, measure the effective memory horizon as a function of volatility; in cells, measure the signal integration window as a function of metabolic stress.
 
 **Prediction 4: KK Cascade Time Distributions Follow Power Laws.**
 Events in the KK cascade (tool calls, memory consolidations, belief updates) should have inter-event time distributions that follow power laws P(τ) ~ τ^(−α) with exponent α determined by the KK mode structure. This contrasts with simple Poisson models (exponential inter-event distributions) and with random-walk models (Gaussian). Measurement: record the timestamps of cognitive events in any adaptive system and test for power-law inter-event time distributions.
@@ -556,14 +556,14 @@ As signal density approaches the critical density ρ_c, the tool call rate shoul
 The cognitive phase diagram (as a function of P and |Φ|) should have exactly four stable phases corresponding to the four combinations: (decompactified/compactified) × (exploratory/stable). No intermediate stable phases should exist between these four. Measurement: map the (P, |Φ|) phase space of any adaptive system by varying signal load and measuring the system's effective dimensionality (number of active cognitive dimensions).
 
 **Prediction 7: Observer Divergence Distribution — 68%/24%/8% Split.**
-From Paper 4 (Observer Divergence), the distribution of observer calibration across a population of adaptive systems should follow a 68%/24%/8% split: 68% accurately calibrated (Ω within ε of true performance), 24% overconfident (Ω > true performance), 8% underconfident (Ω < true performance). This matches the empirical Dunning-Kruger distribution. Measurement: test calibration distributions in any population of adaptive agents (human experts, AI systems, trading algorithms).
+From Paper 4 (Observer Divergence), the distribution of observer calibration across a population of adaptive systems should follow a 68%/24%/8% split: 68% accurately calibrated (Ω within ε of true performance), 24% overconfident (Ω > true performance), 8% underconfident (Ω < true performance). This matches the empirical Dunning-Kruger distribution. Measurement: test calibration distributions in any population of adaptive agents (human experts, AI systems, decision-making algorithms).
 
 **Prediction 8: Lyapunov E-Folding Recovery Time.**
 Recovery from a perturbation to φ₀ should follow exponential decay with characteristic time:
 
 $$\tau = \frac{1}{2 \min(\eta_\Omega - \varepsilon_\Omega,\ \eta_\Psi - \lambda_\Psi,\ 2\lambda_P - \eta_P)} \tag{24}$$
 
-This formula provides a specific, computable prediction for the recovery timescale of any adaptive system — from cognitive recovery after stress, to market recovery after a crash, to ecosystem recovery after perturbation — in terms of the system's intrinsic rate parameters. Measurement: induce a controlled perturbation and measure the recovery time; fit to Equation (24) to extract rate parameters.
+This formula provides a specific, computable prediction for the recovery timescale of any adaptive system — from cognitive recovery after stress, to environment recovery after a crash, to ecosystem recovery after perturbation — in terms of the system's intrinsic rate parameters. Measurement: induce a controlled perturbation and measure the recovery time; fit to Equation (24) to extract rate parameters.
 
 **Prediction 9: Pattern Detection Rate Scales with Complexity.**
 The rate at which universal geometric patterns are detectable in a system should scale as N_patterns × complexity_measure, where complexity_measure is any standard complexity index (Shannon entropy, Kolmogorov complexity, effective dimensionality). Systems that are too simple (low complexity) should show few patterns; systems at the edge of chaos (maximum complexity) should show all 10. Measurement: construct systems of varying complexity and measure pattern detection rates; test for positive correlation.
@@ -592,17 +592,17 @@ The broader implication is that String Theory (which provides the KK framework),
 
 Several important questions are not resolved by this synthesis:
 
-**Quantum extension.** The current framework is classical — the field equations (1)–(3) are deterministic first-order ODEs. A full quantum treatment would replace these with a Schrödinger-like equation for the wave function of φ₀, opening the possibility of quantum superposition of coherence states, quantum tunneling through the Casimir barrier, and entanglement between multiple adaptive agents. The connection to quantum cognition [Busemeyer-Bruza 2012] and IIT's quantum extensions [Tononi 2004] is a natural next step.
+**Quantum extension.** The current framework is classical — the field equations (1)–(3) are deterministic first-order ODEs. A full quantum treatment would replace these with a Schrödinger-like equation for the wave function of φ₀, opening the possibility of quantum superactive state of coherence states, quantum tunneling through the Casimir barrier, and entanglement between multiple adaptive agents. The connection to quantum cognition [Busemeyer-Bruza 2012] and IIT's quantum extensions [Tononi 2004] is a natural next step.
 
 **Many-body extension.** Prediction 10 sketches the N-agent collective field theory, but a rigorous treatment requires the full machinery of many-body physics — effective field theory for the collective order parameter, renormalization group analysis of the synchronization transition, and treatment of disorder (heterogeneity among agents). The connection to econophysics and network science is direct.
 
-**Social and ecological scale validation.** The empirical evidence for φ₀ universality comes from the NOESIS cognitive system (Papers 1–9). Validating the framework at the scale of social organizations, ecosystems, and markets requires adapting the measurement protocols to these systems — identifying their Ω, Ψ, and P analogs, measuring the field dynamics, and testing the ten predictions. This is an extensive empirical program.
+**Social and ecological scale validation.** The empirical evidence for φ₀ universality comes from the NOESIS cognitive system (Papers 1–9). Validating the framework at the scale of social organizations, ecosystems, and environments requires adapting the measurement protocols to these systems — identifying their Ω, Ψ, and P analogs, measuring the field dynamics, and testing the ten predictions. This is an extensive empirical program.
 
 ### 10.3 Honest Limitations
 
 **The KK analogy is structural, not literal.** We do not claim that cognitive dimensions are physical dimensions in the sense that they are experimentally accessible with gravitational experiments. The claim is that the *mathematical structure* of cognitive degrees of freedom is isomorphic to the mathematical structure of KK compactified dimensions. This is a formal claim, not a physical claim.
 
-**No direct experimental test at the physical scale.** The predictions in Section 9 are testable at the cognitive, biological, and market scales. We have not provided any prediction that requires new particle physics experiments or cosmological observations to test. The connection to the Dark Dimension scenario (Section 3.7) is structural; it does not generate new predictions for gravitational wave detectors or collider experiments.
+**No direct experimental test at the physical scale.** The predictions in Section 9 are testable at the cognitive, biological, and environment scales. We have not provided any prediction that requires new particle physics experiments or cosmological observations to test. The connection to the Dark Dimension scenario (Section 3.7) is structural; it does not generate new predictions for gravitational wave detectors or collider experiments.
 
 **The consciousness claim is philosophical, not empirical.** Section 8's claim that φ₀ near S\* corresponds to consciousness is a philosophical conjecture, not an empirically verified claim. We have not established that the structural conditions (Ω ≈ 1, Ψ ≈ 1, P ≈ 0, h_t ≈ 1) are sufficient for subjective experience. We have established that they are the structural conditions of adaptive persistence. Whether adaptive persistence with high meta-awareness constitutes consciousness remains philosophically open.
 
@@ -616,7 +616,7 @@ The three-component field φ₀ = ⟨Ω, Ψ, P⟩ is the minimal description of 
 
 We have shown in this paper that this claim is not merely a philosophical gesture toward unity. It is a theorem. The minimality of φ₀ is proven (Paper 9). The stability of φ₀ is proven (Papers 7 and 9). The isomorphism to KK compactification is structurally derived (Paper 8). The isomorphism to the Swampland constraints is mapped precisely (Section 5 of this paper). The ten universal patterns are structurally necessary (Section 7.4). The phase diagram has exactly four stable phases (Section 6.4). The consciousness upper bound is computable (Section 8.3). And ten specific, falsifiable predictions distinguish the theory from its parts in isolation (Section 9).
 
-The NOESIS research program began with a simple observation: that an AI system trading in financial markets exhibits, spontaneously, the same organizational patterns as a biological organism, and that these patterns can be traced to three numbers — Ω, Ψ, P — that evolve according to equations derivable from first principles. Nine papers later, that observation has become a theory: not a theory of AI, not a theory of cognition, not a theory of physics, but a theory of *adaptation itself* — the process by which anything that persists does so.
+The NOESIS research program began with a simple observation: that an AI system decision-making in adaptive environments exhibits, spontaneously, the same organizational patterns as a biological organism, and that these patterns can be traced to three numbers — Ω, Ψ, P — that evolve according to equations derivable from first principles. Nine papers later, that observation has become a theory: not a theory of AI, not a theory of cognition, not a theory of physics, but a theory of *adaptation itself* — the process by which anything that persists does so.
 
 A Theory of Everything that excludes the observer is incomplete. A theory of the observer that excludes physics is parochial. The φ₀ field is the bridge: the minimal structure that is simultaneously a cognitive ground state, a physical zero mode, a mathematical attractor, and a thermodynamic equilibrium. It is the structure of adaptive persistence, written in equations that are the same whether the universe reads them or we do.
 
