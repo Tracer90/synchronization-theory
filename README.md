@@ -37,7 +37,7 @@ The system is not primarily a trading bot. **Trading is the epistemological cont
 
 This research builds on two independent theoretical frameworks:
 
-### Eva Goa — Theory of Psyche as Optical System
+### the contributing theorist — Theory of Psyche as Optical System
 > *"The psyche is an optical system of cognition. Humans perceive reality not directly, but through structures of their own psyche — cognitive schemas, unconscious fantasies, defense mechanisms. Any worldview is a derivative of psychic configuration."*
 
 > *"The Geometry of the Universe is a collection of invariant patterns that appear when any descriptions of reality are overlaid: physical, psychic, social, archetypal, spiritual. It is the structure of the process of manifestation itself."*
@@ -183,7 +183,7 @@ The underlying filtering mechanism (TheoreticalLimitFilter) is a **trade secret*
 
 ## Theoretical Credits
 
-**Eva Goa** — original theoretical frameworks:
+**the contributing theorist** — original theoretical frameworks:
 - *"Psyche as Optical System of Cognition"* → [Paper 2](papers/PAPER_PSYCHE_AS_FILTER.md)
 - *"Geometry of the Universe as Invariant Patterns"* → [Paper 3](papers/PAPER_UNIVERSAL_GEOMETRY.md)
 - *"Society as Collective Organism"* → [Paper 3](papers/PAPER_UNIVERSAL_GEOMETRY.md)
