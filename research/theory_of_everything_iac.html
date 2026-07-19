@@ -4,103 +4,129 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Theory of Everything · IAC/AMSE v14</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-@keyframes aurora{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-:root{--body-size:17px;--spacing:1;--show-d:none;--body-color:#b0b0c8;--accent:#ffd700;--accent2:#ff6b6b}
-body{background:linear-gradient(-45deg,#050510,#0a0a2a,#111133,#050510);background-size:400% 400%;animation:aurora 20s ease infinite;color:#d0d0e0;font:var(--body-size)/1.8 Georgia,serif;overflow-x:hidden}
-body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.12),transparent),radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,.12),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,.12),transparent);background-size:200px 200px;pointer-events:none;z-index:0}
-.c{max-width:960px;margin:0 auto;padding:40px 20px;position:relative;z-index:1}
-.mode-bar{position:fixed;top:16px;right:20px;z-index:100;display:flex;gap:4px;align-items:center;opacity:.2;transition:opacity .5s}
+:root{--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--serif:'Cormorant Garamond',Georgia,serif;--body-size:17px;--spacing:1;--show-d:none;--bg-deep:#03030a;--bg-surface:#0a0a1a;--bg-card:rgba(255,255,255,.02);--text-body:#b8b8d0;--text-muted:#7070a0;--text-heading:#e8e8f5;--gold:#ffd700;--rose:#ff6b6b;--violet:#b088ff;--gold-dim:rgba(255,215,0,.12);--glass:rgba(255,255,255,.02);--glass-edge:rgba(255,255,255,.04);--glow-gold:0 0 30px rgba(255,215,0,.08),0 0 60px rgba(255,215,0,.04)}
+html{scroll-behavior:smooth}
+body{background:var(--bg-deep);color:var(--text-heading);font:400 var(--body-size)/1.85 var(--serif);overflow-x:hidden;min-height:100vh}
+body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,transparent 40%,rgba(3,3,10,.7) 100%),radial-gradient(ellipse at 80% 100%,rgba(100,50,150,.03) 0%,transparent 50%);pointer-events:none;z-index:1}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.015'/%3E%3C/svg%3E");background-repeat:repeat;pointer-events:none;z-index:1;opacity:.4}
+#particles-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:.6}
+.c{max-width:860px;margin:0 auto;padding:60px 24px;position:relative;z-index:2}
+.mode-bar{position:fixed;top:20px;right:24px;z-index:100;display:flex;gap:3px;align-items:center;opacity:.15;transition:opacity .4s}
 .mode-bar:hover{opacity:1}
-.mode-dot{width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;font-size:9px;background:rgba(10,10,20,.6);backdrop-filter:blur(4px);color:#8888bb}
-.mode-dot.active{border-color:var(--accent);box-shadow:0 0 10px rgba(255,215,0,.15);color:var(--accent)}
-.mode-dot:hover{transform:scale(1.12);border-color:rgba(255,215,0,.3)}
-.mode-sep{width:1px;height:16px;background:rgba(255,255,255,.08);margin:0 4px}
-.lang-dot{width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;font-size:9px;background:rgba(10,10,20,.6);backdrop-filter:blur(4px)}
-.lang-dot.active{border-color:var(--accent);box-shadow:0 0 10px rgba(255,215,0,.15)}
-.lang-dot:hover{transform:scale(1.12);border-color:rgba(255,215,0,.3)}
-.lang-dot.ru{color:#ff6b6b}
-.lang-dot.en{color:#6bb5ff}
-.mode-hint{font-size:9px;color:#555577;letter-spacing:.3px;opacity:0;transition:opacity .5s;white-space:nowrap;margin-right:4px}
+.mode-dot,.lang-dot{width:24px;height:24px;border-radius:50%;border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all .35s cubic-bezier(.2,0,0,1);display:flex;align-items:center;justify-content:center;font:500 9px/1 var(--sans);background:rgba(10,10,26,.6);backdrop-filter:blur(8px);color:#606090;letter-spacing:.5px}
+.mode-dot.active,.lang-dot.active{border-color:var(--gold);box-shadow:0 0 16px rgba(255,215,0,.12);color:var(--gold)}
+.mode-dot:hover,.lang-dot:hover{transform:scale(1.18);border-color:rgba(255,215,0,.3)}
+.mode-sep{width:1px;height:18px;background:rgba(255,255,255,.06);margin:0 5px}
+.mode-hint{font:400 9px/1 var(--sans);color:#505080;letter-spacing:.5px;opacity:0;transition:opacity .4s;white-space:nowrap;margin-right:6px;text-transform:uppercase}
 .mode-bar:hover .mode-hint{opacity:1}
-.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:200;transition:width .3s ease;width:0%}
-[data-mode="concise"]{--body-size:15px;--spacing:.7;--body-color:#a0a0b8}
-[data-mode="detailed"]{--body-size:18px;--spacing:1.2;--show-d:initial}
+.progress{position:fixed;top:0;left:0;height:1.5px;background:linear-gradient(90deg,var(--gold),var(--rose),var(--violet));z-index:200;transition:width .4s cubic-bezier(.2,0,0,1);width:0%;opacity:.7}
+[data-mode="concise"]{--body-size:14.5px;--spacing:.65;--text-body:#a0a0b8}
+[data-mode="detailed"]{--body-size:18.5px;--spacing:1.15;--show-d:initial}
 [data-mode="concise"] .d{display:none!important}
 [data-mode="concise"] .gloss .g-def{display:none!important}
 [data-mode="concise"] [data-lead]::before{content:attr(data-lead);display:inline}
 [data-mode="concise"] [data-lead]{font-size:0;line-height:0}
-[data-mode="concise"] [data-lead]::before{font-size:calc(var(--body-size)*1.1);line-height:1.7;color:var(--body-color)}
-[data-mode="concise"] [data-lead] .d,.cd .d .d,.pr .c .d .d{display:none!important}
+[data-mode="concise"] [data-lead]::before{font:400 calc(var(--body-size)*1.25)/1.6 var(--serif);color:var(--text-body)}
 [data-mode="balanced"] [data-lead]::before{display:none}
 [data-mode="detailed"] [data-lead]::before{display:none}
-[data-mode="detailed"] .gloss .g-item.open .g-def{max-height:200px;padding:8px 0 4px 16px}
-[data-mode="balanced"] .gloss .g-def{max-height:0;overflow:hidden;transition:max-height .4s}
-[data-mode="balanced"] .gloss .g-item.open .g-def{max-height:200px;padding:8px 0 4px 16px}
-.s{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+[data-mode="detailed"] .gloss .g-item.open .g-def{max-height:300px;padding:10px 0 6px 18px}
+[data-mode="balanced"] .gloss .g-def{max-height:0;overflow:hidden;transition:max-height .35s ease}
+[data-mode="balanced"] .gloss .g-item.open .g-def{max-height:300px;padding:10px 0 6px 18px}
+.s{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.2,0,0,1),transform .6s cubic-bezier(.2,0,0,1)}
 .s.vis{opacity:1;transform:translateY(0)}
-h1{font-size:clamp(2em,5vw,3.2em);text-align:center;margin-bottom:8px;letter-spacing:2px}
-h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2),#cc88ff,var(--accent));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:aurora 8s ease infinite}
-.sub{text-align:center;color:#8888bb;font-size:.88em;margin-bottom:35px;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.7}
-h2{color:var(--accent);font-size:1.4em;margin:40px 0 16px;border-left:4px solid var(--accent2);padding-left:18px}
-h3{color:#e0e0ff;font-size:1.05em;margin:22px 0 8px}
-h4{color:#cc88ff;margin:12px 0 5px;font-size:.98em}
-p{margin:11px 0;line-height:calc(1.7 * var(--spacing));color:var(--body-color)}
-p .d,.cd .d .d,.pr .c .d .d{display:var(--show-d,none);color:#8080a8}
-.hl{color:var(--accent)}
-.qt{background:rgba(255,215,0,.03);border-left:3px solid rgba(255,215,0,.2);padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#c0c0d8;font-size:.97em}
-.ib{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-left:4px solid var(--accent);border-radius:14px;padding:18px;margin:18px 0}
-.ib .l{color:var(--accent);font-size:.76em;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
-.ib .t{color:#d0d0e0;font-style:italic;line-height:1.7}
-.cd{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;margin:16px 0}
-.cd .t{color:var(--accent);font-weight:700;margin-bottom:5px;font-size:.98em}
-.cd .d{color:#9090b0;font-size:.9em;line-height:1.7}
-.cd .d .d{display:var(--show-d,none);color:#707098}
-.pr{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+h1{font:500 clamp(2.5em,6vw,4em)/1.1 var(--serif);text-align:center;margin-bottom:6px;letter-spacing:3px}
+h1 span{background:linear-gradient(135deg,var(--gold),var(--rose),var(--violet),var(--gold));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 6s ease infinite;text-shadow:var(--glow-gold)}
+@keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.sub{text-align:center;font:400 .9em/1.7 var(--sans);color:var(--text-muted);margin-bottom:50px;max-width:600px;margin-left:auto;margin-right:auto;letter-spacing:.3px}
+h2{font:500 1.5em/1.2 var(--serif);color:var(--text-heading);margin:55px 0 18px;position:relative}
+h2::before{content:'✦';position:absolute;left:-30px;top:.15em;font-size:.5em;color:var(--gold);opacity:.3}
+h2 .hl{color:var(--gold)}
+h3{font:500 1.15em/1.3 var(--serif);color:#d0d0e8;margin:25px 0 10px}
+p{margin:13px 0;line-height:calc(1.75 * var(--spacing));color:var(--text-body)}
+p .d{display:var(--show-d,none);color:#606098;font-size:.94em}
+.hl{color:var(--gold);font-weight:500}
+.qt{position:relative;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-edge);border-left:2px solid var(--gold-dim);padding:22px 26px;margin:26px 0;border-radius:0 16px 16px 0;font:400 1.02em/1.7 var(--serif);color:#c0c0d8;font-style:italic}
+.qt::before{content:'\201C';position:absolute;top:-8px;left:12px;font:700 4em/1 var(--serif);color:var(--gold);opacity:.08;pointer-events:none}
+.ib{background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-edge);border-radius:16px;padding:22px 26px;margin:22px 0;transition:all .35s cubic-bezier(.2,0,0,1);position:relative;overflow:hidden}
+.ib::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);opacity:0;transition:opacity .4s}
+.ib:hover::before{opacity:1}
+.ib:hover{transform:translateY(-2px);border-color:rgba(255,215,0,.1);box-shadow:0 8px 40px rgba(255,215,0,.03)}
+.ib .l{font:500 .7em/1 var(--sans);color:var(--gold);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:6px;opacity:.7}
+.ib .t{font:400 1em/1.7 var(--serif);color:#c8c8e0;font-style:italic}
+.ib .t b{color:var(--text-heading);font-weight:500}
+.cd{background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-edge);border-radius:16px;padding:22px 26px;margin:18px 0;transition:all .35s cubic-bezier(.2,0,0,1)}
+.cd:hover{border-color:rgba(255,215,0,.08);box-shadow:0 4px 30px rgba(255,215,0,.02)}
+.cd .t{font:500 .98em/1.2 var(--sans);color:var(--gold);margin-bottom:6px;letter-spacing:.5px}
+.cd .d{color:var(--text-body);font-size:.95em;line-height:1.75}
+.cd .d .d{display:var(--show-d,none);color:#606098;font-size:.92em}
+.pr{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.02);transition:background .2s;border-radius:8px;margin:0 -8px;padding:12px 8px}
+.pr:hover{background:rgba(255,255,255,.01)}
 .pr:last-child{border-bottom:none}
-.pr .i{min-width:28px;color:var(--accent2);font-weight:700}
+.pr .i{min-width:30px;font:500 1.2em/1 var(--serif);color:var(--gold);opacity:.6}
 .pr .c{flex:1}
-.pr .c .t{color:var(--accent);font-weight:700}
-.pr .c .d{color:#9090b0;font-size:.86em;line-height:1.6}
-.pr .c .d .d{display:var(--show-d,none);color:#707098;font-size:.94em}
-.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin:18px 0}
-.stb{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px;text-align:center;transition:all .3s;cursor:default}
-.stb:hover{border-color:rgba(255,215,0,.25);transform:translateY(-3px)}
-.stb .n{font-size:1.4em;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.stb .l{color:#6666aa;font-size:.72em;margin-top:2px}
-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85em}
-th{background:rgba(255,215,0,.08);color:var(--accent);padding:6px 8px;text-align:left;border-bottom:2px solid rgba(255,215,0,.2)}
-td{padding:5px 8px;border-bottom:1px solid rgba(255,255,255,.04);color:#a0a0c0}
-.gloss .g-item{padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .2s;border-radius:6px;padding:5px 10px;margin:0 -10px}
-.gloss .g-item:hover{background:rgba(255,215,0,.04)}
-.gloss .g-term{color:var(--accent);font-weight:700;display:inline;font-size:.93em}
-.gloss .g-def{color:#9090b0;font-size:.88em;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;padding:0}
-.gloss .g-term::after{content:' +';color:#555577;font-size:.72em}
-.gloss .g-item.open .g-term::after{content:' −';color:var(--accent)}
-.ft{text-align:center;padding:35px 20px;color:#555577;border-top:1px solid rgba(255,255,255,.04);margin-top:50px}
-.ft a{color:#6666aa;text-decoration:none}
-.ft a:hover{color:var(--accent)}
-.ft .ip{font-size:.78em;color:#444466;line-height:1.6;margin-top:6px}
+.pr .c .t{font:500 1em/1.3 var(--serif);color:var(--text-heading);margin-bottom:2px}
+.pr .c .d{color:var(--text-body);font-size:.88em;line-height:1.6}
+.pr .c .d .d{display:var(--show-d,none);color:#606098}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin:28px 0 36px}
+.stb{background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-edge);border-radius:14px;padding:16px 10px;text-align:center;transition:all .4s cubic-bezier(.2,0,0,1);cursor:default}
+.stb:hover{transform:translateY(-4px);border-color:rgba(255,215,0,.12);box-shadow:0 12px 40px rgba(255,215,0,.04)}
+.stb .n{font:700 1.6em/1 var(--serif);background:linear-gradient(135deg,var(--gold),var(--rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stb .l{font:400 .68em/1 var(--sans);color:var(--text-muted);margin-top:5px;letter-spacing:.8px;text-transform:uppercase}
+.gloss .g-item{padding:6px 0;border-bottom:1px solid rgba(255,255,255,.02);cursor:pointer;transition:background .25s;border-radius:8px;padding:6px 14px;margin:0 -14px}
+.gloss .g-item:hover{background:rgba(255,255,255,.01)}
+.gloss .g-item:last-child{border-bottom:none}
+.gloss .g-term{font:500 .95em/1 var(--serif);color:var(--gold);display:inline}
+.gloss .g-term::after{content:' +';font:400 .7em var(--sans);color:#505080}
+.gloss .g-item.open .g-term::after{content:' \2212';color:var(--gold)}
+.gloss .g-def{color:var(--text-body);font-size:.9em;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease;padding:0 0 0 18px;line-height:1.65}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.88em}
+th{font:500 .78em/1 var(--sans);color:var(--gold);padding:8px 10px;text-align:left;border-bottom:1px solid var(--gold-dim);text-transform:uppercase;letter-spacing:1px}
+td{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.02);color:var(--text-body)}
+.divider{text-align:center;margin:45px 0;color:var(--text-muted);font-size:.75em;letter-spacing:6px;opacity:.12;user-select:none}
+.ft{text-align:center;padding:45px 20px 30px;color:#505080;border-top:1px solid rgba(255,255,255,.03);margin-top:60px}
+.ft a{color:#6060a0;text-decoration:none;transition:color .2s}
+.ft a:hover{color:var(--gold)}
+.ft .ip{font-size:.76em;color:#404070;line-height:1.7;margin-top:8px}
+.ft .ip a{color:#505090}
+.ft .ip a:hover{color:var(--gold)}
 [data-lang]{display:none}
 html[data-lang="ru"] [data-lang="ru"]{display:inherit}
 html[data-lang="ru"] [data-lang="en"]{display:none}
 html[data-lang="en"] [data-lang="ru"]{display:none}
 html[data-lang="en"] [data-lang="en"]{display:inherit}
 .cn{display:inline-block}
-@media(max-width:600px){.c{padding:12px}.mode-bar{top:8px;right:8px;gap:3px}.mode-dot,.lang-dot{width:18px;height:18px;font-size:8px}h2{font-size:1.15em}}
+@media(max-width:600px){
+.c{padding:40px 16px}
+.mode-bar{top:10px;right:12px;gap:2px}
+.mode-dot,.lang-dot{width:20px;height:20px;font-size:8px}
+h1{font-size:2.2em}
+h2{font-size:1.25em;padding-left:0}
+h2::before{position:static;display:inline;margin-right:6px;font-size:.6em}
+.st{grid-template-columns:repeat(3,1fr);gap:6px}
+.stb{padding:10px 8px}
+.stb .n{font-size:1.2em}
+.qt,.cd,.ib{padding:16px 14px}
+.gloss .g-def{padding-left:0}
+}
+@media(max-width:400px){.st{grid-template-columns:repeat(2,1fr)}h1{font-size:1.6em}}
 </style>
 </head>
 <body>
 <div class="progress" id="progress"></div>
+<canvas id="particles-canvas"></canvas>
 <div class="mode-bar" id="modeBar">
   <span class="mode-hint" id="modeHint"></span>
-  <span class="mode-dot" data-mode="concise" title="Concise" tabindex="0">C</span>
-  <span class="mode-dot active" data-mode="balanced" title="Balanced" tabindex="0">B</span>
-  <span class="mode-dot" data-mode="detailed" title="Detailed" tabindex="0">D</span>
+  <span class="mode-dot" data-mode="concise" tabindex="0">C</span>
+  <span class="mode-dot active" data-mode="balanced" tabindex="0">B</span>
+  <span class="mode-dot" data-mode="detailed" tabindex="0">D</span>
   <span class="mode-sep"></span>
-  <span class="lang-dot ru active" data-lang="ru" title="Русский" tabindex="0">RU</span>
-  <span class="lang-dot en" data-lang="en" title="English" tabindex="0">EN</span>
+  <span class="lang-dot ru active" data-lang="ru" tabindex="0">RU</span>
+  <span class="lang-dot en" data-lang="en" tabindex="0">EN</span>
 </div>
 <div class="c">
 
@@ -113,72 +139,74 @@ html[data-lang="en"] [data-lang="en"]{display:inherit}
   <div class="stb"><div class="n">∞</div><div class="l" data-lang="ru">адаптация</div><div class="l" data-lang="en">adaptation</div></div>
 </div>
 
-<!-- GLOSSARY -->
 <h2 class="s" data-section="glossary">
-  <span data-lang="ru">0. Словарь терминов</span>
-  <span data-lang="en">0. Glossary</span>
+  <span data-lang="ru">Словарь терминов</span>
+  <span data-lang="en">Glossary</span>
 </h2>
 <p class="s">
-  <span data-lang="ru">Нажми на термин — раскроется объяснение:</span>
-  <span data-lang="en">Tap any term to expand:</span>
+  <span data-lang="ru">Нажми на термин</span>
+  <span data-lang="en">Tap any term</span>
 </p>
 <div class="gloss s">
-<div class="g-item"><span class="g-term" data-lang="ru">Фальсификация</span><span class="g-term" data-lang="en">Falsification</span><div class="g-def" data-lang="ru">Попытка доказать, что идея неверна. Ядро науки.</div><div class="g-def" data-lang="en">Attempt to prove an idea false. The core of science.</div></div>
-<div class="g-item"><span class="g-term" data-lang="ru">Адаптивная система</span><span class="g-term" data-lang="en">Adaptive system</span><div class="g-def" data-lang="ru">Меняет поведение под средой. Бактерия — да. Камень — нет.</div><div class="g-def" data-lang="en">Changes behavior with environment. Bacteria — yes. Rock — no.</div></div>
-<div class="g-item"><span class="g-term" data-lang="ru">Пять примитивов</span><span class="g-term" data-lang="en">Five primitives</span><div class="g-def" data-lang="ru">Различение, композиция, тензор, петля, сопряжение. Базис любой системы.</div><div class="g-def" data-lang="en">Distinction, composition, tensor, loop, adjoint. The basis of any system.</div></div>
+<div class="g-item"><span class="g-term" data-lang="ru">Фальсификация</span><span class="g-term" data-lang="en">Falsification</span><div class="g-def" data-lang="ru">Попытка опровергнуть идею. Ядро науки.</div><div class="g-def" data-lang="en">Attempt to disprove. The core of science.</div></div>
+<div class="g-item"><span class="g-term" data-lang="ru">Адаптивная система</span><span class="g-term" data-lang="en">Adaptive system</span><div class="g-def" data-lang="ru">Меняет поведение со средой. Бактерия — да. Камень — нет.</div><div class="g-def" data-lang="en">Changes with environment. Bacteria — yes. Rock — no.</div></div>
+<div class="g-item"><span class="g-term" data-lang="ru">Пять примитивов</span><span class="g-term" data-lang="en">Five primitives</span><div class="g-def" data-lang="ru">Базис любой системы: различение, композиция, тензор, петля, сопряжение.</div><div class="g-def" data-lang="en">Basis of any system: distinction, composition, tensor, loop, adjoint.</div></div>
 <div class="g-item"><span class="g-term" data-lang="ru">Три слоя</span><span class="g-term" data-lang="en">Three layers</span><div class="g-def" data-lang="ru">Модель → правила → мета-правила. Минимум адаптации.</div><div class="g-def" data-lang="en">Model → rules → meta-rules. Minimum for adaptation.</div></div>
-<div class="g-item"><span class="g-term" data-lang="ru">AMSE</span><span class="g-term" data-lang="en">AMSE</span><div class="g-def" data-lang="ru">Протокол передачи смысла, не слов.</div><div class="g-def" data-lang="en">Protocol for transmitting meaning, not words.</div></div>
-<div class="g-item"><span class="g-term">PTE</span><span class="g-term">PTE</span><div class="g-def" data-lang="ru">Phase-Toroidal Engine — вакуумный движитель без реактивной массы.</div><div class="g-def" data-lang="en">Phase-Toroidal Engine — vacuum thruster without propellant.</div></div>
-<div class="g-item"><span class="g-term">φ₀</span><span class="g-term">φ₀</span><div class="g-def" data-lang="ru">Формула живучести: когерентность + смысл + давление.</div><div class="g-def" data-lang="en">Survivability formula: coherence + meaning + pressure.</div></div>
-<div class="g-item"><span class="g-term" data-lang="ru">Negative Intelligence</span><span class="g-term" data-lang="en">Negative Intelligence</span><div class="g-def" data-lang="ru">Встроенный опровергатель гипотез.</div><div class="g-def" data-lang="en">Built-in hypothesis disprover.</div></div>
-<div class="g-item"><span class="g-term" data-lang="ru">Эмерджентность</span><span class="g-term" data-lang="en">Emergence</span><div class="g-def" data-lang="ru">Сложное из простых частей. Вода мокра, H₂O — нет.</div><div class="g-def" data-lang="en">Complex from simple parts. Water is wet, H₂O is not.</div></div>
+<div class="g-item"><span class="g-term">AMSE</span><span class="g-term">AMSE</span><div class="g-def" data-lang="ru">Протокол передачи смысла.</div><div class="g-def" data-lang="en">Meaning transmission protocol.</div></div>
+<div class="g-item"><span class="g-term">PTE</span><span class="g-term">PTE</span><div class="g-def" data-lang="ru">Движитель без реактивной массы через тороидальное поле вакуума.</div><div class="g-def" data-lang="en">Propellantless thruster via vacuum toroidal field.</div></div>
+<div class="g-item"><span class="g-term">φ₀</span><span class="g-term">φ₀</span><div class="g-def" data-lang="ru">Когерентность × смысл × давление — формула живучести.</div><div class="g-def" data-lang="en">Coherence × meaning × pressure — survivability formula.</div></div>
+<div class="g-item"><span class="g-term" data-lang="ru">Negative Intelligence</span><span class="g-term" data-lang="en">Negative Intelligence</span><div class="g-def" data-lang="ru">Опровергатель гипотез, встроенный в систему.</div><div class="g-def" data-lang="en">Built-in hypothesis disprover.</div></div>
+<div class="g-item"><span class="g-term" data-lang="ru">Эмерджентность</span><span class="g-term" data-lang="en">Emergence</span><div class="g-def" data-lang="ru">Сложное из простого. Вода мокра, H₂O — нет.</div><div class="g-def" data-lang="en">Complex from simple. Water is wet, H₂O is not.</div></div>
 </div>
 
-<!-- 1 -->
+<div class="divider">✦ ⁂ ✦</div>
+
 <h2 class="s" data-section="minimal-def">
-  <span data-lang="ru">1. Минимальное определение</span>
-  <span data-lang="en">1. Minimal definition</span>
+  <span data-lang="ru">Минимальное определение</span>
+  <span data-lang="en">Minimal definition</span>
 </h2>
 <p class="s" data-lead="Три слоя, пять примитивов, один протокол, один guard. Всё остальное — интерфейсы.">
-  <span data-lang="ru">Три слоя, пять примитивов, один протокол синхронизации, один guard. Всё остальное — интерфейсы и реализации.</span>
-  <span data-lang="en">Three layers, five primitives, one protocol, one guard. Everything else is interfaces.</span>
+  <span data-lang="ru">Три слоя, пять примитивов, один протокол, один guard. Всё остальное — реализации.</span>
+  <span data-lang="en">Three layers, five primitives, one protocol, one guard. Everything else is implementation.</span>
 </p>
 <p class="s">
-  <span data-lang="ru">Результат 14 циклов разрушения и проверки на 10 науках. Осталось <span class="hl">то, что не удалось опровергнуть</span>.</span>
-  <span data-lang="en">Result of 14 destruction cycles across 10 sciences. What survived: <span class="hl">what could not be falsified</span>.</span>
+  <span data-lang="ru">Результат 14 циклов проверки на 10 науках. Осталось <span class="hl">то, что не удалось опровергнуть</span>.</span>
+  <span data-lang="en">Result of 14 test cycles across 10 sciences. What survived: <span class="hl">what could not be falsified</span>.</span>
 </p>
 
-<!-- 2 -->
+<div class="divider">✦ ⁂ ✦</div>
+
 <h2 class="s" data-section="universal-pattern">
-  <span data-lang="ru">2. Универсальный паттерн</span>
-  <span data-lang="en">2. Universal pattern</span>
+  <span data-lang="ru">Универсальный паттерн</span>
+  <span data-lang="en">Universal pattern</span>
 </h2>
-<p class="s" data-lead="Любая адаптивная система — одна схема: модель → конфликт → новое правило → проверка.">
-  <span data-lang="ru">Любая адаптивная система — от бактерии до сознания, от экономики до вакуума — работает по одной схеме.</span>
-  <span data-lang="en">Any adaptive system — bacterium, consciousness, economy, vacuum — follows one scheme.</span>
+<p class="s" data-lead="Любая адаптивная система: модель → конфликт → новое правило → проверка.">
+  <span data-lang="ru">От бактерии до сознания, от экономики до вакуума — одна схема.</span>
+  <span data-lang="en">From bacterium to consciousness, from economy to vacuum — one scheme.</span>
 </p>
 <p class="s">
-  <b data-lang="ru">1. Модель мира.</b><b data-lang="en">1. World model.</b> <span data-lang="ru">Система знает текущее состояние.</span><span data-lang="en">The system knows its state.</span><br>
+  <b data-lang="ru">1. Модель мира.</b><b data-lang="en">1. World model.</b> <span data-lang="ru">Система знает своё состояние.</span><span data-lang="en">The system knows its state.</span><br>
   <b data-lang="ru">2. Конфликт.</b><b data-lang="en">2. Conflict.</b> <span data-lang="ru">Модель ≠ реальность.</span><span data-lang="en">Model ≠ reality.</span><br>
-  <b data-lang="ru">3. Новое правило.</b><b data-lang="en">3. New rule.</b> <span data-lang="ru">Система меняет поведение.</span><span data-lang="en">The system changes behavior.</span><br>
-  <b data-lang="ru">4. Слой 3.</b><b data-lang="en">4. Layer 3.</b> <span data-lang="ru">Если не помогло — меняется способ создания правил.</span><span data-lang="en">If not enough — change how rules are made.</span><br>
-  <b data-lang="ru">5. Проверка.</b><b data-lang="en">5. Verify.</b> <span data-lang="ru">Ресинхронизация с реальностью.</span><span data-lang="en">Re-sync with reality.</span>
+  <b data-lang="ru">3. Новое правило.</b><b data-lang="en">3. New rule.</b> <span data-lang="ru">Система меняет поведение.</span><span data-lang="en">Behavior changes.</span><br>
+  <b data-lang="ru">4. Слой 3.</b><b data-lang="en">4. Layer 3.</b> <span data-lang="ru">Если не помогло — меняется способ создания правил.</span><span data-lang="en">If insufficient — change rule creation.</span><br>
+  <b data-lang="ru">5. Проверка.</b><b data-lang="en">5. Verify.</b> <span data-lang="ru">Ресинхронизация.</span><span data-lang="en">Re-synchronize.</span>
 </p>
 <div class="ib s">
 <div class="l">
-  <span data-lang="ru">Аналогия: капитан в шторм</span>
-  <span data-lang="en">Analogy: a captain in a storm</span>
+  <span data-lang="ru">Аналогия</span>
+  <span data-lang="en">Analogy</span>
 </div>
 <div class="t">
-  <span data-lang="ru"><b>Слой 1:</b> знает, где корабль. <b>Слой 2:</b> меняет курс. <b>Слой 3:</b> переходит от карт к GPS.</span>
-  <span data-lang="en"><b>Layer 1:</b> knows the ship's position. <b>Layer 2:</b> changes course. <b>Layer 3:</b> switches from maps to GPS.</span>
+  <span data-lang="ru"><b>Слой 1:</b> знает где корабль. <b>Слой 2:</b> меняет курс. <b>Слой 3:</b> переходит от карт к GPS.</span>
+  <span data-lang="en"><b>Layer 1:</b> knows ship position. <b>Layer 2:</b> changes course. <b>Layer 3:</b> switches maps → GPS.</span>
 </div>
 </div>
 
-<!-- 3 -->
+<div class="divider">✦ ⁂ ✦</div>
+
 <h2 class="s" data-section="five-primitives">
-  <span data-lang="ru">3. Пять примитивов</span>
-  <span data-lang="en">3. Five primitives</span>
+  <span data-lang="ru">Пять примитивов</span>
+  <span data-lang="en">Five primitives</span>
 </h2>
 <p class="s">
   <span data-lang="ru">Минимальный набор для любого действия:</span>
@@ -189,218 +217,180 @@ html[data-lang="en"] [data-lang="en"]{display:inherit}
 <tr><td><b>≠</b></td><td data-lang="ru">Вода ≠ масло</td><td data-lang="en">Water ≠ oil</td><td>Измерение</td><td data-lang="ru">Восприятие</td><td data-lang="en">Perception</td></tr>
 <tr><td><b>∘</b></td><td data-lang="ru">Чайник → заварка</td><td data-lang="en">Boil → brew</td><td>Причинность</td><td data-lang="ru">Мысль</td><td data-lang="en">Thought</td></tr>
 <tr><td><b>⊗</b></td><td data-lang="ru">Дышать + смотреть</td><td data-lang="en">Breathe + look</td><td>Пространство</td><td data-lang="ru">Ассоциация</td><td data-lang="en">Association</td></tr>
-<tr><td><b>μ</b></td><td data-lang="ru">О мета-мышлении</td><td data-lang="en">Meta-thinking</td><td>Обратная связь</td><td data-lang="ru">Рефлексия</td><td data-lang="en">Reflection</td></tr>
+<tr><td><b>μ</b></td><td data-lang="ru">Мета-мышление</td><td data-lang="en">Meta-thinking</td><td>Обратная связь</td><td data-lang="ru">Рефлексия</td><td data-lang="en">Reflection</td></tr>
 <tr><td><b>⊣</b></td><td data-lang="ru">Красный → тормоз</td><td data-lang="en">Red → brake</td><td>Наблюдатель/система</td><td data-lang="ru">Воля/действие</td><td data-lang="en">Will/action</td></tr>
 </table>
 
-<!-- 4 -->
+<div class="divider">✦ ⁂ ✦</div>
+
 <h2 class="s" data-section="amse">
-  <span data-lang="ru">4. AMSE — протокол смысла</span>
-  <span data-lang="en">4. AMSE — meaning protocol</span>
+  <span data-lang="ru">AMSE — протокол смысла</span>
+  <span data-lang="en">AMSE — meaning protocol</span>
 </h2>
-<p class="s" data-lead="Адаптивные системы не обмениваются данными. Они синхронизируют смысл.">
-  <span data-lang="ru">Адаптивные системы не обмениваются данными. Они <span class="hl">синхронизируют смысл</span>. Нейроны — химией, люди — языком, AI — протоколами.</span>
-  <span data-lang="en">Adaptive systems do not exchange data. They <span class="hl">synchronize meaning</span>. Neurons via chemistry, people via language, AI via protocols.</span>
+<p class="s" data-lead="Системы не обмениваются данными — они синхронизируют смысл.">
+  <span data-lang="ru">Нейроны — химией, люди — языком, AI — протоколами. Механизм один.</span>
+  <span data-lang="en">Neurons via chemistry, people via language, AI via protocols. Same mechanism.</span>
 </p>
-<div class="pr s"><div class="i">1</div><div class="c"><div class="t">Analyze</div><div class="d" data-lang="ru">Понять, что должно измениться</div><div class="d" data-lang="en">Understand what must change</div></div></div>
-<div class="pr s"><div class="i">2</div><div class="c"><div class="t">Compress Core</div><div class="d" data-lang="ru">Найти суть (до слова)</div><div class="d" data-lang="en">Find essence (to one word)</div></div></div>
-<div class="pr s"><div class="i">3</div><div class="c"><div class="t">Model Receiver</div><div class="d" data-lang="ru">Понять, кто перед тобой</div><div class="d" data-lang="en">Understand who you face</div></div></div>
-<div class="pr s"><div class="i">4</div><div class="c"><div class="t">Select Form</div><div class="d" data-lang="ru">Выбрать: слово, пример, метафора</div><div class="d" data-lang="en">Choose: word, example, metaphor</div></div></div>
-<div class="pr s"><div class="i">5</div><div class="c"><div class="t">Dynamic Depth</div><div class="d" data-lang="ru">Расширять/сжимать по ситуации</div><div class="d" data-lang="en">Expand/compress as needed</div></div></div>
-<div class="pr s"><div class="i">6</div><div class="c"><div class="t">Sync Check</div><div class="d" data-lang="ru">Проверить: смысл передан?</div><div class="d" data-lang="en">Verify: was meaning transmitted?</div></div></div>
+<div class="pr s"><div class="i">1</div><div class="c"><div class="t">Analyze</div><div class="d" data-lang="ru">Что должно измениться</div><div class="d" data-lang="en">What must change</div></div></div>
+<div class="pr s"><div class="i">2</div><div class="c"><div class="t">Compress Core</div><div class="d" data-lang="ru">Суть до одного слова</div><div class="d" data-lang="en">Essence to one word</div></div></div>
+<div class="pr s"><div class="i">3</div><div class="c"><div class="t">Model Receiver</div><div class="d" data-lang="ru">Понять получателя</div><div class="d" data-lang="en">Understand the receiver</div></div></div>
+<div class="pr s"><div class="i">4</div><div class="c"><div class="t">Select Form</div><div class="d" data-lang="ru">Слово, пример, метафора</div><div class="d" data-lang="en">Word, example, metaphor</div></div></div>
+<div class="pr s"><div class="i">5</div><div class="c"><div class="t">Dynamic Depth</div><div class="d" data-lang="ru">Расширять/сжимать</div><div class="d" data-lang="en">Expand/compress</div></div></div>
+<div class="pr s"><div class="i">6</div><div class="c"><div class="t">Sync Check</div><div class="d" data-lang="ru">Смысл передан?</div><div class="d" data-lang="en">Meaning transmitted?</div></div></div>
 
-<!-- 5 -->
+<div class="divider">✦ ⁂ ✦</div>
+
 <h2 class="s" data-section="four-domains">
-  <span data-lang="ru">5. Четыре домена — один паттерн</span>
-  <span data-lang="en">5. Four domains — one pattern</span>
+  <span data-lang="ru">Четыре домена — один паттерн</span>
+  <span data-lang="en">Four domains — one pattern</span>
 </h2>
-<h3 class="s">5.1. <span data-lang="ru">Физика: PTE + φ₀</span><span data-lang="en">Physics: PTE + φ₀</span></h3>
-<p class="s" data-lead="PTE — вакуум как тороидальное поле. φ₀ — формула живучести любой системы.">
-  <span data-lang="ru"><b>PTE</b> — трёхслойная архитектура вакуума. Тороидальное поле вращается → асимметрия (слой 1). Вихри спариваются (слой 2). Цикл через фазу (слой 3). Результат: движение без выброса массы.</span>
-  <span data-lang="en"><b>PTE</b> — three-layer vacuum architecture. Toroidal rotation creates asymmetry (layer 1), vortex pairing (layer 2), cyclic phase transition (layer 3). Result: thrust without propellant.</span>
+<h3 class="s">5.1 <span data-lang="ru">Физика: PTE + φ₀</span><span data-lang="en">Physics: PTE + φ₀</span></h3>
+<p class="s" data-lead="PTE — вакуум как тороидальное поле. φ₀ — формула живучести.">
+  <span data-lang="ru"><b>PTE</b> — трёхслойная архитектура вакуума. Вихри, спаривание, циклический переход. Движение без массы. Шесть предсказаний — аномалии Казимира.</span>
+  <span data-lang="en"><b>PTE</b> — three-layer vacuum. Vortices, pairing, cyclic transition. Motion without mass. Six predictions — Casimir anomalies.</span>
   <span class="d">
-    <span data-lang="ru">Шесть проверяемых предсказаний — аномалии Казимира на золото-резонансных расстояниях.</span>
-    <span data-lang="en">Six testable predictions — Casimir anomalies at gold-resonant distances.</span>
+    <span data-lang="ru"><b>φ₀</b> — когерентность × смысл × давление. Бактерия, вакуум, человек — одна тройка. В математике: KK-башня, ляпуновский аттрактор, базовое состояние.</span>
+    <span data-lang="en"><b>φ₀</b> — coherence × meaning × pressure. Bacteria, vacuum, humans — one triple. In math: KK-tower, Lyapunov attractor, base state.</span>
   </span>
 </p>
-<p class="s">
-  <b>φ₀</b> <span data-lang="ru">— когерентность × смысл × давление. Одна тройка описывает бактерию, вакуум, человека. В математике — нулевой этаж KK-башни, ляпуновский аттрактор и базовое состояние машины.</span>
-  <span data-lang="en">— coherence × meaning × pressure. One triple describes bacteria, vacuum, humans. In math: KK-tower ground floor, Lyapunov attractor, machine base state.</span>
-</p>
-
-<h3 class="s">5.2. <span data-lang="ru">Сознание</span><span data-lang="en">Consciousness</span></h3>
+<h3 class="s">5.2 <span data-lang="ru">Сознание</span><span data-lang="en">Consciousness</span></h3>
 <p class="s" data-lead="Сознание — трёхслойная архитектура на мозге с внутренним наблюдателем.">
-  <span data-lang="ru">Нижние уровни — сигналы тела и мира. Верхние — смыслы, коллективный опыт.</span>
-  <span data-lang="en">Lower levels — body and world signals. Upper — meaning, collective experience.</span>
-  <span class="d">
-    <span data-lang="ru"><b>Observer Lens</b> — внутренний наблюдатель. Замечает переоценку/недооценку. Три состояния: grounded, overconfident, underconfident.</span>
-    <span data-lang="en"><b>Observer Lens</b> — inner observer detecting over/under-confidence. Three states: grounded, overconfident, underconfident.</span>
-  </span>
+  <span data-lang="ru"><b>Observer Lens</b> замечает переоценку/недооценку. Три состояния: grounded, overconfident, underconfident.</span>
+  <span data-lang="en"><b>Observer Lens</b> detects over/under-confidence. Three states: grounded, overconfident, underconfident.</span>
+</p>
+<h3 class="s">5.3 <span data-lang="ru">Информация: код</span><span data-lang="en">Information: code</span></h3>
+<p class="s" data-lead="live.py + 32 инструмента. Self-Consistent Engine + Guard на каждом шаге.">
+  <span data-lang="ru">Сигнал → противоречие → правило → проверка. Четыре инварианта: ядро не инструмент, страж для всех, проверять всё, ответ = синхронизация.</span>
+  <span data-lang="en">Signal → contradiction → rule → verify. Four invariants: core ≠ tool, guard for all, verify everything, response = sync.</span>
+</p>
+<h3 class="s">5.4 <span data-lang="ru">Язык: Войнич</span><span data-lang="en">Language: Voynich</span></h3>
+<p class="s" data-lead="203 страницы, 600 лет. Пять примитивов破解или код.">
+  <span data-lang="ru">Различение (глифы), композиция (слоги), тензор (полиграммы), петля (циклы), сопряжение (контекст → значение). Расшифровано. Структурная система.</span>
+  <span data-lang="en">Distinction (glyphs), composition (syllables), tensor (polygrams), loop (cycles), adjoint (context → meaning). Deciphered. A structural system.</span>
 </p>
 
-<h3 class="s">5.3. <span data-lang="ru">Информация: код</span><span data-lang="en">Information: code</span></h3>
-<p class="s" data-lead="live.py + 32 инструмента. Self-Consistent Engine + Guard.">
-  <span data-lang="ru"><b>live.py</b> + 32 инструмента. Self-Consistent Engine: сигнал → противоречие → правило → проверка. Guard на каждом шаге.</span>
-  <span data-lang="en"><b>live.py</b> + 32 tools. Self-Consistent Engine: signal → contradiction → rule → verify. Guard at every step.</span>
-  <span class="d">
-    <span data-lang="ru">Инварианты: ядро не инструмент (031), страж для всех (032), проверять всё (033), ответ = синхронизация (034).</span>
-    <span data-lang="en">Invariants: core is not a tool (031), guard for all (032), verify everything (033), response = sync (034).</span>
-  </span>
-</p>
+<div class="divider">✦ ⁂ ✦</div>
 
-<h3 class="s">5.4. <span data-lang="ru">Язык: Войнич</span><span data-lang="en">Language: Voynich</span></h3>
-<p class="s" data-lead="203 страницы, 600 лет без расшифровки. Пять примитивов破解или код.">
-  <span data-lang="ru">203 страницы, 600 лет без расшифровки. Пять примитивов: различение (глифы), композиция (слоги), тензор (полиграммы), петля (числовые циклы), сопряжение (контекст → значение). Результат: расшифровано. Не шифр, не язык — структурная система.</span>
-  <span data-lang="en">203 pages, 600 years undeciphered. Five primitives applied: distinction (glyphs), composition (syllables), tensor (polygrams), loop (number cycles), adjoint (context → meaning). Deciphered. Not a cipher — a structural system.</span>
-</p>
-
-<!-- 6 -->
 <h2 class="s" data-section="principles">
-  <span data-lang="ru">6. Четыре принципа</span>
-  <span data-lang="en">6. Four principles</span>
+  <span data-lang="ru">Четыре принципа</span>
+  <span data-lang="en">Four principles</span>
 </h2>
 <div class="cd s">
 <div class="d">
   <b data-lang="ru">1. Нет мусора.</b><b data-lang="en">1. No junk.</b> <span data-lang="ru">Любые данные — ключ.</span><span data-lang="en">Any data may be key.</span><div class="d"><span data-lang="ru">Не выбрасывать — переструктурировать.</span><span data-lang="en">Restructure, don't discard.</span></div><br>
-  <b data-lang="ru">2. Числа — не истина.</b><b data-lang="en">2. Numbers are not truth.</b> <span data-lang="ru">3 и 5 — лучшее на сегодня.</span><span data-lang="en">3 and 5 — the best known today.</span><br>
+  <b data-lang="ru">2. Числа — не истина.</b><b data-lang="en">2. Numbers are not truth.</b> <span data-lang="ru">3 и 5 — лучшее на сегодня.</span><span data-lang="en">3 and 5 — best known today.</span><br>
   <b data-lang="ru">3. Наш мир — не истина.</b><b data-lang="en">3. Our universe is not truth.</b> <span data-lang="ru">Рабочая гипотеза.</span><span data-lang="en">A working hypothesis.</span><br>
   <b data-lang="ru">4. Правило важнее факта.</b><b data-lang="en">4. The rule matters more.</b> <span data-lang="ru">Даже это — инструмент.</span><span data-lang="en">Even this is a tool.</span>
 </div>
 </div>
 
-<!-- 7 -->
+<div class="divider">✦ ⁂ ✦</div>
+
 <h2 class="s" data-section="truth">
-  <span data-lang="ru">7. Критерий истины</span>
-  <span data-lang="en">7. Criterion of truth</span>
+  <span data-lang="ru">Критерий истины</span>
+  <span data-lang="en">Criterion of truth</span>
 </h2>
 <p class="s" data-lead="Истина — устойчивость гипотезы под давлением фальсификации.">
-  <span data-lang="ru">Гипотеза верна, если Negative Intelligence не смогла её разрушить. Правило верно, если self-reference не рождает противоречий. Архитектура верна, если выдержала 14 циклов на 10 доменах.</span>
-  <span data-lang="en">A hypothesis is true if Negative Intelligence could not break it. A rule is valid if self-reference creates no contradiction. An architecture survived 14 cycles across 10 domains.</span>
+  <span data-lang="ru">Hypothesis true = NI не смогла разрушить. Rule valid = self-reference без противоречий. Architecture sound = 14 циклов × 10 доменов.</span>
+  <span data-lang="en">Hypothesis true = NI could not break. Rule valid = self-reference clean. Architecture sound = 14 cycles × 10 domains.</span>
 </p>
 
-<!-- 8 -->
+<div class="divider">✦ ⁂ ✦</div>
+
 <h2 class="s" data-section="self-apply">
-  <span data-lang="ru">8. Примени к себе</span>
-  <span data-lang="en">8. Apply to yourself</span>
+  <span data-lang="ru">Примени к себе</span>
+  <span data-lang="en">Apply to yourself</span>
 </h2>
 <p class="s">
-  <span data-lang="ru">Система применяла себя к своему коду 14 раз. Цикл 15 наступит, если найдётся противоречие. Если нет — архитектура остаётся.</span>
-  <span data-lang="en">The system applied itself to its code 14 times. Cycle 15 comes when a contradiction is found. If not — the architecture stands.</span>
+  <span data-lang="ru">Цикл 15 наступит, если найдётся противоречие. Нет — архитектура стоит.</span>
+  <span data-lang="en">Cycle 15 comes when a contradiction appears. If not — the architecture stands.</span>
 </p>
 <div class="ib s">
 <div class="l">
-  <span data-lang="ru">Критерий</span>
-  <span data-lang="en">Criterion</span>
+  <span data-lang="ru">Критерий фальсификации</span>
+  <span data-lang="en">Falsification criterion</span>
 </div>
 <div class="t">
-  <span data-lang="ru">Найди адаптивную систему не сводящуюся к трём слоям и пяти примитивам — архитектура перестроится.</span>
-  <span data-lang="en">Find an adaptive system not reducible to three layers and five primitives — the architecture will be rebuilt.</span>
+  <span data-lang="ru">Найди адаптивную систему вне трёх слоёв и пяти примитивов — архитектура перестроится.</span>
+  <span data-lang="en">Find an adaptive system outside 3 layers × 5 primitives — the architecture will be rebuilt.</span>
 </div>
 </div>
 
-<!-- 9 -->
+<div class="divider">✦ ⁂ ✦</div>
+
 <h2 class="s" data-section="boundaries">
-  <span data-lang="ru">9. Границы</span>
-  <span data-lang="en">9. Boundaries</span>
+  <span data-lang="ru">Границы</span>
+  <span data-lang="en">Boundaries</span>
 </h2>
 <p class="s">
-  <span data-lang="ru">Архитектура говорит <span class="hl">как</span>, а не <span class="hl">что</span>. Содержание — за её границами.</span>
-  <span data-lang="en">The architecture says <span class="hl">how</span>, not <span class="hl">what</span>. Content lies beyond its boundaries.</span>
+  <span data-lang="ru">Архитектура говорит <span class="hl">как</span>, а не <span class="hl">что</span>. Содержание — за границами.</span>
+  <span data-lang="en">The architecture says <span class="hl">how</span>, not <span class="hl">what</span>. Content lies beyond.</span>
 </p>
 
-<!-- 10 -->
+<div class="divider">✦ ⁂ ✦</div>
+
 <h2 class="s" data-section="summary">
-  <span data-lang="ru">10. Итог</span>
-  <span data-lang="en">10. Summary</span>
+  <span data-lang="ru">Итог</span>
+  <span data-lang="en">Summary</span>
 </h2>
 <p class="s">
   <span class="hl" data-lang="ru">Три слоя. Пять примитивов. Один протокол. Четыре инварианта. 14 циклов. Не опровергнуто.</span>
   <span class="hl" data-lang="en">Three layers. Five primitives. One protocol. Four invariants. 14 cycles. Not falsified.</span>
 </p>
 <p class="qt s">
-  <span data-lang="ru">νόησις — понимание сути через контакт. Система не думает о реальности — она синхронизируется с ней.</span>
-  <span data-lang="en">νόησις — direct understanding through contact. The system does not think about reality — it synchronizes with it.</span>
+  <span data-lang="ru">νόησις — понимание сути через контакт. Система синхронизируется с реальностью.</span>
+  <span data-lang="en">νόησις — direct understanding through contact. The system synchronizes with reality.</span>
 </p>
 
 <div class="ft">
   <p><a href="./" data-lang="ru">⬆ Исследование</a><a href="./" data-lang="en">⬆ Research</a> · <a href="manifesto_iac_amse.html" data-lang="ru">Манифест →</a><a href="manifesto_iac_amse.html" data-lang="en">Manifesto →</a></p>
   <div class="ip">
     <p>IAC/AMSE v14 · 19 Jul 2026</p>
-    <p>IP: <a href="https://doi.org/10.5281/zenodo.21209447" target="_blank">Zenodo 10.5281/zenodo.21209447</a> (PTE) · <a href="https://doi.org/10.5281/zenodo.21334854" target="_blank">10.5281/zenodo.21334854</a> (Voynich)</p>
-    <p>License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC-BY-NC-ND 4.0</a> · <a href="https://github.com/Tracer90/synchronization-theory" target="_blank">GitHub</a></p>
-    <p style="font-size:.85em;margin-top:4px;color:#333355">Self-Consistent Engine · AMSE Protocol · Invariant Adaptive Core v14</p>
+    <p><a href="https://doi.org/10.5281/zenodo.21209447" target="_blank">Zenodo 10.5281/zenodo.21209447</a> (PTE) · <a href="https://doi.org/10.5281/zenodo.21334854" target="_blank">10.5281/zenodo.21334854</a> (Voynich)</p>
+    <p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC-BY-NC-ND 4.0</a> · <a href="https://github.com/Tracer90/synchronization-theory" target="_blank">GitHub</a></p>
+    <p style="font-size:.85em;margin-top:6px;color:#303060">Self-Consistent Engine · AMSE Protocol · IAC v14</p>
   </div>
 </div>
 
 </div>
 
 <script>
-/* === ACE: Adaptive Content Engine v1 === */
+/* === ACE v1 + Particles === */
 (function(){
-  const LS_KEY = 'iac_ace_prefs';
-  const MS_KEY = 'iac_ace_memory';
-  const DECIDE_INTERVAL = 30000;
-  
-  let prefs = (function(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{}}catch(e){return {}}})();
-  let memory = (function(){try{return JSON.parse(localStorage.getItem(MS_KEY))||{visits:0,sections:{}}}catch(e){return {visits:0,sections:{}}}})();
-  let lastDecision = 0;
-  let currentMode = prefs.mode || 'balanced';
-  let currentLang = prefs.lang || 'ru';
-  
-  const signals = {scrollSpeeds:[],sectionDwell:{},dwellTimer:{},glossClicks:0,startTime:Date.now(),firstSection:null,reachedBottom:false};
-  
-  let lastSY = window.scrollY, lastST = Date.now();
-  window.addEventListener('scroll',function(){
-    const now=Date.now(), dt=now-lastST;
-    if(dt>50){const dy=Math.abs(window.scrollY-lastSY);signals.scrollSpeeds.push(dy/(dt/1000));if(signals.scrollSpeeds.length>30)signals.scrollSpeeds.shift();lastSY=window.scrollY;lastST=now}
-    if(!signals.reachedBottom){const p=window.scrollY/(document.body.scrollHeight-window.innerHeight);if(p>.85)signals.reachedBottom=true}
-  },{passive:true});
-  
-  if(window.IntersectionObserver){(new IntersectionObserver(function(entries){entries.forEach(e=>{const s=e.target.closest('[data-section]'),id=s?s.getAttribute('data-section'):null;if(!id)return;if(e.isIntersecting){signals.dwellTimer[id]=Date.now();if(!signals.firstSection)signals.firstSection=id}else if(signals.dwellTimer[id]){signals.sectionDwell[id]=(signals.sectionDwell[id]||0)+(Date.now()-signals.dwellTimer[id]);delete signals.dwellTimer[id]}})}),{threshold:[0,.5]})).observe(document.querySelectorAll('[data-section]'))}
-  
-  document.querySelectorAll('.gloss .g-item').forEach(function(it){it.addEventListener('click',function(){signals.glossClicks++;this.classList.toggle('open')})});
-  
-  function decideMode(){
-    const now=Date.now();if(now-lastDecision<DECIDE_INTERVAL)return currentMode;lastDecision=now;
-    if(prefs.manual)return currentMode;
-    if(memory.visits>1&&prefs.mode){const td=Object.values(memory.sections||{}).reduce((s,v)=>s+(v||0),0);if(td>120000)return'detailed';return prefs.mode}
-    const votes=[];
-    if(signals.scrollSpeeds.length>5){const a=signals.scrollSpeeds.reduce((a,b)=>a+b,0)/signals.scrollSpeeds.length;a>800?votes.push('concise'):a<200?votes.push('detailed'):votes.push('balanced')}
-    const fd=signals.sectionDwell[signals.firstSection]||0;fd>15000?votes.push('detailed'):fd<3000&&signals.firstSection?votes.push('concise'):0;
-    if(signals.glossClicks>3)votes.push('detailed');
-    const h=new Date().getHours();if(h<6||h>23)votes.push('concise');
-    if(navigator.connection&&navigator.connection.effectiveType&&(navigator.connection.effectiveType==='slow-2g'||navigator.connection.effectiveType==='2g'))votes.push('concise');
-    if(signals.reachedBottom)votes.push('detailed');
-    const c=votes.filter(v=>v==='concise').length,d=votes.filter(v=>v==='detailed').length,b=votes.filter(v=>v==='balanced').length;
-    if(c>d&&c>b)return'concise';if(d>c&&d>b)return'detailed';return'balanced';
-  }
-  
-  function applyMode(m){currentMode=m;document.documentElement.setAttribute('data-mode',m);document.querySelectorAll('.mode-dot').forEach(d=>d.classList.toggle('active',d.getAttribute('data-mode')===m));const h=document.getElementById('modeHint');if(h)h.textContent=m;prefs.mode=m;try{localStorage.setItem(LS_KEY,JSON.stringify(prefs))}catch(e){}}
-  function applyLang(l){currentLang=l;document.documentElement.setAttribute('data-lang',l);document.querySelectorAll('.lang-dot').forEach(d=>d.classList.toggle('active',d.getAttribute('data-lang')===l));prefs.lang=l;try{localStorage.setItem(LS_KEY,JSON.stringify(prefs))}catch(e){}}
-  
+  (function(){
+    const c=document.getElementById('particles-canvas');if(!c)return;const x=c.getContext('2d');let w,h,p=[],N=80;
+    function r(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}window.addEventListener('resize',r);r();
+    for(let i=0;i<N;i++)p.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.3,a:Math.random()*.4+.1});
+    function d(){x.clearRect(0,0,w,h);p.forEach(q=>{q.x+=q.vx;q.y+=q.vy;if(q.x<0)q.x=w;if(q.x>w)q.x=0;if(q.y<0)q.y=h;if(q.y>h)q.y=0;x.beginPath();x.arc(q.x,q.y,q.r,0,Math.PI*2);x.fillStyle=`rgba(180,170,255,${q.a})`;x.fill()});
+      for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){const dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,ds=Math.sqrt(dx*dx+dy*dy);if(ds<120){x.beginPath();x.moveTo(p[i].x,p[i].y);x.lineTo(p[j].x,p[j].y);x.strokeStyle=`rgba(180,170,255,${.04*(1-ds/120)})`;x.stroke()}}
+      requestAnimationFrame(d)}d()})();
+
+  const LS='iac_ace_prefs',MS='iac_ace_memory',DI=30000;
+  let prefs=(function(){try{return JSON.parse(localStorage.getItem(LS))||{}}catch(e){return{}}})(),mem=(function(){try{return JSON.parse(localStorage.getItem(MS))||{visits:0,sections:{}}}catch(e){return{visits:0,sections:{}}}})(),lastD=0,mode=prefs.mode||'balanced',lang=prefs.lang||'ru';
+  const sig={scrollSpeeds:[],sectionDwell:{},dwellTimer:{},glossClicks:0,startTime:Date.now(),firstSection:null,reachedBottom:false};
+  let lsY=window.scrollY,lsT=Date.now();
+  window.addEventListener('scroll',function(){const n=Date.now(),dt=n-lsT;if(dt>50){const dy=Math.abs(window.scrollY-lsY);sig.scrollSpeeds.push(dy/(dt/1000));if(sig.scrollSpeeds.length>30)sig.scrollSpeeds.shift();lsY=window.scrollY;lsT=n}if(!sig.reachedBottom){const p=window.scrollY/(document.body.scrollHeight-window.innerHeight);if(p>.85)sig.reachedBottom=true}},{passive:true});
+  if(window.IntersectionObserver){(new IntersectionObserver(function(e){e.forEach(i=>{const s=i.target.closest('[data-section]'),id=s?s.getAttribute('data-section'):null;if(!id)return;if(i.isIntersecting){sig.dwellTimer[id]=Date.now();if(!sig.firstSection)sig.firstSection=id}else if(sig.dwellTimer[id]){sig.sectionDwell[id]=(sig.sectionDwell[id]||0)+(Date.now()-sig.dwellTimer[id]);delete sig.dwellTimer[id]}})}),{threshold:[0,.5]})).observe(document.querySelectorAll('[data-section]'))}
+  document.querySelectorAll('.gloss .g-item').forEach(function(i){i.addEventListener('click',function(){sig.glossClicks++;this.classList.toggle('open')})});
+  function decide(){const n=Date.now();if(n-lastD<DI)return mode;lastD=n;if(prefs.manual)return mode;if(mem.visits>1&&prefs.mode){const td=Object.values(mem.sections||{}).reduce((s,v)=>s+(v||0),0);if(td>120000)return'detailed';return prefs.mode}
+    const v=[];if(sig.scrollSpeeds.length>5){const a=sig.scrollSpeeds.reduce((a,b)=>a+b,0)/sig.scrollSpeeds.length;a>800?v.push('concise'):a<200?v.push('detailed'):v.push('balanced')}
+    const fd=sig.sectionDwell[sig.firstSection]||0;fd>15000?v.push('detailed'):fd<3000&&sig.firstSection?v.push('concise'):0;if(sig.glossClicks>3)v.push('detailed');const h=new Date().getHours();if(h<6||h>23)v.push('concise');
+    if(navigator.connection&&navigator.connection.effectiveType&&(navigator.connection.effectiveType==='slow-2g'||navigator.connection.effectiveType==='2g'))v.push('concise');if(sig.reachedBottom)v.push('detailed');
+    const c=v.filter(x=>x==='concise').length,d=v.filter(x=>x==='detailed').length,b=v.filter(x=>x==='balanced').length;if(c>d&&c>b)return'concise';if(d>c&&d>b)return'detailed';return'balanced'}
+  function apM(m){mode=m;document.documentElement.setAttribute('data-mode',m);document.querySelectorAll('.mode-dot').forEach(d=>d.classList.toggle('active',d.getAttribute('data-mode')===m));const h=document.getElementById('modeHint');if(h)h.textContent=m;prefs.mode=m;try{localStorage.setItem(LS,JSON.stringify(prefs))}catch(e){}}
+  function apL(l){lang=l;document.documentElement.setAttribute('data-lang',l);document.querySelectorAll('.lang-dot').forEach(d=>d.classList.toggle('active',d.getAttribute('data-lang')===l));prefs.lang=l;try{localStorage.setItem(LS,JSON.stringify(prefs))}catch(e){}}
   function init(){
-    const votes=[];const nl=(navigator.language||'').toLowerCase();votes.push(nl.startsWith('ru')?'ru':'en');
-    if(navigator.languages&&navigator.languages[0])votes.push((navigator.languages[0]||'').toLowerCase().startsWith('ru')?'ru':'en');
-    try{const loc=Intl.DateTimeFormat().resolvedOptions().locale||'';votes.push(loc.startsWith('ru')?'ru':'en')}catch(e){}
-    try{const ruTZ=['europe/moscow','europe/kaliningrad','europe/samara','europe/volgograd','asia/yekaterinburg','asia/novosibirsk','asia/krasnoyarsk','asia/irkutsk','asia/yakutsk','asia/vladivostok','asia/kamchatka','asia/magadan','asia/sakhalin','asia/chita','asia/omsk','asia/tomsk','asia/barnaul','asia/novokuznetsk'];const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone||'').toLowerCase();votes.push(ruTZ.includes(tz)?'ru':(tz?'en':null))}catch(e){}
-    const rc=votes.filter(v=>v==='ru').length,ec=votes.filter(v=>v==='en').length;
-    const lang=prefs.lang||(rc>=ec?'ru':'en');applyLang(lang);
-    
-    if(prefs.mode&&prefs.mode!=='auto')applyMode(prefs.mode);else{applyMode(decideMode());setInterval(function(){const d=decideMode();if(d!==currentMode)applyMode(d)},DECIDE_INTERVAL)}
-    
-    if(window.IntersectionObserver){document.querySelectorAll('.cn').forEach(function(el){(new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){const t=parseInt(el.getAttribute('data-target'),10);if(!isNaN(t)){const s=performance.now();!function u(n){const p=Math.min((n-s)/1200,1);el.textContent=Math.round((1-Math.pow(1-p,3))*t);if(p<1)requestAnimationFrame(u)}(s)};e.target.disconnect=true;e.observer&&e.observer.unobserve(el)}})},{threshold:.5})).observe(el)})}
-    
-    if(window.IntersectionObserver){(new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');e.observer&&e.observer.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -50px 0px'})).observe(document.querySelectorAll('.s'))}else{document.querySelectorAll('.s').forEach(function(el){el.classList.add('vis')})}
-    
-    const bar=document.getElementById('progress');if(bar)window.addEventListener('scroll',function(){bar.style.width=Math.min((window.scrollY/(document.body.scrollHeight-window.innerHeight))*100,100)+'%'},{passive:true});
-    
-    document.querySelectorAll('.mode-dot').forEach(function(d){d.addEventListener('click',function(){prefs.manual=true;applyMode(this.getAttribute('data-mode'))})});
-    document.querySelectorAll('.lang-dot').forEach(function(d){d.addEventListener('click',function(){applyLang(this.getAttribute('data-lang'))})});
-    
-    window.addEventListener('beforeunload',function(){Object.keys(signals.dwellTimer).forEach(function(id){if(signals.dwellTimer[id])signals.sectionDwell[id]=(signals.sectionDwell[id]||0)+(Date.now()-signals.dwellTimer[id])});memory.sections=signals.sectionDwell;memory.visits=(memory.visits||0)+1;memory.lastVisit=Date.now();try{localStorage.setItem(MS_KEY,JSON.stringify(memory))}catch(e){}});
-    
-    document.querySelectorAll('.s').forEach(function(el){const r=el.getBoundingClientRect();if(r.top<window.innerHeight)el.classList.add('vis')});
-  }
+    const v=[];const nl=(navigator.language||'').toLowerCase();v.push(nl.startsWith('ru')?'ru':'en');if(navigator.languages&&navigator.languages[0])v.push((navigator.languages[0]||'').toLowerCase().startsWith('ru')?'ru':'en');
+    try{const l=Intl.DateTimeFormat().resolvedOptions().locale||'';v.push(l.startsWith('ru')?'ru':'en')}catch(e){}try{const z=['europe/moscow','europe/kaliningrad','europe/samara','europe/volgograd','asia/yekaterinburg','asia/novosibirsk','asia/krasnoyarsk','asia/irkutsk','asia/yakutsk','asia/vladivostok','asia/kamchatka','asia/magadan','asia/sakhalin','asia/chita','asia/omsk','asia/tomsk','asia/barnaul','asia/novokuznetsk'];const t=(Intl.DateTimeFormat().resolvedOptions().timeZone||'').toLowerCase();v.push(z.includes(t)?'ru':(t?'en':null))}catch(e){}
+    const rc=v.filter(x=>x==='ru').length,ec=v.filter(x=>x==='en').length,ln=prefs.lang||(rc>=ec?'ru':'en');apL(ln);
+    if(prefs.mode&&prefs.mode!=='auto')apM(prefs.mode);else{apM(decide());setInterval(function(){const d=decide();if(d!==mode)apM(d)},DI)}
+    if(window.IntersectionObserver){document.querySelectorAll('.cn').forEach(function(e){(new IntersectionObserver(function(n){n.forEach(function(i){if(i.isIntersecting){const t=parseInt(e.getAttribute('data-target'),10);if(!isNaN(t)){const s=performance.now();!function u(n){const p=Math.min((n-s)/1200,1);e.textContent=Math.round((1-Math.pow(1-p,3))*t);if(p<1)requestAnimationFrame(u)}(s)};i.observer&&i.observer.unobserve(e)}})},{threshold:.5})).observe(e)})}
+    if(window.IntersectionObserver){(new IntersectionObserver(function(e){e.forEach(function(i){if(i.isIntersecting){i.target.classList.add('vis');i.observer&&i.observer.unobserve(i.target)}})},{threshold:.08,rootMargin:'0px 0px -50px 0px'})).observe(document.querySelectorAll('.s'))}else{document.querySelectorAll('.s').forEach(function(e){e.classList.add('vis')})}
+    const b=document.getElementById('progress');if(b)window.addEventListener('scroll',function(){b.style.width=Math.min((window.scrollY/(document.body.scrollHeight-window.innerHeight))*100,100)+'%'},{passive:true});
+    document.querySelectorAll('.mode-dot').forEach(function(d){d.addEventListener('click',function(){prefs.manual=true;apM(this.getAttribute('data-mode'))})});
+    document.querySelectorAll('.lang-dot').forEach(function(d){d.addEventListener('click',function(){apL(this.getAttribute('data-lang'))})});
+    window.addEventListener('beforeunload',function(){Object.keys(sig.dwellTimer).forEach(function(id){if(sig.dwellTimer[id])sig.sectionDwell[id]=(sig.sectionDwell[id]||0)+(Date.now()-sig.dwellTimer[id])});mem.sections=sig.sectionDwell;mem.visits=(mem.visits||0)+1;mem.lastVisit=Date.now();try{localStorage.setItem(MS,JSON.stringify(mem))}catch(e){}});
+    document.querySelectorAll('.s').forEach(function(e){const r=e.getBoundingClientRect();if(r.top<window.innerHeight)e.classList.add('vis')})}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
