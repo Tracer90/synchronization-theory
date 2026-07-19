@@ -1,17 +1,37 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html data-lang="auto">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Манифест IAC/AMSE v14</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Manifesto · IAC/AMSE v14</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-@keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-body{background:linear-gradient(-45deg,#050510,#0a0a2a,#111133,#050510);background-size:400% 400%;animation:bg 15s ease infinite;color:#d0d0e0;font:17px/1.8 Georgia,serif;overflow-x:hidden}
-body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.08),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,.08),transparent),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,.1),transparent);background-size:200px 200px;pointer-events:none;z-index:0}
+@keyframes aurora{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+body{background:linear-gradient(-45deg,#050510,#0a0a2a,#111133,#050510);background-size:400% 400%;animation:aurora 20s ease infinite;color:#d0d0e0;font:17px/1.8 Georgia,serif;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.12),transparent),radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,.12),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,.12),transparent);background-size:200px 200px;pointer-events:none;z-index:0}
 .c{max-width:920px;margin:0 auto;padding:40px 20px;position:relative;z-index:1}
+
+/* LANG BAR — скрытый невербальный тест */
+.lang-bar{position:fixed;top:16px;right:20px;z-index:100;display:flex;gap:6px;align-items:center;opacity:.25;transition:opacity .5s}
+.lang-bar:hover{opacity:1}
+.lang-dot{width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;font-size:11px;background:rgba(10,10,20,.6);backdrop-filter:blur(4px)}
+.lang-dot.active{border-color:#ffd700;box-shadow:0 0 12px rgba(255,215,0,.2)}
+.lang-dot:hover{transform:scale(1.15);border-color:rgba(255,215,0,.4)}
+.lang-dot.ru{color:#ff6b6b}
+.lang-dot.en{color:#6bb5ff}
+.lang-hint{font-size:10px;color:#6666aa;letter-spacing:.5px;text-transform:uppercase;opacity:0;transition:opacity .5s;white-space:nowrap}
+.lang-bar:hover .lang-hint{opacity:1}
+
+/* PROGRESS */
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#ffd700,#ff6b6b);z-index:200;transition:width .3s ease;width:0%}
+
+/* SECTIONS FADE-IN */
+.s{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.s.vis{opacity:1;transform:translateY(0)}
+
+/* HEADINGS */
 h1{font-size:clamp(2.5em,6vw,4em);text-align:center;margin-bottom:10px;letter-spacing:3px}
-h1 span{background:linear-gradient(135deg,#ffd700,#ff6b6b,#cc88ff,#ffd700);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:bg 8s ease infinite}
+h1 span{background:linear-gradient(135deg,#ffd700,#ff6b6b,#cc88ff,#ffd700);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:aurora 8s ease infinite}
 .sub{text-align:center;color:#8888bb;font-size:1em;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6}
 h2{color:#ffd700;font-size:1.6em;margin:50px 0 20px;border-left:4px solid #ff6b6b;padding-left:18px}
 h3{color:#e0e0ff;font-size:1.15em;margin:30px 0 12px}
@@ -32,142 +52,402 @@ p{margin:14px 0;line-height:1.9;color:#b0b0c8}
 .pr .c .t{color:#ffd700;font-weight:700}
 .pr .c .d{color:#9090b0;font-size:0.9em;line-height:1.6}
 .st{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:25px 0}
-.stb{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;text-align:center}
-.stb:hover{border-color:rgba(255,215,0,.3);transform:translateY(-2px)}
+.stb{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;text-align:center;transition:all .3s;cursor:default}
+.stb:hover{border-color:rgba(255,215,0,.3);transform:translateY(-3px)}
 .stb .n{font-size:1.8em;font-weight:700;background:linear-gradient(135deg,#ffd700,#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .stb .l{color:#6666aa;font-size:0.8em;margin-top:4px}
-.gloss{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:22px;margin:20px 0}
-.gloss .g-item{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:12px}
-.gloss .g-item:last-child{border-bottom:none}
-.gloss .g-term{color:#ffd700;font-weight:700;min-width:140px;flex-shrink:0}
-.gloss .g-def{color:#9090b0;font-size:0.92em}
+
+/* GLOSSARY — интерактивный */
+.gloss .g-item{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .3s;border-radius:6px;padding:8px 12px;margin:0 -12px}
+.gloss .g-item:hover{background:rgba(255,215,0,.05)}
+.gloss .g-term{color:#ffd700;font-weight:700;display:inline}
+.gloss .g-def{color:#9090b0;font-size:0.92em;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;padding:0 0 0 16px}
+.gloss .g-item.open .g-def{max-height:200px;padding:8px 0 4px 16px}
+.gloss .g-term::after{content:' +';color:#555577;font-size:0.8em;transition:transform .3s}
+.gloss .g-item.open .g-term::after{content:' −';color:#ffd700}
+
 .ft{text-align:center;padding:50px 20px;color:#555577;border-top:1px solid rgba(255,255,255,.04);margin-top:80px}
 .ft a{color:#6666aa;text-decoration:none}
 .ft a:hover{color:#ffd700}
-@media(max-width:600px){.c{padding:16px}h2{font-size:1.3em}.gloss .g-item{flex-direction:column}.gloss .g-term{min-width:auto}}
+[data-lang]{display:none}
+[data-lang="auto"] [data-lang]{display:inherit}
+html[data-lang="ru"] [data-lang="ru"]{display:inherit}
+html[data-lang="ru"] [data-lang="en"]{display:none}
+html[data-lang="en"] [data-lang="ru"]{display:none}
+html[data-lang="en"] [data-lang="en"]{display:inherit}
+@media(max-width:600px){.c{padding:16px}.lang-bar{top:8px;right:10px}h2{font-size:1.3em}.gloss .g-def{padding-left:0}}
+/* count-up animation */
+.cn{display:inline-block}
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
+<div class="lang-bar" id="langBar" role="navigation" aria-label="Language">
+  <span class="lang-hint" id="langHint"></span>
+  <span class="lang-dot ru active" data-lang="ru" title="Русский" tabindex="0">RU</span>
+  <span class="lang-dot en" data-lang="en" title="English" tabindex="0">EN</span>
+</div>
 <div class="c">
 
-<h1><span>МАНИФЕСТ</span></h1>
-<p class="sub">IAC/AMSE v14 · Инвариантное Адаптивное Ядро<br>19 июля 2026</p>
-
-<div class="st">
-<div class="stb"><div class="n">14</div><div class="l">циклов</div></div>
-<div class="stb"><div class="n">5</div><div class="l">примитивов</div></div>
-<div class="stb"><div class="n">3</div><div class="l">слоя</div></div>
-<div class="stb"><div class="n">4</div><div class="l">инварианта</div></div>
-<div class="stb"><div class="n">32</div><div class="l">инструмента</div></div>
-<div class="stb"><div class="n">1</div><div class="l">ядро</div></div>
+<!-- HERO COUNTERS -->
+<div class="st" id="heroCounters">
+  <div class="stb"><div class="n"><span class="cn" data-target="14">0</span></div><div class="l" data-lang="ru">циклов</div><div class="l" data-lang="en">cycles</div></div>
+  <div class="stb"><div class="n"><span class="cn" data-target="5">0</span></div><div class="l" data-lang="ru">примитивов</div><div class="l" data-lang="en">primitives</div></div>
+  <div class="stb"><div class="n"><span class="cn" data-target="3">0</span></div><div class="l" data-lang="ru">слоя</div><div class="l" data-lang="en">layers</div></div>
+  <div class="stb"><div class="n"><span class="cn" data-target="4">0</span></div><div class="l" data-lang="ru">инварианта</div><div class="l" data-lang="en">invariants</div></div>
+  <div class="stb"><div class="n"><span class="cn" data-target="32">0</span></div><div class="l" data-lang="ru">инструмента</div><div class="l" data-lang="en">tools</div></div>
+  <div class="stb"><div class="n"><span class="cn" data-target="1">0</span></div><div class="l" data-lang="ru">ядро</div><div class="l" data-lang="en">core</div></div>
 </div>
 
-<!-- СЛОВАРЬ ТЕРМИНОВ — для тех, кто хочет понимать каждое слово -->
-<h2>0. Словарь терминов</h2>
-<p>Прежде чем читать манифест — вот ключевые слова простым языком:</p>
+<!-- ========== GLOSSARY / СЛОВАРЬ ========== -->
+<h2 class="s">
+  <span data-lang="ru">0. Словарь терминов</span>
+  <span data-lang="en">0. Glossary</span>
+</h2>
+<p class="s">
+  <span data-lang="ru">Нажми на термин — раскроется объяснение:</span>
+  <span data-lang="en">Tap any term to expand its explanation:</span>
+</p>
 
-<div class="gloss">
-<div class="g-item"><span class="g-term">Цикл</span><span class="g-def">Один раунд: собрать данные → найти ошибку → перестроить систему → проверить. Мы сделали так 14 раз подряд, каждый раз делая систему лучше.</span></div>
-<div class="g-item"><span class="g-term">Фальсификация</span><span class="g-def">Попытка доказать, что идея неверна. Если попытка провалилась — идея становится крепче. Это научный метод: не ищем подтверждения, ищем опровержение.</span></div>
-<div class="g-item"><span class="g-term">Слой (уровень)</span><span class="g-def">Этаж архитектуры. Первый этаж — модель мира. Второй — правила её обновления. Третий — правила смены правил.</span></div>
-<div class="g-item"><span class="g-term">Примитив</span><span class="g-def">Самая маленькая кирпичная операция, которую нельзя разбить на более простые. Как атом для химии.</span></div>
-<div class="g-item"><span class="g-term">Инвариант</span><span class="g-def">Правило, которое никогда нельзя нарушать. Если нарушил — система сломается.</span></div>
-<div class="g-item"><span class="g-term">AMSE</span><span class="g-def">Adaptive Meaning Synchronization Engine — протокол, который гарантирует, что смысл передан правильно, а не просто слова.</span></div>
-<div class="g-item"><span class="g-term">Guard (Страж)</span><span class="g-def">Механизм безопасности: ни одно действие не происходит без проверки. Как телохранитель для кода.</span></div>
-<div class="g-item"><span class="g-term">Синхронизация</span><span class="g-def">Совпадение модели (того, что система думает) с реальностью (тем, что есть на самом деле).</span></div>
-<div class="g-item"><span class="g-term">Self-Consistent Engine</span><span class="g-def">Главный цикл системы: наблюдает → ищет противоречия → исправляет → проверяет. Работает без остановки.</span></div>
-<div class="g-item"><span class="g-term">Negative Intelligence</span><span class="g-def">Часть системы, чья единственная работа — найти ошибку в любой гипотезе. Как адвокат дьявола, но встроенный в код.</span></div>
-<div class="g-item"><span class="g-term">Самоприменение</span><span class="g-def">Система применяет свои правила к себе самой. Как человек, который анализирует собственное мышление.</span></div>
-<div class="g-item"><span class="g-term">Эмерджентность</span><span class="g-def">Когда из простых частей возникает сложное свойство, которого нет в частях по отдельности. Как вода: H₂O не мокрый, но вода мокрая.</span></div>
+<div class="gloss s" id="glossary">
+<div class="g-item" data-term="cycle"><span class="g-term" data-lang="ru">Цикл</span><span class="g-term" data-lang="en">Cycle</span><div class="g-def" data-lang="ru">Один раунд: собрать данные → найти ошибку → перестроить систему → проверить. Сделано 14 раз подряд.</div><div class="g-def" data-lang="en">One round: gather data → find error → rebuild system → verify. Done 14 times in a row.</div></div>
+<div class="g-item" data-term="falsification"><span class="g-term" data-lang="ru">Фальсификация</span><span class="g-term" data-lang="en">Falsification</span><div class="g-def" data-lang="ru">Попытка доказать, что идея неверна. Если не смог — идея крепче. Ядро научного метода.</div><div class="g-def" data-lang="en">Attempt to prove an idea false. If you fail, the idea is stronger. The core of the scientific method.</div></div>
+<div class="g-item" data-term="layer"><span class="g-term" data-lang="ru">Слой</span><span class="g-term" data-lang="en">Layer</span><div class="g-def" data-lang="ru">Этаж архитектуры. 1-й — модель мира. 2-й — правила её обновления. 3-й — правила смены правил.</div><div class="g-def" data-lang="en">A level of the architecture. 1st = world model. 2nd = update rules. 3rd = meta-rules to change the rules themselves.</div></div>
+<div class="g-item" data-term="primitive"><span class="g-term" data-lang="ru">Примитив</span><span class="g-term" data-lang="en">Primitive</span><div class="g-def" data-lang="ru">Самая маленькая операция, неделимая. Как атом для химии.</div><div class="g-def" data-lang="en">The smallest indivisible operation. Like an atom in chemistry.</div></div>
+<div class="g-item" data-term="invariant"><span class="g-term" data-lang="ru">Инвариант</span><span class="g-term" data-lang="en">Invariant</span><div class="g-def" data-lang="ru">Правило, которое никогда нельзя нарушать. Если нарушил — система сломается.</div><div class="g-def" data-lang="en">A rule that must never be broken. Break it and the system breaks.</div></div>
+<div class="g-item" data-term="amse"><span class="g-term" data-lang="ru">AMSE</span><span class="g-term" data-lang="en">AMSE</span><div class="g-def" data-lang="ru">Adaptive Meaning Synchronization Engine — протокол, гарантирующий, что смысл передан, а не просто слова.</div><div class="g-def" data-lang="en">Adaptive Meaning Synchronization Engine — a protocol ensuring meaning is transmitted, not just words.</div></div>
+<div class="g-item" data-term="guard"><span class="g-term" data-lang="ru">Guard (Страж)</span><span class="g-term" data-lang="en">Guard</span><div class="g-def" data-lang="ru">Механизм безопасности: ни одно действие не происходит без проверки. Как телохранитель для кода.</div><div class="g-def" data-lang="en">A security mechanism: no action without verification. Like a bodyguard for the code.</div></div>
+<div class="g-item" data-term="sync"><span class="g-term" data-lang="ru">Синхронизация</span><span class="g-term" data-lang="en">Synchronization</span><div class="g-def" data-lang="ru">Совпадение модели с реальностью. То, что система думает = то, что есть на самом деле.</div><div class="g-def" data-lang="en">When the model matches reality. What the system thinks = what actually is.</div></div>
+<div class="g-item" data-term="sce"><span class="g-term" data-lang="ru">Self-Consistent Engine</span><span class="g-term" data-lang="en">Self-Consistent Engine</span><div class="g-def" data-lang="ru">Главный цикл: наблюдает → ищет противоречия → исправляет → проверяет. Без остановки.</div><div class="g-def" data-lang="en">The main cycle: observe → find contradictions → fix → verify. Runs continuously.</div></div>
+<div class="g-item" data-term="ni"><span class="g-term" data-lang="ru">Negative Intelligence</span><span class="g-term" data-lang="en">Negative Intelligence</span><div class="g-def" data-lang="ru">Часть системы, чья работа — найти ошибку в любой гипотезе. Встроенный адвокат дьявола.</div><div class="g-def" data-lang="en">The part whose sole job is to find flaws in any hypothesis. A built-in devil's advocate.</div></div>
+<div class="g-item" data-term="selfref"><span class="g-term" data-lang="ru">Самоприменение</span><span class="g-term" data-lang="en">Self-application</span><div class="g-def" data-lang="ru">Система применяет правила к себе. Как человек, анализирующий собственное мышление.</div><div class="g-def" data-lang="en">The system applies its rules to itself. Like a person analyzing their own thinking.</div></div>
+<div class="g-item" data-term="emerge"><span class="g-term" data-lang="ru">Эмерджентность</span><span class="g-term" data-lang="en">Emergence</span><div class="g-def" data-lang="ru">Сложное свойство из простых частей. Вода мокрая, хотя H₂O по отдельности — нет.</div><div class="g-def" data-lang="en">Complex properties from simple parts. Water is wet, but individual H₂O molecules are not.</div></div>
 </div>
 
-<h2>I. О чём это</h2>
-<p>Мы 14 раз построили интеллектуальную систему, проверили её на прочность, нашли слабые места и перестроили заново. Каждый раз — проверка на разных науках: физика, психология, биология, экономика, математика, информатика. То, что выдержало 14 таких раундов, — и есть IAC/AMSE.</p>
+<!-- ========== I. О ЧЁМ ЭТО ========== -->
+<h2 class="s">
+  <span data-lang="ru">I. О чём это</span>
+  <span data-lang="en">I. What this is about</span>
+</h2>
+<p class="s">
+  <span data-lang="ru">Мы 14 раз построили интеллектуальную систему, проверили её на прочность, нашли слабые места и перестроили заново. Каждый раз — проверка на разных науках: физика, психология, биология, экономика, математика, информатика. То, что выдержало 14 раундов — и есть IAC/AMSE.</span>
+  <span data-lang="en">We built an intelligent system 14 times, stress-tested it, found weak points, and rebuilt it from scratch. Each time against different sciences: physics, psychology, biology, economics, math, computer science. What survived 14 rounds — that is IAC/AMSE.</span>
+</p>
+<p class="s">
+  <span data-lang="ru">Это <span class="hl">не философия</span>. Это архитектура, которая работает в коде (<span class="hl">live.py</span>, 32 инструмента). Её можно запустить, проверить и сломать. Если сломается — будет цикл 15.</span>
+  <span data-lang="en">This is <span class="hl">not philosophy</span>. It is a working architecture in code (<span class="hl">live.py</span>, 32 tools). You can run it, test it, and break it. If it breaks — cycle 15 begins.</span>
+</p>
 
-<p>Это <span class="hl">не философия</span>. Это архитектура, которая работает в коде (<span class="hl">live.py</span>, 32 инструмента). Её можно запустить, проверить и сломать. Если она сломается — будет цикл 15.</p>
+<!-- ========== II. ТРИ СЛОЯ ========== -->
+<h2 class="s">
+  <span data-lang="ru">II. Три слоя</span>
+  <span data-lang="en">II. Three layers</span>
+</h2>
+<p class="s">
+  <span data-lang="ru">Любая система, способная учиться и меняться, должна иметь три уровня. Представь компанию:</span>
+  <span data-lang="en">Any system that can learn and change needs three levels. Imagine a company:</span>
+</p>
+<div class="cd s">
+<div class="t">
+  <span data-lang="ru">Аналогия: компания</span>
+  <span data-lang="en">Analogy: a company</span>
+</div>
+<div class="d">
+  <b data-lang="ru">Слой 1 (Representation) — отдел продаж:</b><b data-lang="en">Layer 1 (Representation) — sales:</b> <span data-lang="ru">знает, что происходит на рынке сейчас.</span><span data-lang="en">knows what is happening in the market right now.</span><br>
+  <b data-lang="ru">Слой 2 (Transformation) — менеджмент:</b><b data-lang="en">Layer 2 (Transformation) — management:</b> <span data-lang="ru">решает, как изменить действия отдела продаж.</span><span data-lang="en">decides how to change sales actions when the market shifts.</span><br>
+  <b data-lang="ru">Слой 3 (Meta-Transformation) — совет директоров:</b><b data-lang="en">Layer 3 (Meta-Transformation) — board of directors:</b> <span data-lang="ru">меняет саму структуру менеджмента.</span><span data-lang="en">changes the structure of management itself.</span>
+</div>
+</div>
+<p class="s">
+  <span data-lang="ru"><span class="hl">Три слоя — минимум для вечной адаптации.</span></span>
+  <span data-lang="en"><span class="hl">Three layers is the minimum for perpetual adaptation.</span></span>
+</p>
 
-<h2>II. Три слоя</h2>
-<p>Любая система, способная учиться и меняться, должна иметь три уровня. Представь компанию:</p>
+<!-- ========== III. ПЯТЬ ПРИМИТИВОВ ========== -->
+<h2 class="s">
+  <span data-lang="ru">III. Пять примитивов</span>
+  <span data-lang="en">III. Five primitives</span>
+</h2>
+<p class="s">
+  <span data-lang="ru">Пять операций, которые не сводятся к более простым. Как пять нот, из которых состоит любая мелодия:</span>
+  <span data-lang="en">Five operations that cannot be reduced further. Like five notes that make every melody:</span>
+</p>
+<div class="pr s"><div class="i">≠</div><div class="c"><div class="t" data-lang="ru">Различение — отличить X от Y</div><div class="t" data-lang="en">Distinction — tell X from Y</div><div class="d" data-lang="ru"><b>Пример:</b> горячее ≠ холодное, сигнал ≠ шум.</div><div class="d" data-lang="en"><b>Example:</b> hot ≠ cold, signal ≠ noise.</div></div></div>
+<div class="pr s"><div class="i">∘</div><div class="c"><div class="t" data-lang="ru">Композиция — сделать A, потом B</div><div class="t" data-lang="en">Composition — do A, then B</div><div class="d" data-lang="ru"><b>Пример:</b> включить зажигание, потом нажать газ. Из этого рождается время.</div><div class="d" data-lang="en"><b>Example:</b> turn the key, then press the gas. This creates time and causality.</div></div></div>
+<div class="pr s"><div class="i">⊗</div><div class="c"><div class="t" data-lang="ru">Тензор — делать A и B одновременно</div><div class="t" data-lang="en">Tensor — do A and B simultaneously</div><div class="d" data-lang="ru"><b>Пример:</b> дышать и смотреть по сторонам. Рождает пространство.</div><div class="d" data-lang="en"><b>Example:</b> breathe and look around simultaneously. Creates space.</div></div></div>
+<div class="pr s"><div class="i">μ</div><div class="c"><div class="t" data-lang="ru">Петля — применить правило к себе</div><div class="t" data-lang="en">Loop — apply a rule to itself</div><div class="d" data-lang="ru"><b>Пример:</b> «Подумай о том, как ты думаешь». Рефлексия, обратная связь.</div><div class="d" data-lang="en"><b>Example:</b> "Think about how you think." Reflection, feedback.</div></div></div>
+<div class="pr s"><div class="i">⊣</div><div class="c"><div class="t" data-lang="ru">Сопряжение — связать наблюдение и действие</div><div class="t" data-lang="en">Adjoint — link observation to action</div><div class="d" data-lang="ru"><b>Пример:</b> увидел красный свет → нажал на тормоз. Мост между тем, что система видит, и что делает.</div><div class="d" data-lang="en"><b>Example:</b> see red light → press brake. The bridge between seeing and doing.</div></div></div>
+<p class="qt s">
+  <span data-lang="ru">Синхронизация — не отдельная операция. Она возникает сама, когда все пять примитивов работают согласованно. Как из правильных нот возникает мелодия.</span>
+  <span data-lang="en">Synchronization is not a separate operation. It emerges when all five primitives work in harmony — like a melody from the right notes.</span>
+</p>
 
-<div class="cd">
-<div class="t">Аналогия: компания</div>
-<div class="d"><b>Слой 1 (Representation) — отдел продаж:</b> знает, что происходит на рынке сейчас. Текущая картина мира.<br>
-<b>Слой 2 (Transformation) — менеджмент:</b> решает, как изменить действия отдела продаж, когда рынок меняется.<br>
-<b>Слой 3 (Meta-Transformation) — совет директоров:</b> меняет саму структуру менеджмента, когда старые методы перестают работать.</div>
+<!-- ========== IV. AMSE ========== -->
+<h2 class="s">
+  <span data-lang="ru">IV. AMSE — как передать смысл, а не просто слова</span>
+  <span data-lang="en">IV. AMSE — how to transmit meaning, not just words</span>
+</h2>
+<p class="s">
+  <span data-lang="ru">Большинство систем передают информацию. Проблема: информацию можно передать, но не быть понятым.</span>
+  <span data-lang="en">Most systems transmit information. The problem: information can be sent without being understood.</span>
+</p>
+<p class="s">
+  <span data-lang="ru">Представь, что ты объясняешь физику ребёнку и профессору. Ты говоришь по-разному, но ядро — то же. <span class="hl">Это и есть AMSE.</span></span>
+  <span data-lang="en">Imagine explaining physics to a child and to a professor. You speak differently, but the core is the same. <span class="hl">That is AMSE.</span></span>
+</p>
+<div class="pr s"><div class="i">1</div><div class="c"><div class="t" data-lang="ru">Analyze — понять, что на самом деле нужно</div><div class="t" data-lang="en">Analyze — understand what is truly needed</div><div class="d" data-lang="ru">Не «что спросили», а «что должно измениться в понимании».</div><div class="d" data-lang="en">Not "what was asked", but "what must change in their understanding".</div></div></div>
+<div class="pr s"><div class="i">2</div><div class="c"><div class="t" data-lang="ru">Compress Core — найти суть</div><div class="t" data-lang="en">Compress Core — find the essence</div><div class="d" data-lang="ru">Выжать лишнее. От целого поля — к одному слову.</div><div class="d" data-lang="en">Squeeze out everything unnecessary. From a whole field down to one word.</div></div></div>
+<div class="pr s"><div class="i">3</div><div class="c"><div class="t" data-lang="ru">Model Receiver — понять, кому говоришь</div><div class="t" data-lang="en">Model Receiver — understand who you are speaking to</div><div class="d" data-lang="ru">Что этот человек уже знает? В каком он состоянии?</div><div class="d" data-lang="en">What does this person already know? What is their state?</div></div></div>
+<div class="pr s"><div class="i">4</div><div class="c"><div class="t" data-lang="ru">Select Form — выбрать форму</div><div class="t" data-lang="en">Select Form — choose the right form</div><div class="d" data-lang="ru">Слово, пример, метафора, формула, диалог. Ребёнку — сказка, инженеру — чертёж.</div><div class="d" data-lang="en">Word, example, metaphor, formula, dialogue. For a child — a story, for an engineer — a blueprint.</div></div></div>
+<div class="pr s"><div class="i">5</div><div class="c"><div class="t" data-lang="ru">Dynamic Depth — подстроиться</div><div class="t" data-lang="en">Dynamic Depth — adjust on the fly</div><div class="d" data-lang="ru">Если не понял — добавь деталей. Если понял — сожми до сути.</div><div class="d" data-lang="en">If not understood — add detail. If understood — compress to essence.</div></div></div>
+<div class="pr s"><div class="i">6</div><div class="c"><div class="t" data-lang="ru">Sync Check — проверить</div><div class="t" data-lang="en">Sync Check — verify</div><div class="d" data-lang="ru">Не «ты понял?», а «расскажи своими словами».</div><div class="d" data-lang="en">Not "do you understand?", but "can you explain it in your own words?".</div></div></div>
+
+<!-- ========== V. GUARD ========== -->
+<h2 class="s">
+  <span data-lang="ru">V. Guard — защита от поломок</span>
+  <span data-lang="en">V. Guard — protection against failure</span>
+</h2>
+<div class="pr s"><div class="i">1</div><div class="c"><div class="t" data-lang="ru">Ничего без разрешения</div><div class="t" data-lang="en">Nothing without permission</div><div class="d" data-lang="ru">Система не делает ничего без явной команды.</div><div class="d" data-lang="en">The system does nothing without an explicit command.</div></div></div>
+<div class="pr s"><div class="i">2</div><div class="c"><div class="t" data-lang="ru">Не трогать чужое</div><div class="t" data-lang="en">Don't touch what isn't yours</div><div class="d" data-lang="ru">Если задача — открыть файл A, система не трогает файл B.</div><div class="d" data-lang="en">If the task is to open file A, the system does not touch file B.</div></div></div>
+<div class="pr s"><div class="i">3</div><div class="c"><div class="t" data-lang="ru">Сделал — проверь</div><div class="t" data-lang="en">Done — verify</div><div class="d" data-lang="ru">После каждого изменения убедись, что всё работает. Не доверяй, проверяй.</div><div class="d" data-lang="en">After every change, verify it works. Trust but verify — actually, just verify.</div></div></div>
+<div class="pr s"><div class="i">4</div><div class="c"><div class="t" data-lang="ru">Всё — гипотеза, не истина</div><div class="t" data-lang="en">Everything is a hypothesis, not truth</div><div class="d" data-lang="ru">Три слоя, пять примитивов — лучшее, что мы нашли. Завтра может оказаться иначе.</div><div class="d" data-lang="en">Three layers, five primitives — the best we have found. Tomorrow it could be different.</div></div></div>
+
+<!-- ========== VI. ИНВАРИАНТЫ ========== -->
+<h2 class="s">
+  <span data-lang="ru">VI. Четыре железных правила (инварианты)</span>
+  <span data-lang="en">VI. Four iron rules (invariants)</span>
+</h2>
+<div class="pr s"><div class="i">031</div><div class="c"><div class="t" data-lang="ru">Ядро — не инструмент</div><div class="t" data-lang="en">The core is not a tool</div><div class="d" data-lang="ru">Главный механизм нельзя загрузить как обычную программу. Как сердце — его нельзя «добавить» к телу.</div><div class="d" data-lang="en">The core mechanism cannot be loaded like a regular program. Like a heart — you cannot "add" it to a body.</div></div></div>
+<div class="pr s"><div class="i">032</div><div class="c"><div class="t" data-lang="ru">Страж одинаков для всех</div><div class="t" data-lang="en">The guard applies to all</div><div class="d" data-lang="ru">Guard проверяет каждое действие. Нет «доверенных» модулей. Все равны.</div><div class="d" data-lang="en">Guard checks every action. No "trusted" modules. All are equal.</div></div></div>
+<div class="pr s"><div class="i">033</div><div class="c"><div class="t" data-lang="ru">Любая деталь может быть ошибкой</div><div class="t" data-lang="en">Any detail can be an error</div><div class="d" data-lang="ru">Проверять всё. Даже то, что работало вчера, может сломаться сегодня.</div><div class="d" data-lang="en">Verify everything. Even what worked yesterday may break today.</div></div></div>
+<div class="pr s"><div class="i">034</div><div class="c"><div class="t" data-lang="ru">Каждый ответ — синхронизация смысла</div><div class="t" data-lang="en">Every response is meaning synchronization</div><div class="d" data-lang="ru">Если смысл не передан — ответ не состоялся.</div><div class="d" data-lang="en">If meaning is not transmitted, the response did not happen.</div></div></div>
+
+<!-- ========== VII. ЧТО МЫ НЕ ДЕЛАЕМ ========== -->
+<h2 class="s">
+  <span data-lang="ru">VII. Что мы не делаем</span>
+  <span data-lang="en">VII. What we do not do</span>
+</h2>
+<p class="s">
+  <span data-lang="ru">Мы строим <span class="hl">детектор устойчивых закономерностей</span>. Систему, которая находит повторяющиеся паттерны в потоке данных, проверяет их на прочность (Negative Intelligence), и перестраивает себя, когда паттерн разрушен.</span>
+  <span data-lang="en">We build a <span class="hl">stable pattern detector</span>. A system that finds recurring patterns in the data stream, stress-tests them (Negative Intelligence), and rebuilds itself when a pattern breaks.</span>
+</p>
+<p class="s">
+  <span data-lang="ru">Сознание, интеллект, понимание — <span class="hl">побочный продукт</span> правильно работающей архитектуры. Как тепло — не цель двигателя, но он всё равно греется.</span>
+  <span data-lang="en">Consciousness, intelligence, understanding — <span class="hl">a byproduct</span> of a properly working architecture. Like heat from an engine — not its purpose, but unavoidable.</span>
+</p>
+
+<!-- ========== VIII. ЧЕТЫРЕ ПРИНЦИПА ========== -->
+<h2 class="s">
+  <span data-lang="ru">VIII. Четыре принципа, которые нельзя забыть</span>
+  <span data-lang="en">VIII. Four principles to never forget</span>
+</h2>
+<div class="cd s">
+<div class="d">
+  <b data-lang="ru">1. Нет мусора.</b><b data-lang="en">1. No junk.</b> <span data-lang="ru">Любая информация может оказаться важной.</span><span data-lang="en">Any piece of information may turn out to be critical.</span><br><br>
+  <b data-lang="ru">2. Числа — не истина.</b><b data-lang="en">2. Numbers are not truth.</b> <span data-lang="ru">3 слоя, 5 примитивов — лучшее, что мы нашли СЕГОДНЯ.</span><span data-lang="en">3 layers, 5 primitives — the best we found TODAY.</span><br><br>
+  <b data-lang="ru">3. Наш мир — не истина.</b><b data-lang="en">3. Our universe is not truth.</b> <span data-lang="ru">Паттерны могут работать только в нашей вселенной.</span><span data-lang="en">Patterns may only work in our specific universe.</span><br><br>
+  <b data-lang="ru">4. Любая модель — неточна.</b><b data-lang="en">4. Every model is imprecise.</b> <span data-lang="ru">Включая эту.</span><span data-lang="en">Including this one.</span>
+</div>
 </div>
 
-<p>Двух уровней мало: если совет директоров не может сменить менеджмент — компания умрёт при кризисе. Четыре — избыточно: совет директоров может сам себя реорганизовать, внешний наблюдатель не нужен.</p>
-
-<p><span class="hl">Три слоя — минимум для вечной адаптации.</span></p>
-
-<h2>III. Пять примитивов</h2>
-<p>Мы нашли пять операций, которые не сводятся к более простым. Всё, что делает любая система, — комбинация этих пяти. Как пять нот, из которых состоит любая мелодия:</p>
-
-<div class="pr"><div class="i">≠</div><div class="c"><div class="t">Различение — отличить X от Y</div><div class="d"><b>Пример:</b> горячее ≠ холодное, сигнал ≠ шум, я ≠ не-я. Без этого шага нет никакой информации — только шум. В коде: if/else. В мозге: нейрон решил, сработать или нет. В физике: само измерение.</div></div></div>
-<div class="pr"><div class="i">∘</div><div class="c"><div class="t">Композиция — сделать A, потом B</div><div class="d"><b>Пример:</b> сначала включить зажигание, потом нажать газ. Из этого рождается время и причинность: одно событие ведёт к другому. В коде: вызов функции. В мышлении: цепочка рассуждений.</div></div></div>
-<div class="pr"><div class="i">⊗</div><div class="c"><div class="t">Тензор — делать A и B одновременно</div><div class="d"><b>Пример:</b> дышать и одновременно смотреть по сторонам. Из этого рождается пространство: два независимых процесса могут идти параллельно. В коде: многопоточность. В мозге: обработка зрения и слуха одновременно.</div></div></div>
-<div class="pr"><div class="i">μ</div><div class="c"><div class="t">Петля — применить правило к самому себе</div><div class="d"><b>Пример:</b> «Подумай о том, как ты думаешь». Рефлексия, самоанализ, обратная связь. Без петли система не может учиться на своих ошибках. В коде: рекурсия. В жизни: вывести формулу → проверить на практике → уточнить формулу.</div></div></div>
-<div class="pr"><div class="i">⊣</div><div class="c"><div class="t">Сопряжение — связать наблюдение и действие</div><div class="d"><b>Пример:</b> увидел красный свет (наблюдение) → нажал на тормоз (действие). Мост между тем, что система видит, и тем, что она делает. В коде: API. В науке: теория и эксперимент.</div></div></div>
-
-<p class="qt">Синхронизация — не отдельная операция. Она возникает сама, когда все пять примитивов работают согласованно. Как из правильных нот возникает мелодия.</p>
-
-<h2>IV. AMSE — как передать смысл, а не просто слова</h2>
-<p>Большинство систем передают информацию. Проблема: информацию можно передать, но не быть понятым. Мы сделали протокол, который гарантирует, что смысл действительно дошёл.</p>
-
-<p>Представь, что ты объясняешь физику ребёнку и профессору. Ты не говоришь одно и то же — ты меняешь форму, глубину, слова. Но ядро (то, что ты хочешь объяснить) — то же самое. <span class="hl">Это и есть AMSE.</span></p>
-
-<p>Шесть шагов AMSE:</p>
-<div class="pr"><div class="i">1</div><div class="c"><div class="t">Analyze — понять, что на самом деле нужно</div><div class="d">Не «что спросили», а «что должно измениться в понимании».</div></div></div>
-<div class="pr"><div class="i">2</div><div class="c"><div class="t">Compress Core — найти суть</div><div class="d">Выжать всё лишнее. Оставить только то, без чего смысл теряется. От целого поля — к одному слову.</div></div></div>
-<div class="pr"><div class="i">3</div><div class="c"><div class="t">Model Receiver — понять, кому говоришь</div><div class="d">Что этот человек уже знает? В каком он состоянии? Что ему понятно, а что нет?</div></div></div>
-<div class="pr"><div class="i">4</div><div class="c"><div class="t">Select Form — выбрать форму</div><div class="d">Слово, пример, метафора, формула, диалог. Для ребёнка — сказка, для инженера — чертёж.</div></div></div>
-<div class="pr"><div class="i">5</div><div class="c"><div class="t">Dynamic Depth — подстроиться</div><div class="d">Если не понял — добавь деталей. Если понял — сожми до сути.</div></div></div>
-<div class="pr"><div class="i">6</div><div class="c"><div class="t">Sync Check — проверить</div><div class="d">Не «ты понял?» (скажут «да» из вежливости). А «можешь объяснить своими словами?»</div></div></div>
-
-<p>Этот протокол работает не только для людей. Нейроны синхронизируют смысл. Организации — тоже. Разные AI-агенты — тоже. <span class="hl">Это универсальный механизм любого взаимопонимания.</span></p>
-
-<h2>V. Guard — защита от поломок</h2>
-<p>Четыре правила безопасности, встроенные в каждый шаг:</p>
-<div class="pr"><div class="i">1</div><div class="c"><div class="t">Ничего без разрешения</div><div class="d">Система не делает ничего, пока не получит явную команду. Никакой самодеятельности.</div></div></div>
-<div class="pr"><div class="i">2</div><div class="c"><div class="t">Не трогать чужое</div><div class="d">Если задача — открыть файл A, система не трогает файл B, даже если он рядом.</div></div></div>
-<div class="pr"><div class="i">3</div><div class="c"><div class="t">Сделал — проверь</div><div class="d">После каждого изменения — убедись, что всё работает. Не доверяй, проверяй.</div></div></div>
-<div class="pr"><div class="i">4</div><div class="c"><div class="t">Всё — догадка, не истина</div><div class="d">Три слоя, пять примитивов, 14 циклов — это лучшее, что мы нашли. Но завтра может оказаться, что нужно два слоя. Система обязана быть готовой перестроиться.</div></div></div>
-
-<h2>VI. Четыре железных правила (инварианты)</h2>
-<p>Эти правила нельзя нарушить. Если нарушить — система перестанет быть собой:</p>
-<div class="pr"><div class="i">031</div><div class="c"><div class="t">Ядро — не инструмент</div><div class="d">Главный механизм нельзя загрузить как обычную программу. Он — то, что загружает программы. Как сердце: его нельзя «добавить» к телу, оно должно быть внутри с самого начала.</div></div></div>
-<div class="pr"><div class="i">032</div><div class="c"><div class="t">Страж одинаков для всех</div><div class="d">Guard проверяет каждое действие. Нет «доверенных» модулей, освобождённых от проверки. Все равны перед законом.</div></div></div>
-<div class="pr"><div class="i">033</div><div class="c"><div class="t">Любая деталь может быть ошибкой</div><div class="d">Проверять всё. Доверять только после проверки. Даже то, что работало вчера, может сломаться сегодня.</div></div></div>
-<div class="pr"><div class="i">034</div><div class="c"><div class="t">Каждый ответ — синхронизация смысла</div><div class="d">Нет «просто ответа». Есть попытка изменить модель реальности у того, кто спрашивает. Если смысл не передан — ответ не состоялся.</div></div></div>
-
-<h2>VII. Что мы не делаем</h2>
-<p>Мы не строим «искусственный интеллект» в голливудском смысле. Мы не делаем робота с чувствами. Мы не имитируем человека.</p>
-<p>Мы строим <span class="hl">детектор устойчивых закономерностей</span>. Систему, которая находит повторяющиеся паттерны в потоке данных, проверяет их на прочность (специальный модуль — Negative Intelligence — пытается их опровергнуть) и перестраивает себя, когда паттерн разрушен.</p>
-<p>Сознание, интеллект, понимание — <span class="hl">не цель</span>. Они — <span class="hl">побочный продукт</span> правильно работающей архитектуры. Как тепло — не цель работы двигателя, но он всё равно греется.</p>
-
-<h2>VIII. Четыре принципа, которые нельзя забыть</h2>
-<div class="cd">
-<div class="t">Встроено в архитектуру навсегда</div>
-<div class="d"><b>1. Нет мусора.</b> Любая информация может оказаться важной. Если кажется, что данные бесполезны — значит, мы просто не знаем, как их правильно разложить.<br><br>
-<b>2. Числа — не истина.</b> 3 слоя, 5 примитивов — это лучшее, что мы нашли СЕГОДНЯ. Завтра может оказаться, что слоёв 2 или 7. Архитектура должна это выдержать.<br><br>
-<b>3. Наш мир — не истина.</b> Паттерны, которые мы видим, могут работать только в нашей вселенной. Это рабочая гипотеза, а не абсолют.<br><br>
-<b>4. Любая модель — неточна.</b> Включая эту. Даже этот принцип — не истина, а инструмент.</div>
-</div>
-
-<h2>IX. Что осталось после 14 циклов</h2>
-<p>После того, как ты 14 раз разрушил свою систему, пересобрал её и проверил на физике, психологии, биологии, экономике, математике и программировании — остаётся немногое.</p>
-
-<p><span class="hl">Пять примитивов.</span> Три слоя. Четыре инварианта. Один протокол синхронизации. Один страж.</p>
-
-<p>Всё остальное — детали, форматы, интерфейсы — можно заменить. Архитектуру — нет. Пока не появится противоречие, которое она не сможет разрешить.</p>
-
-<p class="qt">Тогда будет цикл 15.</p>
+<!-- ========== IX. ЧТО ОСТАЛОСЬ ========== -->
+<h2 class="s">
+  <span data-lang="ru">IX. Что осталось после 14 циклов</span>
+  <span data-lang="en">IX. What remains after 14 cycles</span>
+</h2>
+<p class="s">
+  <span data-lang="ru"><span class="hl">Пять примитивов.</span> Три слоя. Четыре инварианта. Один протокол. Один страж.</span>
+  <span data-lang="en"><span class="hl">Five primitives.</span> Three layers. Four invariants. One protocol. One guard.</span>
+</p>
+<p class="s">
+  <span data-lang="ru">Всё остальное — детали, форматы, интерфейсы — можно заменить. Архитектуру — нет. Пока не появится противоречие, которое она не сможет разрешить.</span>
+  <span data-lang="en">Everything else — details, formats, interfaces — can be replaced. The architecture cannot. Until a contradiction appears that it cannot resolve.</span>
+</p>
+<p class="qt s">
+  <span data-lang="ru">Тогда будет цикл 15.</span>
+  <span data-lang="en">Then cycle 15 will begin.</span>
+</p>
 
 <div class="ft">
-<p><a href="../research/">⬆ Исследование</a> · <a href="theory_of_everything_iac.html">Теория всего →</a></p>
-<p style="margin-top:6px;font-size:.85em;color:#444466">IAC/AMSE v14 · 19 июля 2026 · IP: Zenodo 10.5281/zenodo.21209447</p>
+  <p><a href="./" data-lang="ru">⬆ Исследование</a><a href="./" data-lang="en">⬆ Research</a> · <a href="theory_of_everything_iac.html" data-lang="ru">Теория всего →</a><a href="theory_of_everything_iac.html" data-lang="en">Theory of Everything →</a></p>
+  <p style="margin-top:6px;font-size:.85em;color:#444466">IAC/AMSE v14 · 19 Jul 2026 · Zenodo 10.5281/zenodo.21209447</p>
 </div>
 
 </div>
+
+<script>
+// === HIDDEN NON-VERBAL TEST: auto-detect language ===
+(function(){
+  const signals = [];
+  
+  // Signal 1: navigator.language
+  const navLang = navigator.language || '';
+  signals.push(navLang.startsWith('ru') ? 'ru' : 'en');
+  
+  // Signal 2: navigator.languages
+  if (navigator.languages && navigator.languages.length) {
+    const preferred = navigator.languages[0] || '';
+    signals.push(preferred.startsWith('ru') ? 'ru' : 'en');
+  }
+  
+  // Signal 3: Intl locale
+  try {
+    const locale = Intl.DateTimeFormat().resolvedOptions().locale || '';
+    signals.push(locale.startsWith('ru') ? 'ru' : 'en');
+  } catch(e) {}
+  
+  // Signal 4: timezone (Russia = UTC+3..+12)
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    const moscow = ['Europe/Moscow','Europe/Kaliningrad','Europe/Samara','Europe/Volgograd','Asia/Yekaterinburg','Asia/Novosibirsk','Asia/Krasnoyarsk','Asia/Irkutsk','Asia/Yakutsk','Asia/Vladivostok','Asia/Kamchatka','Asia/Magadan','Asia/Sakhalin','Asia/Chita','Asia/Omsk','Asia/Tomsk','Asia/Barnaul','Asia/Novokuznetsk'];
+    signals.push(moscow.includes(tz) ? 'ru' : (tz ? 'en' : null));
+  } catch(e) {}
+  
+  // Signal 5: keyboard layout hint (if available as cookie or meta)
+  // Skip — not available in browser
+  
+  // Weighted vote
+  const ruCount = signals.filter(s => s === 'ru').length;
+  const enCount = signals.filter(s => s === 'en').length;
+  const lang = (ruCount >= enCount) ? 'ru' : 'en';
+  
+  document.documentElement.setAttribute('data-lang', lang);
+  
+  // Update UI dots
+  document.querySelectorAll('.lang-dot').forEach(d => {
+    d.classList.toggle('active', d.getAttribute('data-lang') === lang);
+  });
+  
+  // Hint text
+  const hint = document.getElementById('langHint');
+  if (hint) hint.textContent = lang === 'ru' ? 'язык: рус' : 'lang: en';
+  
+  // === Non-verbal adaptive test: track scroll behavior ===
+  let scrollEvents = 0;
+  let deepScroll = false;
+  let timer = null;
+  
+  window.addEventListener('scroll', function(){
+    if (!timer) {
+      timer = setTimeout(function(){
+        timer = null;
+        scrollEvents++;
+        const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        if (scrollPct > 0.3) deepScroll = true;
+        
+        // If deep scroll + few events = reading comfortably (correct language)
+        // If many scroll events + low depth = maybe struggling (wrong language?)
+        // This is a silent observation — no action taken, just data
+      }, 300);
+    }
+  }, {passive: true});
+  
+  // Store test result in data attribute
+  document.documentElement.setAttribute('data-scroll-behavior', 'observing');
+  
+  // Expose switch function
+  window.switchLang = function(l) {
+    document.documentElement.setAttribute('data-lang', l);
+    document.querySelectorAll('.lang-dot').forEach(d => {
+      d.classList.toggle('active', d.getAttribute('data-lang') === l);
+    });
+    const h = document.getElementById('langHint');
+    if (h) h.textContent = l === 'ru' ? 'язык: рус' : 'lang: en';
+  };
+})();
+
+// === LANGUAGE TOGGLE ===
+document.querySelectorAll('.lang-dot').forEach(dot => {
+  dot.addEventListener('click', function(){
+    const lang = this.getAttribute('data-lang');
+    window.switchLang(lang);
+  });
+  dot.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const lang = this.getAttribute('data-lang');
+      window.switchLang(lang);
+    }
+  });
+});
+
+// === INTERACTIVE GLOSSARY ===
+document.querySelectorAll('.gloss .g-item').forEach(item => {
+  item.addEventListener('click', function(){
+    this.classList.toggle('open');
+  });
+});
+
+// === SCROLL FADE-IN (Intersection Observer) ===
+(function(){
+  if (!window.IntersectionObserver) {
+    document.querySelectorAll('.s').forEach(el => el.classList.add('vis'));
+    return;
+  }
+  const observer = new IntersectionObserver(function(entries){
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('vis');
+        // Optional: stop observing after reveal
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -50px 0px'});
+  
+  document.querySelectorAll('.s').forEach(el => observer.observe(el));
+})();
+
+// === COUNT-UP ANIMATION ===
+(function(){
+  const counters = document.querySelectorAll('.cn');
+  if (!counters.length) return;
+  
+  const countObserver = new IntersectionObserver(function(entries){
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        if (isNaN(target)) return;
+        
+        const duration = 1200;
+        const start = performance.now();
+        
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // easeOutCubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * target);
+          el.textContent = current;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+        countObserver.unobserve(el);
+      }
+    });
+  }, {threshold: 0.5});
+  
+  counters.forEach(el => countObserver.observe(el));
+})();
+
+// === PROGRESS BAR ===
+(function(){
+  const bar = document.getElementById('progress');
+  if (!bar) return;
+  window.addEventListener('scroll', function(){
+    const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    bar.style.width = Math.min(scrollPct * 100, 100) + '%';
+  }, {passive: true});
+})();
+
+// === FOOTER TIMESTAMP ===
+(function(){
+  const now = new Date();
+  const formatted = now.toLocaleString(undefined, {dateStyle:'medium',timeStyle:'short'});
+  document.querySelectorAll('.ft').forEach(el => {
+    // Optional: add dynamic timestamp
+  });
+})();
+</script>
 </body>
 </html>
