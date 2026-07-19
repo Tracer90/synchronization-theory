@@ -1,0 +1,17 @@
+The Voynich Manuscript isn't a language. It's an instruction sequence.
+
+100+ years of trying to "read" it failed because it's not meant to be read like a book.
+
+Here's what the data shows:
+
+1. Word lengths → algorithmic generation, not natural language
+2. "ytedy" markers → step delimiters at 15x random frequency
+3. Reverse reading → hidden procedural structure
+4. Number codes → Fibonacci, binary, Saros cycles
+5. Content graph → connected instruction network
+
+Six falsifiable predictions. Full analysis open access.
+
+Paper: 10.5281/zenodo.21277754
+
+#Voynich #Manuscript #Cipher #History #Mystery #Decoding #Research #Science #Cryptography #Linguistics

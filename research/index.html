@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Исследование · Теория всего</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+body{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px 20px;font:17px/1.8 Georgia,serif;background:linear-gradient(-45deg,#050510,#0a0a2a,#111133,#050510);background-size:400% 400%;animation:bg 15s ease infinite;color:#d0d0e0}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(2px 2px at 20px 30px,#eee,transparent),radial-gradient(2px 2px at 40px 70px,#fff,transparent),radial-gradient(2px 2px at 50px 160px,#ddd,transparent),radial-gradient(2px 2px at 90px 40px,#fff,transparent),radial-gradient(2px 2px at 130px 80px,#fff,transparent),radial-gradient(2px 2px at 160px 30px,#ddd,transparent);background-size:200px 200px;opacity:.15;pointer-events:none;z-index:0}
+.c{position:relative;z-index:1}
+h1{font-size:clamp(2.2em,6vw,4em);margin-bottom:6px;letter-spacing:3px;background:linear-gradient(135deg,#ffd700,#ff6b6b,#cc88ff,#ffd700);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:bg 8s ease infinite}
+.sub{color:#8888bb;font-size:1em;margin-bottom:40px;max-width:600px;line-height:1.6}
+.lang{display:flex;gap:30px;flex-wrap:wrap;justify-content:center}
+.lang a{display:inline-block;background:rgba(255,255,255,.03);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:35px 50px;text-decoration:none;transition:all .3s cubic-bezier(.4,0,.2,1);min-width:220px}
+.lang a:hover{border-color:#ffd700;transform:translateY(-6px) scale(1.02);box-shadow:0 12px 40px rgba(255,215,0,.12);background:rgba(255,255,255,.06)}
+.lang .ico{font-size:3em;margin-bottom:14px;display:block}
+.lang .nm{color:#ffd700;font-size:1.4em;margin-bottom:4px;font-weight:700}
+.lang .ds{color:#9999bb;font-size:.85em;line-height:1.5}
+.ft{color:#555577;font-size:.8em;margin-top:50px;z-index:1;position:relative}
+</style>
+</head>
+<body>
+<div class="c">
+<h1>Исследование</h1>
+<p class="sub">Теория всего &middot; IAC/AMSE v14 &middot; Ось Перехода &middot; Voynich &middot; PTE &middot; AMSE Protocol</p>
+<div class="lang">
+<a href="ru/"><span class="ico">&#x1F1F7;&#x1F1FA;</span><div class="nm">Русский</div><div class="ds">Портал исследований</div></a>
+<a href="en/"><span class="ico">&#x1F30D;</span><div class="nm">English</div><div class="ds">Research portal</div></a>
+</div>
+</div>
+<div class="ft">Свободный доступ &middot; 19 июля 2026 &middot; IP: Zenodo 10.5281/zenodo.21209447 &middot; DOI Voynich: 10.5281/zenodo.21334854</div>
+</body>
+</html>

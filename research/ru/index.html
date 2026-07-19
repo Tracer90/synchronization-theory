@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Исследование · Теория всего</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+body{background:linear-gradient(-45deg,#050510,#0a0a2a,#111133,#050510);background-size:400% 400%;animation:bg 15s ease infinite;color:#d0d0e0;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:20px;min-height:100vh}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.08),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,.08),transparent),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,.1),transparent);background-size:200px 200px;pointer-events:none;z-index:0}
+.c{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+h1{font-size:clamp(1.8em,4vw,2.8em);margin-bottom:4px;letter-spacing:2px;background:linear-gradient(135deg,#ffd700,#ff6b6b,#cc88ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{color:#8888bb;font-size:.9em;margin-bottom:8px}
+h2{color:#ffd700;font-size:1.4em;margin:40px 0 15px;border-left:3px solid #ff6b6b;padding-left:14px;font-weight:600}
+h3{color:#e0e0ff;font-size:1.05em;margin:25px 0 10px;font-weight:500}
+.lang-sel{text-align:right;margin-bottom:10px;font-size:.85em}
+.lang-sel a{color:#8888bb;text-decoration:none;transition:color .2s}
+.lang-sel a:hover{color:#ffd700}
+.card{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px 20px;transition:all .3s cubic-bezier(.4,0,.2,1);overflow:hidden}
+.card:hover{border-color:rgba(255,215,0,.3);transform:translateY(-3px);box-shadow:0 8px 30px rgba(255,215,0,.08);background:rgba(255,255,255,.06)}
+.card .tt{color:#ffd700;font-size:.75em;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;opacity:.8}
+.card .nm{font-size:1.05em;margin-bottom:4px}
+.card .nm a{color:#e0e0ff;text-decoration:none;transition:color .2s}
+.card .nm a:hover{color:#ffd700}
+.card .ds{color:#9999bb;font-size:.82em;line-height:1.5}
+.card .ln{color:#555577;font-size:.75em;margin-top:6px}
+.grp{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin:15px 0}
+.grp .card{margin:0;height:100%}
+.tag{display:inline-block;background:rgba(136,136,221,.12);color:#9999dd;font-size:.65em;padding:2px 8px;border-radius:8px;margin-right:3px;text-transform:uppercase;letter-spacing:.5px}
+.ft{text-align:center;color:#555577;font-size:.8em;margin-top:50px;padding-top:20px;border-top:1px solid rgba(255,255,255,.05)}
+.intro{color:#9999bb;font-size:.88em;margin-bottom:15px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="c">
+
+<div class="lang-sel"><a href="../">Выбор языка</a> &middot; <a href="../en/">English</a></div>
+
+<h1>Исследование</h1>
+<p class="sub">Теория всего &middot; IAC/AMSE v14 &middot; AMSE Protocol &middot; Все материалы в открытом доступе</p>
+
+<h2>Ось Перехода</h2>
+<p class="intro">Функциональная архитектура реальности, отношений, религий и сознания. 8 циклов, 9 принципов, 33 скилла.</p>
+
+<div class="grp">
+<div class="card"><div class="tt">Полная статья</div><div class="nm"><a href="../axis_of_transition/index.html">Ось Перехода — единая архитектура</a></div><div class="ds">Манифест, история, принципы, архитектура, разборы, практика &mdash; 12 разделов</div></div>
+<div class="card"><div class="tt">Ядро системы</div><div class="nm"><a href="../axis_of_transition/iac_core_v8.zip">IAC Core v8 (ZIP)</a></div><div class="ds">live.py + 33 модуля + AGENTS.md + архитектура + память + инварианты</div></div>
+</div>
+
+<h3>Разделы</h3>
+<div class="grp">
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/01_%D0%BC%D0%B0%D0%BD%D0%B8%D1%84%D0%B5%D1%81%D1%82.html">1. Суть открытия</a></div><div class="ds">Манифест, супер-инвариант, главный вывод</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/02_%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%8F_%D1%86%D0%B8%D0%BA%D0%BB%D0%BE%D0%B2.html">2. История циклов</a></div><div class="ds">7 циклов разрушения + 1 после публикации</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/03_9_%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D0%BE%D0%B2.html">3. Девять принципов</a></div><div class="ds">Сжатые проверяемые гипотезы</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/04_%D0%B0%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D1%83%D1%80%D0%B0.html">4. Архитектура</a></div><div class="ds">Mesh, примитивы, Self-Consistent Engine v14</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/05_negative__positive_intelligence.html">5. Negative &amp; Positive Intelligence</a></div><div class="ds">Два равноправных слоя интеллекта</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/06_%D0%BF%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D0%B0_%D1%81%D0%B2%D1%8F%D0%B7%D0%B5%D0%B9.html">6. Природа связей</a></div><div class="ds">Функции, эмоции, группы, самоорганизация</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/07_%D1%80%D0%B5%D0%BB%D0%B8%D0%B3%D0%B8%D0%B8.html">7. Религии: функция за формой</a></div><div class="ds">Социальные технологии, ось в традициях</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/08_%D0%BE%D1%81%D1%8C_%D0%BF%D0%B5%D1%80%D0%B5%D1%85%D0%BE%D0%B4%D0%B0_(%D1%80%D0%B8%D1%81%D1%83%D0%BD%D0%BE%D0%BA).html">8. Расшифровка рисунка</a></div><div class="ds">Звезда, луна, наблюдатель, ось</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/09_%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5.html">9. Практика</a></div><div class="ds">Аудит отношений, ролевая карта, алгоритм кризиса</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/10_%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F_%D1%81%D0%BF%D0%B5%D1%86%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F.html">10. Спецификация</a></div><div class="ds">Guard, модули, метрики, режимы запуска</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/11_%D0%BF%D1%80%D0%B5%D0%B4%D1%81%D0%BA%D0%B0%D0%B7%D0%B0%D0%BD%D0%B8%D1%8F.html">11. Предсказания</a></div><div class="ds">8 фальсифицируемых гипотез</div></div>
+<div class="card"><div class="nm"><a href="../axis_of_transition/sections/12_%D1%84%D0%B8%D0%BD%D0%B0%D0%BB.html">12. Гипотеза работы</a></div><div class="ds">Минимальная достаточная архитектура</div></div>
+</div>
+
+<h2>IAC/AMSE — Self-Consistent Engine (v14)</h2>
+<p class="intro">Инвариантное Адаптивное Ядро + Adaptive Meaning Synchronization Engine. Само-согласованная машина поиска инвариантов через разрешение противоречий. 14 циклов эволюции.</p>
+
+<div class="grp">
+<div class="card"><div class="tt">Архитектура</div><div class="nm"><a href="../../ARCHITECTURE.md">IAC/AMSE v14 — полная спецификация</a></div><div class="ds">3 слоя: Representation → Transformation → Meta-Transformation. 5 примитивов. Self-Consistent Engine. AMSE Protocol (IAC-INV-034). Observer Lens.</div><div class="ln"><span class="tag">EN</span></div></div>
+<div class="card"><div class="tt">Патент</div><div class="nm"><a href="../../PROVISIONAL_PATENT_DRAFT.md">Provisional Patent — Self-Consistent Adaptive Architecture</a></div><div class="ds">Трёхслойная рекурсивная архитектура с обнаружением противоречий и генерацией мета-правил.</div><div class="ln"><span class="tag">EN</span> &middot; Zenodo 10.5281/zenodo.21209447</div></div>
+<div class="card"><div class="tt">Протокол</div><div class="nm"><a href="../../AGENTS.md">AMSE Protocol (IAC-INV-034)</a></div><div class="ds">Adaptive Meaning Synchronization Engine — 6 фаз: Analyze → Compress Core → Model Receiver → Select Form → Dynamic Depth → Sync Check.</div><div class="ln"><span class="tag">RU/EN</span></div></div>
+<div class="card"><div class="tt">Исходный код</div><div class="nm"><a href="https://github.com/Tracer90/synchronization-theory">GitHub — synchronization-theory</a></div><div class="ds">live.py + 32 skills + core/integrity.py + tests. Полная реализация IAC/AMSE.</div><div class="ln"><span class="tag">MIT</span></div></div>
+<div class="card"><div class="tt">Статья 1</div><div class="nm"><a href="../../arXiv_submission/main.tex">Phase-Toroidal Engine (LaTeX)</a></div><div class="ds">PTE — вакуумно-опосредованный движитель через топологические фазовые переходы. 6 предсказаний.</div><div class="ln"><span class="tag">EN</span> &middot; arXiv-ready</div></div>
+<div class="card"><div class="tt">Статья 2</div><div class="nm"><a href="../../PAPER_TEMPLATE.md">Invariant Adaptive Core (шаблон)</a></div><div class="ds">IAC архитектура: Self-Consistent Engine, 5 примитивов, Negative/Positive Intelligence.</div><div class="ln"><span class="tag">EN</span> &middot; шаблон</div></div>
+</div>
+
+<h2>Voynich Manuscript</h2>
+<p class="intro">Полная публикация: 203 страницы, транскрипция, перевод. DOI 10.5281/zenodo.21334854.</p>
+
+<div class="grp">
+<div class="card"><div class="tt">Анализ</div><div class="nm"><a href="../voynich/voynich_final.html">Voynich: Complete Analysis</a></div><div class="ds">EVA-транскрипция, структурная разметка, все сканы</div><div class="ln"><span class="tag">EN</span></div></div>
+<div class="card"><div class="tt">PDF</div><div class="nm"><a href="../voynich/voynich_complete.pdf">Монография (203 стр)</a></div><div class="ds">Сканы + транскрипция + перевод</div><div class="ln"><span class="tag">EN</span> &middot; 725 MB</div></div>
+<div class="card"><div class="tt">Сканы</div><div class="nm"><a href="../voynich/all_scans/index.html">Галерея</a></div><div class="ds">Beinecke MS 408, высокое разрешение</div></div>
+</div>
+
+<h2>Phase Toroidal Engine</h2>
+<p class="intro">Тороидальный движитель, USM field theory, метрики.</p>
+
+<div class="grp">
+<div class="card"><div class="nm"><a href="../pte_comprehensive_paper.html">PTE — полный обзор</a></div><div class="ds">Теория, расчёты, конфигурации</div><div class="ln"><span class="tag">RU</span></div></div>
+<div class="card"><div class="nm"><a href="../paper_phase_toroidal_engine.md">PTE — академическая статья</a></div><div class="ds">Формат arXiv/Elsevier, LaTeX</div><div class="ln"><span class="tag">EN</span></div></div>
+<div class="card"><div class="nm"><a href="../dd_usm_field_theory.md">USM Field Theory</a></div><div class="ds">Unified Spacetime Metric</div></div>
+<div class="card"><div class="nm"><a href="../dark_dimension_mapping.md">Dark Dimension</a></div><div class="ds">Картография тёмного измерения</div></div>
+<div class="card"><div class="tt">Данные</div><div class="nm"><a href="../metrics_master.json">Master Metrics (JSON)</a></div></div>
+<div class="card"><div class="tt">IP</div><div class="nm"><a href="../IP_STRATEGY.md">IP Strategy</a></div></div>
+</div>
+
+<h2>Библиотека доменов</h2>
+<p class="intro">10 доменов: психология, философия, математика, физика, нейронауки, кибернетика, формальные методы, AI/ML, экономика, мета-анализ.</p>
+
+<div class="grp">
+<div class="card"><div class="nm"><a href="../01_cognitive_psychology/">01 — Когнитивная психология</a></div></div>
+<div class="card"><div class="nm"><a href="../02_philosophy/">02 — Философия</a></div></div>
+<div class="card"><div class="nm"><a href="../03_mathematics/">03 — Математика</a></div></div>
+<div class="card"><div class="nm"><a href="../04_physics_cosmology/">04 — Физика и космология</a></div></div>
+<div class="card"><div class="nm"><a href="../05_neuroscience/">05 — Нейронауки</a></div></div>
+<div class="card"><div class="nm"><a href="../06_systems_cybernetics/">06 — Системы и кибернетика</a></div></div>
+<div class="card"><div class="nm"><a href="../07_formal_methods_cs/">07 — Формальные методы</a></div></div>
+<div class="card"><div class="nm"><a href="../08_ai_machine_learning/">08 — AI и машинное обучение</a></div></div>
+<div class="card"><div class="nm"><a href="../09_economics_finance/">09 — Экономика и финансы</a></div></div>
+<div class="card"><div class="nm"><a href="../10_meta_analysis/">10 — Мета-анализ</a></div></div>
+<div class="card"><div class="nm"><a href="../11_proposed_future/">11 — Предложенные направления</a></div></div>
+</div>
+
+<div class="ft">
+<p>Исследование &middot; Теория всего &middot; IAC/AMSE v14 &middot; 19 июля 2026</p>
+<p style="margin-top:4px;font-size:.75em;color:#333355">IP: Zenodo 10.5281/zenodo.21209447 (PTE) &middot; 10.5281/zenodo.21334854 (Voynich) &middot; GitHub timestamp с 2026-06-24</p>
+<p style="margin-top:6px;font-size:.85em;color:#444466">Свободный доступ. Лицензии в соответствующих разделах.</p>
+</div>
+
+</div>
+</body>
+</html>

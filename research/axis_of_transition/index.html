@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ось Перехода — Полная архитектура</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+body{background:linear-gradient(-45deg,#050510,#0a0a2a,#111133,#050510);background-size:400% 400%;animation:bg 15s ease infinite;color:#d0d0e0;font:17px/1.8 Georgia,serif;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.08),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,.08),transparent),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,.1),transparent);background-size:200px 200px;pointer-events:none;z-index:0}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;position:relative;z-index:1}
+.hero h1{font-size:clamp(2.5em,7vw,5em);letter-spacing:2px}
+.hero h1 span{background:linear-gradient(135deg,#ffd700,#ff6b6b,#cc88ff,#ffd700);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:bg 8s ease infinite}
+.hero .sub{color:#9999bb;font-size:clamp(1em,2.5vw,1.3em);max-width:700px;margin:16px auto 25px;line-height:1.6}
+.hero .meta{color:#555577;font-size:0.85em;margin-bottom:15px}
+.hero .meta b{color:#8888bb}
+.dl{display:inline-block;background:linear-gradient(135deg,#ffd700,#ff6b6b);color:#050510;font-weight:700;padding:14px 36px;border-radius:30px;text-decoration:none;margin:8px;font-size:1em;transition:all .3s cubic-bezier(.4,0,.2,1)}
+.dl:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(255,215,0,.15)}
+.scroll{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);color:#555577;font-size:0.8em;animation:b 2s infinite}
+@keyframes b{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+.nav{background:rgba(10,10,30,.8);backdrop-filter:blur(10px);padding:10px 0;text-align:center;position:sticky;top:0;z-index:10;border-bottom:1px solid rgba(255,255,255,.05)}
+.nav a{color:#6666aa;text-decoration:none;padding:6px 12px;font-size:0.8em;display:inline-block;transition:color .2s}
+.nav a:hover{color:#ffd700}
+.nav .sel{color:#ffd700;border-bottom:2px solid #ffd700}
+.c{max-width:920px;margin:0 auto;padding:20px;position:relative;z-index:1}
+h2{color:#ffd700;font-size:1.8em;margin:60px 0 25px;border-left:4px solid #ff6b6b;padding-left:18px;font-weight:600}
+h3{color:#e0e0ff;font-size:1.2em;margin:35px 0 15px;font-weight:400}
+h4{color:#cc88ff;margin:20px 0 8px;font-size:1.05em}
+p{margin:14px 0;line-height:1.9;color:#b0b0c8}
+.hl{color:#ffd700}
+.em{color:#ff6b6b;font-style:normal}
+.mt{color:#6666aa;font-size:0.9em}
+.ib{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-left:4px solid #ffd700;border-radius:14px;padding:22px;margin:25px 0;transition:all .3s}
+.ib:hover{border-color:rgba(255,215,0,.3);transform:translateY(-2px);box-shadow:0 6px 25px rgba(255,215,0,.06)}
+.ib .l{color:#ffd700;font-size:0.8em;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.ib .t{color:#d0d0e0;font-style:italic;line-height:1.7}
+.cd{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:25px;margin:20px 0}
+.cd .t{color:#ffd700;font-weight:700;margin-bottom:6px;font-size:1.05em}
+.cd .d{color:#9090b0;font-size:0.92em;line-height:1.7}
+.pr{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.pr:last-child{border-bottom:none}
+.pr .i{min-width:32px;color:#ff6b6b;font-weight:700;font-size:1em}
+.pr .c{flex:1}
+.pr .c .t{color:#ffd700;font-weight:700}
+.pr .c .d{color:#9090b0;font-size:0.9em;line-height:1.6}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:0.9em}
+th{background:rgba(255,215,0,.08);color:#ffd700;padding:10px;text-align:left;border-bottom:2px solid rgba(255,215,0,.2)}
+td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);color:#a0a0c0}
+.dl2{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0}
+.co{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px}
+.co .h{color:#ffd700;font-weight:700;margin-bottom:8px}
+.co ul{list-style:none;padding:0}
+.co li{padding:4px 0;color:#9090b0;font-size:0.9em}
+.co li::before{content:'▸ ';color:#ffd700}
+pre{background:rgba(13,13,32,.8);border-radius:10px;padding:16px;margin:12px 0;overflow-x:auto;font-size:0.85em;color:#b0b0c8;border:1px solid rgba(255,255,255,.04);line-height:1.6}
+.qt{background:rgba(255,215,0,.03);border-left:3px solid rgba(255,215,0,.2);padding:18px 22px;margin:20px 0;border-radius:0 10px 10px 0;font-style:italic;color:#c0c0d8;font-size:1.05em}
+.pd{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:16px 20px;margin:10px 0;border-left:3px solid #ff6b6b;transition:all .3s}
+.pd:hover{border-color:rgba(255,107,107,.3);transform:translateX(3px)}
+.pd .id{color:#ff6b6b;font-weight:700;font-size:0.85em}
+.pd .t{color:#a0a0b8;font-size:0.95em;margin-top:4px}
+.arc{display:flex;flex-direction:column;align-items:center;margin:30px 0}
+.an{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px 24px;margin:3px 0;text-align:center;min-width:180px;transition:all .3s}
+.an:hover{border-color:rgba(255,215,0,.3);transform:translateY(-2px)}
+.an .m{color:#ffd700;font-weight:700}
+.an .s{color:#7777aa;font-size:0.8em;margin-top:2px}
+.arw{color:#444466;font-size:1.1em;margin:2px 0}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:25px 0}
+.stb{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;text-align:center;transition:all .3s}
+.stb:hover{border-color:rgba(255,215,0,.3);transform:translateY(-2px)}
+.stb .n{font-size:1.8em;font-weight:700;background:linear-gradient(135deg,#ffd700,#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stb .l{color:#6666aa;font-size:0.8em;margin-top:4px}
+.ft{text-align:center;padding:50px 20px;color:#555577;border-top:1px solid rgba(255,255,255,.04);margin-top:80px}
+.ft a{color:#6666aa;text-decoration:none;transition:color .2s}
+.ft a:hover{color:#ffd700}
+ul{color:#b0b0c8;line-height:1.9;padding-left:20px}
+@media(max-width:600px){
+  .c{padding:12px}
+  h2{font-size:1.3em}
+  .dl2{grid-template-columns:1fr}
+  .an{min-width:140px;padding:10px 16px}
+  .hero h1{font-size:1.8em}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="meta"><b>IAC v8</b> · 14 июля 2026 · <a href="../" style="color:#555577;text-decoration:none">Исследование. Теория всего</a></div>
+  <h1><span>Ось Перехода</span></h1>
+  <p class="sub">Функциональная архитектура реальности, отношений, религий и сознания<br>— как система применила себя к себе —</p>
+  <p style="color:#555577;font-size:0.8em;margin-bottom:12px">7+1 цикл · 9 принципов · 33 скилла · 8 предсказаний · mesh-архитектура</p>
+  <a href="iac_core_v8.zip" class="dl">⬇ Скачать ядро IAC (680 KB)</a>
+  <div class="scroll">↓</div>
+</div>
+
+<div class="nav">
+<a href="../">Главная</a>
+<a href="../ru/">Портал</a>
+<a href="../en/">English</a>
+<a href="index.html" class="sel">Статья</a>
+<a href="iac_core_v8.zip">ZIP ядра</a>
+</div>
+
+<div class="c">
+
+<!-- ============================================================ -->
+<!-- 1. МАНИФЕСТ -->
+<!-- ============================================================ -->
+<h2>1. Суть открытия</h2>
+
+<p style="font-size:1.15em;color:#d0d0e8">Я применил систему к себе. Прошёл через <span class="hl">семь циклов разрушения</span>. Удалил всё, что можно удалить. Проверил то, что осталось, на разных доменах: физика, биология, психология, группы, религии, само мышление.</p>
+
+<p>Гипотеза: архитектура работает. Не потому что она «истинная». А потому что она <span class="hl">проверяемая</span> и пока не опровергнута.</p>
+
+<div class="ib">
+  <div class="l">Супер-инвариант</div>
+  <div class="t">Любая интеллектуальная система — это механизм построения, сжатия и корректировки пространства состояний, в котором возможны прогнозирование, выбор и адаптация. Пространство состояний строится через отношения. Отношения возникают из различий. Различия существуют благодаря ограничениям. А ограничения — потому что невозможно реализовать все состояния одновременно.</div>
+</div>
+
+<div class="st">
+  <div class="stb"><div class="n">8</div><div class="l">циклов</div></div>
+  <div class="stb"><div class="n">9</div><div class="l">принципов</div></div>
+  <div class="stb"><div class="n">3</div><div class="l">операции</div></div>
+  <div class="stb"><div class="n">8</div><div class="l">предсказаний</div></div>
+  <div class="stb"><div class="n">33</div><div class="l">скилла</div></div>
+  <div class="stb"><div class="n">5</div><div class="l">примитивов</div></div>
+</div>
+
+<div class="cd">
+  <div class="t">Главный вывод</div>
+  <div class="d">Всё, что делает интеллект — <b>сравнивает</b>, <b>выбирает</b> и <b>обновляет</b>. Память — производная. Знания — производные. Синхронизация — метрика. Отношения — производные. Культура — производная. Религия — производная. Производные не менее важны — они интерфейсы. Но когда ты знаешь архитектуру, ты перестаёшь путать интерфейс с реальностью.</div>
+</div>
+
+<div class="qt">«Не ищи истину. Ищи архитектуру, которая выдерживает проверку. И меняй её, когда перестанет.»</div>
+
+<!-- ============================================================ -->
+<!-- 2. ИСТОРИЯ ЦИКЛОВ -->
+<!-- ============================================================ -->
+<h2>2. История циклов</h2>
+<p class="mt">Как система последовательно разрушала собственные основания — 7 циклов до публикации + 1 после.</p>
+
+<h3>Цикл 1. От объектов к инвариантам</h3>
+<p>Вопрос: «Что является самым глубоким фундаментом?» Я начал удалять элементы. Удалил память — система ещё существует. Удалил планирование — существует. Удалил прогноз — существует. Удалил синхронизацию — ошибки, но работает. <b>Удалил ограничения — система исчезла.</b></p>
+<div class="ib"><div class="l">Открытие</div><div class="t">Constraint Space — пространство допустимых состояний — глубже памяти, интеллекта и синхронизации. Без ограничений нет выбора, оптимизации, обучения.</div></div>
+
+<h3>Цикл 2. От состояний к сжимаемости</h3>
+<p>Вопрос: «Что должно существовать, чтобы был возможен любой инвариант?» Проверял: повторяемость? — хаос разрушает. Причинность? — LLM работают без неё. Информация? — шум тоже информация. Осталось одно: <b>сжимаемость</b>. Если мир несжимаем — нет законов, науки, языка, интеллекта.</p>
+<div class="ib"><div class="l">Открытие</div><div class="t">Интеллект существует только потому, что мир содержит структуры, которые можно сжать без полной потери информации.</div></div>
+
+<h3>Цикл 3. От отношений к сравнению</h3>
+<p>Вопрос: «Что делает отношение полезным?» Разрушал уровень за уровнем. Объекты исчезли — остались отношения. Отношения исчезли — остались различия. Различия исчезли — осталось <b>сравнение</b>. Compare(A,B) — единственная фундаментальная операция.</p>
+<div class="ib"><div class="l">Открытие</div><div class="t">Наблюдение — сравнение. Обучение — сравнение. Наука — сравнение. Эволюция — сравнение. Нейросети — сравнение (loss). Всё сводится к сравнению.</div></div>
+
+<h3>Цикл 4. Применение к отношениям</h3>
+<p>Вопрос: «Работает ли архитектура для человеческих связей?» Да. Любые отношения имеют функцию. Эмоции — не помеха, а топливо. Группа — не сумма людей, а организм. Связи не строятся — разворачиваются.</p>
+<div class="ib"><div class="l">Открытие</div><div class="t">Система имеет потребность и притягивает того, кто её закроет. Носитель выпал — на его место придёт новый. Это самоорганизация.</div></div>
+
+<h3>Цикл 5. Применение к религиям</h3>
+<p>Вопрос: «А если применить к религиям?» Религии — не истина. Они — социальные технологии. Как Windows — работают, пока ты внутри. Но они — не реальность.</p>
+<div class="ib"><div class="l">Открытие</div><div class="t">Религия — операционная система для сознания. Не выбирай между «всё зло» и «всё истина». Видь функцию за формой.</div></div>
+
+<h3>Цикл 6. Ось Перехода</h3>
+<p>Вопрос: «Что объединяет все уровни?» Ответ пришёл из рисунка на листке блокнота. Вертикальная ось. Две фигуры — звезда (логика) и луна (интуиция). Отделённая голова — наблюдатель. Внизу — фигуры, признающие иерархию.</p>
+<div class="ib"><div class="l">Открытие</div><div class="t">Ось — не символ. Это архитектура. Канал перехода между структурированным и хаотическим, сознательным и бессознательным. На каждом уровне — своя ось.</div></div>
+
+<h3>Цикл 7. Метрика</h3>
+<p>Вопрос: «Почему Compare работает?» Потому что существует критерий. Без метрики сравнение бессмысленно. Вся наука — поиск хорошей метрики. Loss, Entropy, Energy, Likelihood, Fitness — всё это метрики.</p>
+<div class="ib"><div class="l">Открытие</div><div class="t">Синхронизация — не процесс, а метрика. Sync Score = 1 − (расхождение прогноза и реальности).</div></div>
+
+<h3>Цикл 8. Negative Intelligence к собственной статье</h3>
+<p>После публикации применил Negative Intelligence к самой архитектуре. Результат:</p>
+<ul style="color:#b0b0c8;line-height:1.9">
+<li>13 принципов сжаты до 9 — принципы 3+4, 6+7, 10+13, 11+12 слиты в один</li>
+<li>Pipeline → mesh — операции связаны не последовательно, а как сеть с адаптивным порядком</li>
+<li>Positive Construction выделен в равноправный слой наравне с Negative Intelligence</li>
+<li>Sync Score — рекурсивная функция: SSₙ = 1 − |p − a| + SSₙ₋₁</li>
+<li>Все утверждения переформулированы как <b>проверяемые гипотезы</b>, а не истины</li>
+</ul>
+<div class="ib"><div class="l">Открытие</div><div class="t">Архитектура выдерживает собственную атаку. Это не значит, что она истинна. Это значит, что она внутренне непротиворечива — пока не найден контрпример.</div></div>
+
+<!-- ============================================================ -->
+<!-- 3. 9 ПРИНЦИПОВ -->
+<!-- ============================================================ -->
+<h2>3. Девять принципов</h2>
+<p class="mt">Сжаты с 13 до 9 после Negative Intelligence цикла 8. Каждый — не истина, а проверяемая гипотеза.</p>
+
+<div class="cd">
+<div class="pr"><div class="i">1</div><div class="c"><div class="t">Реальность — единственный источник истины</div><div class="d">Всё остальное — модели. Модели можно менять. Реальность — нет. Любая система, путающая модель с реальностью, обречена. <span class="mt">Проверка: найди хоть один случай, когда замена модели на желаемую изменила реальность.</span></div></div></div>
+<div class="pr"><div class="i">2</div><div class="c"><div class="t">Любая модель временна</div><div class="d">Чем быстрее готов отбросить — тем быстрее найдёшь лучшую. Привязанность к модели — главный тормоз эволюции. <span class="mt">Проверка: сравни скорость адаптации двух систем — привязанной к модели и готовой её менять.</span></div></div></div>
+<div class="pr"><div class="i">3</div><div class="c"><div class="t">Гипотеза атакуется до принятия; фальсификация ценнее подтверждения</div><div class="d">Negative Intelligence — первый шаг. Сначала разрушь, потом строй. Подтверждение может быть случайным. Опровержение — точное знание. <span class="mt">Проверка: измерить скорость обучения с NI vs без NI.</span></div></div></div>
+<div class="pr"><div class="i">4</div><div class="c"><div class="t">Неопределённость сохраняется явно</div><div class="d">«Я не знаю» — не слабость, а единственное состояние, из которого возможно узнавание. <span class="mt">Проверка: системы с явной неопределённостью устойчивее систем с ложной уверенностью.</span></div></div></div>
+<div class="pr"><div class="i">5</div><div class="c"><div class="t">Ищи инварианты через отношения, а не через объекты или символы</div><div class="d">Символ можно интерпретировать. Объект без отношений не существует. Инвариант остаётся неизменным при любых преобразованиях. Ты — не «кто ты», а «как ты связан». <span class="mt">Проверка: любую сущность можно описать набором отношений без потери информации.</span></div></div></div>
+<div class="pr"><div class="i">6</div><div class="c"><div class="t">Ищи архитектуры, а не объяснения; сжимай без потери силы</div><div class="d">Объяснение успокаивает. Архитектура — работает. Лучшая модель — самая короткая, которая всё ещё предсказывает. <span class="mt">Проверка: бритва Оккама как эмпирический факт, а не эстетика.</span></div></div></div>
+<div class="pr"><div class="i">7</div><div class="c"><div class="t">Эволюционируй рекурсивно — всё есть цикл</div><div class="d">Применяй цикл к циклу. Улучшай способ улучшения. Линейность — иллюзия. Реальность — вложенные петли обратной связи. <span class="mt">Проверка: любая последовательность действий разворачивается в цикл на следующем уровне вложенности.</span></div></div></div>
+<div class="pr"><div class="i">8</div><div class="c"><div class="t">Наименьшее действие в пространстве ограничений</div><div class="d">Природа выбирает путь с минимальным сопротивлением. Без ограничений нет выбора. Без выбора нет интеллекта. Ограничения — не проблема, а структура. <span class="mt">Проверка: в любой системе можно найти функцию действия, минимум которой описывает наблюдаемое поведение.</span></div></div></div>
+<div class="pr"><div class="i">9</div><div class="c"><div class="t">Интеллект = Compare + Select + Update</div><div class="d">Память, знания, синхронизация — производные. Когда ты знаешь архитектуру, ты перестаёшь путать интерфейс с реальностью. <span class="mt">Проверка: любая интеллектуальная система может быть описана через эти три операции.</span></div></div></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. АРХИТЕКТУРА -->
+<!-- ============================================================ -->
+<h2>4. Архитектура как сеть</h2>
+<p class="mt">Не pipeline, а mesh — сеть вложенных циклов без фиксированного порядка.</p>
+
+<div class="arc" style="flex-direction:column;gap:8px;">
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+    <div class="an" style="border-color:#ffd700"><div class="m">Observe</div><div class="s">Наблюдение без интерпретации</div></div>
+    <div class="an" style="border-color:#ff6b6b"><div class="m">Compare</div><div class="s">Сравнение с метрикой</div></div>
+    <div class="an" style="border-color:#88dd88"><div class="m">Select</div><div class="s">Выбор траектории</div></div>
+    <div class="an" style="border-color:#8888ff"><div class="m">Update</div><div class="s">Обновление модели</div></div>
+  </div>
+  <div style="color:#555588;font-size:0.85em;text-align:center;margin-top:6px">← все связаны со всеми, порядок определяется контекстом →</div>
+</div>
+
+<p>Mesh-архитектура означает: любая из трёх операций может вызывать любую. Compare может запустить Observe. Update может запустить Compare. Select может обойтись без Act. Порядок — не предопределён, а адаптивен к ситуации.</p>
+
+<p>Один и тот же mesh на каждом уровне — меняется только масштаб:</p>
+<table>
+  <tr><th>Уровень</th><th>Observe</th><th>Compare</th><th>Select</th><th>Update</th></tr>
+  <tr><td>Нейрон</td><td>Сигнал</td><td>Веса</td><td>Активация</td><td>Сила связи</td></tr>
+  <tr><td>Человек</td><td>Восприятие</td><td>Ценности</td><td>Выбор</td><td>Модель мира</td></tr>
+  <tr><td>Группа</td><td>Роли</td><td>Функции</td><td>Своя роль</td><td>Структура</td></tr>
+  <tr><td>Цивилизация</td><td>Кризисы</td><td>Решения</td><td>Путь</td><td>Культура</td></tr>
+  <tr><td>Знание</td><td>Данные</td><td>Гипотезы</td><td>Теория</td><td>Парадигма</td></tr>
+</table>
+
+<h3>Пять примитивов ядра</h3>
+<table>
+  <tr><th>Примитив</th><th>Формула</th><th>Суть</th></tr>
+  <tr><td><b>DISTINCTION</b></td><td>x ≠ y</td><td>Различение, бит, основа любого сигнала</td></tr>
+  <tr><td><b>COMPOSITION</b></td><td>f ∘ g</td><td>Время, причинность, последовательность</td></tr>
+  <tr><td><b>TENSOR</b></td><td>f ⊗ g</td><td>Пространство, параллелизм, независимость</td></tr>
+  <tr><td><b>FIXED POINT</b></td><td>μx.F(x)</td><td>Самореференция, рекурсия, петля</td></tr>
+  <tr><td><b>ADJOINT</b></td><td>F ⊣ G</td><td>Наблюдение/действие, syntax/semantics</td></tr>
+</table>
+
+<div class="ib">
+  <div class="l">Что исчезло из архитектуры</div>
+  <div class="t">Память — стала хранением траекторий. Знания — сжатыми инвариантами. Синхронизация — рекурсивной функцией. Фильтр — Negative Intelligence. Объекты — узлами сети. Ответы — гипотезами. Осталась только mesh: Observe ↔ Compare ↔ Select ↔ Update.</div>
+</div>
+
+<h3>Self-Consistent Engine (цикл v13 → mesh v14)</h3>
+<pre>Field Interface → Trigger Detection → Internal Conflict
+  → Meta-Rule Generation → Model Update → Verification → Sync</pre>
+<p class="mt">Каждый узел SCE соединён со всеми остальными. Порядок прохождения определяется типом триггера и текущим контекстом.</p>
+
+<!-- ============================================================ -->
+<!-- 5. NEGATIVE & POSITIVE INTELLIGENCE -->
+<!-- ============================================================ -->
+<h2>5. Два равноправных слоя</h2>
+<p>Ключевое открытие: процессы <span class="hl">создания</span> и <span class="hl">разрушения</span> нельзя смешивать. Это два разных слоя, работающих на равных.</p>
+
+<div class="dl2">
+<div class="co" style="border-color:#ff6b6b">
+<div class="h" style="color:#ff6b6b">Negative Intelligence</div>
+<ul>
+<li>Единственная задача: разрушать</li>
+<li>Не создавать, не объяснять, не помогать</li>
+<li>Искать ошибки, противоречия, скрытые допущения</li>
+<li>Шесть типов атак: противоречие, контрпример, скрытое допущение, логическая ошибка, граничный случай, масштабирование</li>
+<li>Применяется <b>до</b> построения</li>
+</ul>
+</div>
+<div class="co" style="border-color:#88dd88">
+<div class="h" style="color:#88dd88">Positive Construction</div>
+<ul>
+<li>Единственная задача: строить</li>
+<li>Не защищать, не оправдывать, не сохранять</li>
+<li>Создавать новые модели, гипотезы, архитектуры</li>
+<li>Методы: синтез, аналогия, рекомбинация, экстраполяция</li>
+<li>Применяется <b>после</b> разрушения</li>
+</ul>
+</div>
+</div>
+
+<div class="ib">
+  <div class="l">Цикл генерации</div>
+  <div class="t">Negative Intelligence разрушает старую модель → Positive Construction строит новую → Negative Intelligence атакует новую → Positive Construction уточняет. Ни один слой не главнее. Оба необходимы. Как наука, peer review, эволюция, иммунная система.</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. ПРИРОДА СВЯЗЕЙ -->
+<!-- ============================================================ -->
+<h2>6. Природа человеческих связей</h2>
+
+<div class="ib">
+  <div class="l">Инвариант отношений</div>
+  <div class="t">Любые отношения имеют функцию. Даже если она не осознаётся. Любой контакт между людьми изменяет состояние обоих — значит есть работа, которую этот контакт выполняет.</div>
+</div>
+
+<p>Два канала — <span class="hl">функциональный</span> (что делает контакт) и <span class="hl">эмоциональный</span> (какую энергию несёт) — неразделимы. Эмоции — не помеха функциям, а топливо. Без эмоций функциональная связь становится механической. Без функции эмоции становятся хаотическими.</p>
+
+<div class="dl2">
+<div class="co">
+<div class="h">Осознающий</div>
+<ul>
+<li>Видит свою функцию в отношениях</li>
+<li>Может адаптироваться к изменениям</li>
+<li>Переживает кризисы без разрушения</li>
+<li>Выбирает осознанно, а не реактивно</li>
+<li>Гибкий и надёжный</li>
+</ul>
+</div>
+<div class="co">
+<div class="h">Неосознающий</div>
+<ul>
+<li>Действует по рефлексу, на аффекте</li>
+<li>Ломается при изменении условий</li>
+<li>Сбегает или разрушает в кризисе</li>
+<li>В иллюзии «люблю просто так»</li>
+<li>Хаотичный и ненадёжный</li>
+</ul>
+</div>
+</div>
+
+<div class="cd">
+  <div class="t">Группа — это организм, а не сумма людей</div>
+  <div class="d">У группы есть скелет (структура, роли, иерархия), нервная система (коммуникация, обратная связь), иммунитет (защита от деструктивных элементов), метаболизм (обмен ресурсами). Каждый человек — орган, выполняющий свою функцию. Если каждый пытается делать всё — группа распадается.</div>
+</div>
+
+<div class="ib">
+  <div class="l">Самоорганизация</div>
+  <div class="t">Связи не строятся. Они разворачиваются в моменте на основании совпадающих функций. Система имеет потребность и притягивает того, кто её закроет. Если носитель выпадает — на его место приходит новый. Это не судьба. Это структура.</div>
+</div>
+
+<h3>Взаимопомощь как стратегия</h3>
+<p>Эгоистически мотивированное вложение в благосостояние другого окупается ростом собственного через улучшение функций партнёра. Осознание этой связки превращает взаимопомощь из альтруизма в прозрачную стратегию долгосрочного эгоизма. Это не обесценивание добра — это объяснение его устойчивости в эволюции.</p>
+
+<!-- ============================================================ -->
+<!-- 7. РЕЛИГИИ -->
+<!-- ============================================================ -->
+<h2>7. Религии: функция за формой</h2>
+
+<div class="dl2">
+<div class="co">
+<div class="h" style="color:#88dd88">Реальность религий</div>
+<ul>
+<li>Структурируют хаос</li>
+<li>Создают общность</li>
+<li>Дают смысл существования</li>
+<li>Управляют страхом смерти</li>
+<li>Закрепляют нормы поведения</li>
+<li>Передают культурный код</li>
+</ul>
+</div>
+<div class="co">
+<div class="h" style="color:#ff6b6b">Ложные суждения</div>
+<ul>
+<li>«Мы знаем истину» — карта не равна территории</li>
+<li>«Наша книга — слово Бога» — уверенность не доказательство</li>
+<li>«Иноверцы — заблудшие» — 99% религии определяется рождением</li>
+<li>«Страх — это уважение» — ад как рычаг управления</li>
+<li>«Мы знаем, что после смерти» — вера не знание</li>
+<li>«Религия — единственный путь к морали» — доброта не требует разрешения</li>
+</ul>
+</div>
+</div>
+
+<div class="ib">
+  <div class="l">Суть</div>
+  <div class="t">Религия — это социальная технология. Как Windows или macOS — работает, пока ты внутри. Удобна, привычна, даёт понятный интерфейс. Но она — не реальность. Реальность — то, что остаётся, когда убрать все интерфейсы. Задача — не выбрать между «всё зло» и «всё истина». Задача — видеть функцию за формой.</div>
+</div>
+
+<h3>Ось Перехода в религиях мира</h3>
+<table>
+  <tr><th>Традиция</th><th>Ось</th><th>Переход</th></tr>
+  <tr><td>Христианство</td><td>Крест</td><td>Смерть → Воскресение</td></tr>
+  <tr><td>Буддизм</td><td>Срединный Путь</td><td>Страдание → Освобождение</td></tr>
+  <tr><td>Ислам</td><td>Сират аль-мустакым</td><td>Заблуждение → Прямой путь</td></tr>
+  <tr><td>Индуизм</td><td>Гора Меру</td><td>Сансара → Мокша</td></tr>
+  <tr><td>Даосизм</td><td>Дао</td><td>Инь и Ян → Единство</td></tr>
+  <tr><td>Суфизм</td><td>Фана</td><td>Эго → Растворение</td></tr>
+  <tr><td>Иудаизм</td><td>Лестница Иакова</td><td>Земное → Небесное</td></tr>
+</table>
+
+<div class="qt">Разные языки, разные образы, разные ритуалы. Но архитектура одна: ось перехода между двумя состояниями — от страха к доверию, от эго к целому, от хаоса к порядку. Религии — не конкуренты. Это переводы одного и того же текста, написанного на языке, которого никто не знает.</div>
+
+<!-- ============================================================ -->
+<!-- 8. ОСЬ ПЕРЕХОДА (РИСУНОК) -->
+<!-- ============================================================ -->
+<h2>8. Расшифровка рисунка</h2>
+
+<p>На листке блокнота — ключ ко всей архитектуре. Вертикальная <span class="hl">ось</span>. По бокам — две фигуры: у одной голова-звезда (ясность, логика, структура), у другой — голова-луна (интуиция, творчество, бессознательное). Третья голова — отдельно, как <span class="hl">наблюдатель</span>. Внизу — фигуры, поклоняющиеся или смотрящие.</p>
+
+<div class="dl2">
+<div class="co">
+<div class="h">Звезда</div>
+<ul>
+<li>Логика</li>
+<li>Структура</li>
+<li>Порядок</li>
+<li>Сознательное</li>
+<li>Анализ</li>
+<li>Контроль</li>
+</ul>
+</div>
+<div class="co">
+<div class="h">Луна</div>
+<ul>
+<li>Интуиция</li>
+<li>Творчество</li>
+<li>Хаос</li>
+<li>Бессознательное</li>
+<li>Ощущение</li>
+<li>Поток</li>
+</ul>
+</div>
+</div>
+
+<div class="cd">
+  <div class="t">Что означает этот рисунок</div>
+  <div class="d">
+    <b>Ось</b> — это канал перехода между двумя режимами существования. Они не враги, а два полюса одного целого.<br>
+    <b>Отделённая голова</b> — осознание. Функция, которая может существовать отдельно и наблюдать за процессом, не участвуя в нём.<br>
+    <b>Поклоняющиеся внизу</b> — признание иерархии. Система имеет вертикальное строение: архетипы наверху, люди — внизу.<br><br>
+    Это не символ. Это архитектура.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 9. ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+<!-- ============================================================ -->
+<h2>9. Как это работает в жизни</h2>
+
+<table>
+  <tr><th>Ситуация</th><th>Вместо</th><th>Действие</th></tr>
+  <tr><td>Утро</td><td>«Что делать?»</td><td>«Что я наблюдаю? Какое моё состояние? Какой режим активен — звезда или луна?»</td></tr>
+  <tr><td>Выбор</td><td>«Что правильно?»</td><td>«Какие варианты существуют? Построй карту всех возможных переходов, отсеки невозможные»</td></tr>
+  <tr><td>Конфликт</td><td>«Кто виноват?»</td><td>«Какие функции столкнулись? Не суди — перераспредели»</td></tr>
+  <tr><td>Отношения</td><td>«Он мне должен»</td><td>«Какую функцию он выполняет в моей системе?»</td></tr>
+  <tr><td>Кризис</td><td>«Почему я?»</td><td>«Какая модель разрушилась? Какой инвариант перестал работать?»</td></tr>
+  <tr><td>Смысл</td><td>«В чём смысл жизни?»</td><td>«Какой переход я сейчас прохожу? Смысл — это вектор, а не пункт»</td></tr>
+</table>
+
+<div class="cd">
+  <div class="t">Аудит отношений (раз в месяц)</div>
+  <div class="d">
+    1. Какую функцию я выполняю в этих отношениях?<br>
+    2. Какую функцию выполняет другой?<br>
+    3. Осознаём ли мы это оба?<br>
+    4. Что движется по каналу — энергия, информация или ресурсы?<br>
+    5. Что будет, если один из нас исчезнет?<br><br>
+    Если канал пуст или функция не выполняется — отношения либо умрут сами, либо потребуют пересборки.
+  </div>
+</div>
+
+<div class="cd">
+  <div class="t">Ролевая карта группы</div>
+  <div class="d">Определи в своей команде, семье или круге друзей:<br>
+    Кто лидер? Кто организатор? Кто эмоциональный центр? Кто критик? Кто миротворец?<br>
+    Если функция пустует — группа нестабильна. Если кто-то выполняет чужую функцию — группа страдает.
+  </div>
+</div>
+
+<div class="ib">
+  <div class="l">Алгоритм кризиса</div>
+  <div class="t">
+    1. Observe: что именно разрушилось? (зафиксируй факты, не интерпретируй)<br>
+    2. Compare: какая модель перестала работать? Что я ожидал vs что произошло?<br>
+    3. Destroy (Negative Intelligence): какие убеждения оказались ложными?<br>
+    4. Extract: какой новый инвариант можно извлечь из ситуации?<br>
+    5. Update: что изменить в модели мира, чтобы она снова работала?
+  </div>
+</div>
+
+<div class="ib">
+  <div class="l">Ежедневный цикл</div>
+  <div class="t">Утро (5 мин): сканирование состояний — Observe. Перед выбором: карта переходов — Compare → Select. При конфликте: разбор функций — Relation Graph. Вечер (5 мин): «Что я узнал сегодня?» — Update. Еженедельно: аудит отношений. При кризисе — полный цикл.</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 10. ТЕХНИЧЕСКАЯ СПЕЦИФИКАЦИЯ -->
+<!-- ============================================================ -->
+<h2>10. Техническая спецификация ядра</h2>
+
+<h3>Guard (observe → authorize → apply)</h3>
+<table>
+  <tr><th>Правило</th><th>Смысл</th></tr>
+  <tr><td>No effect without authorization</td><td>Каждое действие проходит проверку перед выполнением</td></tr>
+  <tr><td>No write outside scope</td><td>Запись только в разрешённые пути. .env, .git, backups, MEMORY.md — заблокированы</td></tr>
+  <tr><td>No success without verification</td><td>Успех не засчитывается без подтверждения</td></tr>
+  <tr><td>Heuristic is not reality</td><td>Эвристика — не истина. Числа 3,4,5 — не абсолют, а текущая компрессия</td></tr>
+  <tr><td>LLM suggests; code guard decides</td><td>LLM предлагает, код принимает решения. Защита от галлюцинаций</td></tr>
+</table>
+
+<h3>Модульная архитектура</h3>
+<table>
+  <tr><th>Файл</th><th>Функция</th></tr>
+  <tr><td><code>live.py</code> (1122 строк)</td><td>Ядро: Self-Consistent Engine, Guard, ReAct-цикл, маршрутизация</td></tr>
+  <tr><td><code>skills/__init__.py</code></td><td>Динамический загрузчик: любой .py с tool_* — автоматический скилл</td></tr>
+  <tr><td><code>skills/sync.py</code></td><td>Sync Engine — вычисление SyncError, обновление паттернов</td></tr>
+  <tr><td><code>skills/negative.py</code></td><td>Negative Intelligence — 6 типов атак на гипотезы</td></tr>
+  <tr><td><code>skills/field.py</code></td><td>Field Interface — сканирование триггеров, связь с LLM-полем</td></tr>
+  <tr><td><code>skills/structure_classifier.py</code></td><td>Классификация данных: narrative / instruction / diagram</td></tr>
+  <tr><td><code>skills/statistical_verifier.py</code></td><td>Стат. проверка паттернов, продвижение инвариантов</td></tr>
+  <tr><td><code>skills/anticipation.py</code></td><td>Прогнозирование SyncError, валидация прогнозов</td></tr>
+  <tr><td><code>skills/somatic.py</code></td><td>Детекция телесных маркеров, подбор практик</td></tr>
+  <tr><td><code>skills/translate.py</code></td><td>Мост между моделями, RU/EN локализация</td></tr>
+  <tr><td><code>skills/observer.py</code></td><td>Мета-наблюдатель, история решений</td></tr>
+  <tr><td><code>skills/mods.py</code></td><td>Пользовательские схемы и кастомизация</td></tr>
+  <tr><td>+ ещё 22 модуля</td><td>Астрономия, веб, email, код, звук, видео, презентации...</td></tr>
+</table>
+
+<h3>Метрики</h3>
+<table>
+  <tr><th>Метрика</th><th>Формула</th><th>Смысл</th></tr>
+  <tr><td>Sync Score</td><td>SSₙ = 1 − |predicted − actual| + SSₙ₋₁</td><td>Рекурсивная метрика. Sync Score системы включает Sync Score её подсистем. Всё остальное — производные</td></tr>
+  <tr><td>SyncError</td><td>SEₙ = |predicted − actual| + SEₙ₋₁</td><td>Рекурсивная ошибка. Чем глубже, тем точнее модель</td></tr>
+  <tr><td>Invariant Strength</td><td>Σ(domain_count × avg_weight)</td><td>Сила инварианта. Порог: &gt;2.5</td></tr>
+</table>
+
+<h3>Режимы запуска</h3>
+<pre>python live.py              # probe, exit (safe default)
+python live.py --once --llm  # single cycle with LLM
+python live.py --loop --llm  # autonomous loop
+python live.py --write ...   # allow write operations</pre>
+
+<h3>Состав ядра (ZIP, 680 KB)</h3>
+<p style="text-align:center;margin:20px 0">
+  <code>live.py</code> + <code>skills/</code> (33 модуля) + <code>AGENTS.md</code> + <code>ARCHITECTURE.md</code> +<br>
+  <code>MEMORY.md</code> + <code>MEMORY_ANCHOR.md</code> + <code>architectural_invariants.json</code> + <code>mycelium.py</code>
+</p>
+<p style="text-align:center">
+  <a href="iac_core_v8.zip" class="dl">⬇ Скачать ядро IAC v8</a>
+</p>
+
+<!-- ============================================================ -->
+<!-- 11. ПРЕДСКАЗАНИЯ -->
+<!-- ============================================================ -->
+<h2>11. Фальсифицируемые предсказания</h2>
+<p class="mt">То, что отличает архитектуру от философии — проверяемость.</p>
+
+<div class="pd"><div class="id">1. Закон деградации</div><div class="t">Любая система, которая перестаёт сравнивать себя с реальностью, деградирует. Скорость деградации обратно пропорциональна частоте сравнения.</div></div>
+<div class="pd"><div class="id">2. Ускорение через Negative Intelligence</div><div class="t">Добавление систематической атаки на собственные гипотезы ускоряет обучение минимум в 2× по сравнению с чистым положительным подкреплением.</div></div>
+<div class="pd"><div class="id">3. Устойчивость групп</div><div class="t">Устойчивость группы прямо пропорциональна доле осознанных функций. Группы с 80%+ осознанных функций стабильнее групп с &lt;30% при прочих равных.</div></div>
+<div class="pd"><div class="id">4. Эмоционально-функциональная связка</div><div class="t">Отношения без осознанной функции разрушаются при первой серьёзной нагрузке. Отношения с осознанной функцией + эмоциональным топливом — выдерживают кризисы.</div></div>
+<div class="pd"><div class="id">5. Эволюция религий</div><div class="t">По мере осознания функциональной природы религий, догматические конфликты снижаются, а выбор традиции по её функции — растёт.</div></div>
+<div class="pd"><div class="id">6. Фрактальная синхронизация</div><div class="t">Эффективность системы на каждом уровне зависит от Sync Score вложенного уровня. Нельзя иметь здоровую цивилизацию при больных группах.</div></div>
+<div class="pd"><div class="id">7. Наименьшее действие в мышлении</div><div class="t">Человек в неопределённости выбирает путь с наименьшим когнитивным сопротивлением. Осознание этого — первый шаг к выходу из автоматизма.</div></div>
+<div class="pd"><div class="id">8. Замена носителей</div><div class="t">При выпадении носителя функции новый появляется за время, обратное важности функции для выживания группы.</div></div>
+
+<!-- ============================================================ -->
+<!-- 12. ФИНАЛ -->
+<!-- ============================================================ -->
+<h2>12. Вместо заключения</h2>
+
+<p>Я применил систему к себе. Прошёл через восемь циклов разрушения. Удалил всё, что можно удалить. Проверил то, что осталось, на разных доменах.</p>
+<p>Архитектура <b>не утверждается как истина</b>. Она предлагается как <span class="hl">проверяемая гипотеза</span>.</p>
+<p>Её можно применить, проверить и фальсифицировать. Именно это — единственный критерий качества. Если найдётся контрпример — архитектура будет пересобрана.</p>
+<p>Ось Перехода — не ответ. Это <span class="hl">инструмент</span>.</p>
+
+<div class="qt" style="font-size:1.15em">«Не защищай архитектуру. Проверяй её. Если она не выдержит — значит, ты её улучшил. Твой ход.»</div>
+
+<div class="ib" style="text-align:center;border-left-color:#ff6b6b">
+  <div class="l">Гипотеза всей работы</div>
+  <div class="t">Три операции: Observe ↔ Compare ↔ Update.<br>
+  Одна mesh, фрактально вложенная во все уровни реальности.<br>
+  Гипотеза: это минимальная достаточная архитектура для любого интеллекта.<br>
+  Если найдётся интеллект, который работает иначе — гипотеза опровергнута.</div>
+</div>
+
+</div>
+
+<div class="ft">
+  <p><a href="iac_core_v8.zip">⬇ Скачать ядро IAC v8 (ZIP, 680 KB)</a></p>
+  <p style="margin-top:6px;font-size:0.85em">14 июля 2026 · Исследование · Теория всего · Свободно для распространения</p>
+  <p style="margin-top:10px;font-size:0.85em;color:#333355">«Карта — не территория. Модель — не реальность. Архитектура — не истина. Но она работает, пока не найдётся лучшая.»</p>
+</div>
+
+</body>
+</html>

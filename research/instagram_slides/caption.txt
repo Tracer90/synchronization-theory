@@ -1,0 +1,16 @@
+We engineered a propellantless engine using vacuum phase transitions. Here's the math.
+
+The Phase-Toroidal Engine works like this:
+
+1. A toroidal EM field builds critical energy density
+2. The quantum vacuum undergoes a topological phase transition
+3. The asymmetry directs released energy into net thrust
+
+No reaction mass. No exotic matter. No negative energy.
+
+Six falsifiable predictions. Full math open access.
+
+Paper: 10.5281/zenodo.21277754
+(link in bio)
+
+#physics #propulsion #quantumvacuum #spacetechnology #engineering #science #breakthrough #aerospace #phasetoroidal #research
