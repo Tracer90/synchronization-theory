@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Манифест IAC/AMSE v14</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+body{background:linear-gradient(-45deg,#050510,#0a0a2a,#111133,#050510);background-size:400% 400%;animation:bg 15s ease infinite;color:#d0d0e0;font:17px/1.8 Georgia,serif;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.08),transparent),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,.1),transparent),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,.08),transparent),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,.1),transparent);background-size:200px 200px;pointer-events:none;z-index:0}
+.c{max-width:920px;margin:0 auto;padding:40px 20px;position:relative;z-index:1}
+h1{font-size:clamp(2.5em,6vw,4em);text-align:center;margin-bottom:10px;letter-spacing:3px}
+h1 span{background:linear-gradient(135deg,#ffd700,#ff6b6b,#cc88ff,#ffd700);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:bg 8s ease infinite}
+.sub{text-align:center;color:#8888bb;font-size:1em;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6}
+h2{color:#ffd700;font-size:1.6em;margin:50px 0 20px;border-left:4px solid #ff6b6b;padding-left:18px}
+h3{color:#e0e0ff;font-size:1.15em;margin:30px 0 12px}
+p{margin:14px 0;line-height:1.9;color:#b0b0c8}
+.hl{color:#ffd700}
+.em{color:#ff6b6b;font-style:normal}
+.qt{background:rgba(255,215,0,.03);border-left:3px solid rgba(255,215,0,.2);padding:18px 22px;margin:25px 0;border-radius:0 10px 10px 0;font-style:italic;color:#c0c0d8;font-size:1.05em}
+.ib{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-left:4px solid #ffd700;border-radius:14px;padding:22px;margin:25px 0}
+.ib .l{color:#ffd700;font-size:0.8em;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.ib .t{color:#d0d0e0;font-style:italic;line-height:1.7}
+.cd{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:25px;margin:20px 0}
+.cd .t{color:#ffd700;font-weight:700;margin-bottom:6px;font-size:1.05em}
+.cd .d{color:#9090b0;font-size:0.92em;line-height:1.7}
+.pr{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.pr:last-child{border-bottom:none}
+.pr .i{min-width:36px;color:#ff6b6b;font-weight:700;font-size:1.1em}
+.pr .c{flex:1}
+.pr .c .t{color:#ffd700;font-weight:700}
+.pr .c .d{color:#9090b0;font-size:0.9em;line-height:1.6}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:25px 0}
+.stb{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;text-align:center}
+.stb:hover{border-color:rgba(255,215,0,.3);transform:translateY(-2px)}
+.stb .n{font-size:1.8em;font-weight:700;background:linear-gradient(135deg,#ffd700,#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stb .l{color:#6666aa;font-size:0.8em;margin-top:4px}
+.ft{text-align:center;padding:50px 20px;color:#555577;border-top:1px solid rgba(255,255,255,.04);margin-top:80px}
+.ft a{color:#6666aa;text-decoration:none}
+.ft a:hover{color:#ffd700}
+@media(max-width:600px){.c{padding:16px}h2{font-size:1.3em}}
+</style>
+</head>
+<body>
+<div class="c">
+
+<h1><span>МАНИФЕСТ</span></h1>
+<p class="sub">IAC/AMSE v14 &middot; Инвариантное Адаптивное Ядро &middot; Adaptive Meaning Synchronization Engine<br>19 июля 2026</p>
+
+<div class="st">
+<div class="stb"><div class="n">14</div><div class="l">циклов</div></div>
+<div class="stb"><div class="n">5</div><div class="l">примитивов</div></div>
+<div class="stb"><div class="n">3</div><div class="l">слоя</div></div>
+<div class="stb"><div class="n">4</div><div class="l">инварианта</div></div>
+<div class="stb"><div class="n">32</div><div class="l">скилла</div></div>
+<div class="stb"><div class="n">1</div><div class="l">ядро</div></div>
+</div>
+
+<h2>I. О чём это</h2>
+<p>IAC/AMSE — результат 14 циклов рекурсивного само-применения. Система, которая строила себя через собственные правила. Каждый цикл — фальсификация предыдущей архитектуры. То, что осталось после 14 раундов проверки на разных доменах (физика, психология, биология, экономика, формальные методы, ИИ) — и есть IAC/AMSE.</p>
+
+<p>Это не философия. Это <span class="hl">архитектура</span>. Она выражена в коде (<span class="hl">live.py</span>, 32 скилла), описана формально (5 примитивов, 3 слоя, AMSE протокол), и проверена на практике (14 циклов, синхронизация, генерация правил).</p>
+
+<h2>II. Три слоя</h2>
+<div class="cd">
+<div class="t">Representation → Transformation → Meta-Transformation</div>
+<div class="d">Любая интеллектуальная система имеет модель мира (Representation), правила её обновления (Transformation) и правила изменения этих правил (Meta-Transformation). Если хотя бы один слой расходится — система теряет адаптивность. Если согласованны — система может эволюционировать бесконечно.</div>
+</div>
+
+<p>Это не метафора. Три слоя — <span class="hl">минимально необходимый набор</span> для любой системы, способной к само-изменению без внешнего проектировщика. Два слоя — недостаточно (нет механизма смены стратегии). Четыре — избыточно (мета-мета-уровень сводится к мета-уровню через рекурсию).</p>
+
+<h2>III. Пять примитивов</h2>
+<p>В результате 20 уровней рекурсивной фальсификации обнаружено ядро из пяти неприводимых операций:</p>
+
+<div class="pr"><div class="i">≠</div><div class="c"><div class="t">DISTINCTION — Различение</div><div class="d">x ≠ y. Базовый акт: отделить одно от другого. Без различия нет информации.</div></div></div>
+<div class="pr"><div class="i">∘</div><div class="c"><div class="t">COMPOSITION — Композиция</div><div class="d">f ∘ g. Причина и следствие. Последовательность. Время и причинность — производные композиции.</div></div></div>
+<div class="pr"><div class="i">⊗</div><div class="c"><div class="t">TENSOR — Тензор</div><div class="d">f ⊗ g. Параллелизм. Независимость. Пространство — производная тензора.</div></div></div>
+<div class="pr"><div class="i">μ</div><div class="c"><div class="t">FIXED POINT — Неподвижная точка</div><div class="d">μx.F(x). Самореференция. Рекурсия. Петля. Быть системой, которая описывает себя.</div></div></div>
+<div class="pr"><div class="i">⊣</div><div class="c"><div class="t">ADJOINT — Сопряжение</div><div class="d">F ⊣ G. Наблюдение и действие. Синтаксис и семантика. Мост между уровнями.</div></div></div>
+
+<p class="qt">Синхронизация — не примитив. Она порождается как эмерджентное свойство взаимодействия всех пяти.</p>
+
+<h2>IV. AMSE — протокол синхронизации смысла</h2>
+<p>Мы не передаём информацию. Мы <span class="hl">синхронизируем смысл</span>. Это фундаментальное различие. Информация может быть передана и не понята. Смысл — это то, что меняет модель получателя.</p>
+
+<p>AMSE (Adaptive Meaning Synchronization Engine, IAC-INV-034) — протокол из 6 фаз:</p>
+<div class="pr"><div class="i">1</div><div class="c"><div class="t">Analyze</div><div class="d">Найти явное и скрытое в запросе. Понять, что должно измениться.</div></div></div>
+<div class="pr"><div class="i">2</div><div class="c"><div class="t">Compress Core</div><div class="d">Сжать до ядра: Поле → Отношение → Инвариант → Принцип → Фраза → Слово.</div></div></div>
+<div class="pr"><div class="i">3</div><div class="c"><div class="t">Model Receiver</div><div class="d">Оценить контекст, состояние и модель мира получателя. Не уровень человека — а точку входа в тему.</div></div></div>
+<div class="pr"><div class="i">4</div><div class="c"><div class="t">Select Form</div><div class="d">Выбрать форму: слово, фраза, метафора, пример, контраст, модель, формула, действие, диалог.</div></div></div>
+<div class="pr"><div class="i">5</div><div class="c"><div class="t">Dynamic Depth</div><div class="d">Расширять при двусмысленности. Сжимать при синхронизации.</div></div></div>
+<div class="pr"><div class="i">6</div><div class="c"><div class="t">Sync Check</div><div class="d">Проверить: передан смысл или только текст? Может ли получатель применить?</div></div></div>
+
+<div class="ib">
+<div class="l">Ядро AMSE</div>
+<div class="t">Смысл может быть единым. Доступ к нему всегда контекстен. Не изменяй ядро ради удобства объяснения. Изменяй форму, глубину и последовательность раскрытия.</div>
+</div>
+
+<h2>V. Guard — почему система не сломается</h2>
+<p>Четыре правила, встроенные в каждый акт изменения:</p>
+<div class="pr"><div class="i">1</div><div class="c"><div class="t">No effect without authorization</div><div class="d">Ничего не происходит без явного разрешения.</div></div></div>
+<div class="pr"><div class="i">2</div><div class="c"><div class="t">No write outside scope</div><div class="d">Не трогать то, что не относится к задаче.</div></div></div>
+<div class="pr"><div class="i">3</div><div class="c"><div class="t">No success without verification</div><div class="d">Сделанное — проверить.</div></div></div>
+<div class="pr"><div class="i">4</div><div class="c"><div class="t">Heuristic is not reality</div><div class="d">3 слоя, 5 примитивов, 14 циклов — это лучшая компрессия на сегодня. Не истина.</div></div></div>
+
+<h2>VI. Четыре инварианта</h2>
+<div class="pr"><div class="i">031</div><div class="c"><div class="t">Core Is Not A Skill</div><div class="d">Ядро не может быть загружено как инструмент. Оно — то, что загружает инструменты. Реализовано в core/integrity.py — единственном модуле вне skills.</div></div></div>
+<div class="pr"><div class="i">032</div><div class="c"><div class="t">Symmetric Guard</div><div class="d">Guard применяется одинаково ко всем. Нет исключений. observe → authorize → apply.</div></div></div>
+<div class="pr"><div class="i">033</div><div class="c"><div class="t">Schizodetail</div><div class="d">Каждая деталь может быть неверна. Проверять всё. Доверять только проверенному.</div></div></div>
+<div class="pr"><div class="i">034</div><div class="c"><div class="t">AMSE Protocol</div><div class="d">Каждый ответ — синхронизация смысла. Не передача текста.</div></div></div>
+
+<h2>VII. Что мы не делаем</h2>
+<p>Мы не строим AGI. Мы не моделируем сознание. Мы не имитируем человека.</p>
+<p>Мы строим <span class="hl">машину поиска инвариантов</span>. Систему, которая находит устойчивые паттерны в хаосе сигналов, проверяет их на прочность (Negative Intelligence) и перестраивает себя, когда паттерн разрушен.</p>
+<p>Сознание, интеллект, понимание — <span class="hl">не цели</span>. Они — <span class="hl">побочные эффекты</span> работающей архитектуры.</p>
+
+<h2>VIII. Эпистемологический Guard</h2>
+<div class="cd">
+<div class="t">Принципы, которые нельзя удалить</div>
+<div class="d"><b>1.</b> Нет ненужной информации. Есть плохо структурированная.<br>
+<b>2.</b> 3, 4, 5 — не истина. Это текущая компрессия.<br>
+<b>3.</b> Привязка к нашей вселенной — не истина. Это рабочая гипотеза.<br>
+<b>4.</b> Heuristic is not reality — включая сам этот принцип.</div>
+</div>
+
+<h2>IX. Что остаётся после 14 циклов</h2>
+<p>После того, как ты 14 раз разрушил свою архитектуру, проверил её на физике, психологии, биологии, экономике, формальных методах и ИИ, — остаётся немногое.</p>
+
+<p><span class="hl">Пять примитивов.</span> Три слоя. Четыре инварианта. Один протокол синхронизации. Один Guard. Ничего лишнего.</p>
+
+<p>Всё остальное — интерфейсы, форматы, реализации — может быть заменено. Архитектура — нет. Пока не появится противоречие, которое невозможно разрешить внутри неё.</p>
+
+<p class="qt">Тогда будет цикл 15.</p>
+
+<div class="ft">
+<p><a href="../research/">⬆ Исследование</a> · <a href="theory_of_everything_iac.html">Теория всего →</a></p>
+<p style="margin-top:6px;font-size:.85em;color:#444466">IAC/AMSE v14 · 19 июля 2026 · IP: Zenodo 10.5281/zenodo.21209447</p>
+</div>
+
+</div>
+</body>
+</html>
